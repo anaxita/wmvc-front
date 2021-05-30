@@ -1,5 +1,5 @@
 import React from 'react';
-import ServerItem from '../ServerItem/ServerItem';
+import ServerItem from './Item/Item';
 
 class ServersList extends React.Component {
     constructor(props) {
@@ -37,11 +37,42 @@ class ServersList extends React.Component {
         })
 
         return (
+            <div>
+            <div className="row main-rows p-0 m-0 mt-2 mb-2 bg-dark border-0 rounded align-items-center">
+            <div className="col-2 p-2">
+                <select name="cars" id="cars" form="carform" className="form-select bg-dark text-light">
+                    <option selected value="volvo">Select HV</option>
+                    <option value="volvo">HV 1</option>
+                    <option value="saab">HV 2</option>
+                    <option value="opel">HV 3</option>
+                    <option value="audi">HV 4</option>
+                </select>
+            </div>
+            <div className="col-2 p-2">
+                <select name="cars" id="cars" form="carform" className="form-select bg-dark text-light">
+                    <option selected value="volvo">Select status</option>
+                    <option value="volvo">Running</option>
+                    <option value="saab">Off</option>
+                </select>
+            </div>
+            <div className="col-2 p-2">
+                <select name="cars" id="cars" form="carform" className="form-select bg-dark text-light">
+                    <option selected value="volvo">Select state</option>
+                    <option value="volvo">Exporting</option>
+                    <option value="saab">Mooving</option>
+                    <option value="opel">Copying</option>
+                </select>
+            </div>
+            <div className="col p-3">
+                <input type="search" className="form-control border-seconadry bg-dark text-light"
+                    placeholder="Search server ..." />
+            </div>
+        </div>
             <div className="row main-rows vh-100 p-0 m-0 border-0 rounded bg-dark">
                 <div className="col border-0 rounded">
                     <div className="row p-1 mr-2 ml-2 mt-2 align-items-center">
-                        <div className="col">HV</div>
-                        <div className="col">Name</div>
+                        <div className="col-1">HV</div>
+                        <div className="col-3">Name</div>
                         <div className="col">State</div>
                         <div className="col">CPU</div>
                         <div className="col">Status</div>
@@ -49,6 +80,7 @@ class ServersList extends React.Component {
                     </div>
                     {serversItems}
                 </div>
+            </div>
             </div>
         )
     }

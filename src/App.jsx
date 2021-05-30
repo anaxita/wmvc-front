@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 import { Route, Switch } from 'react-router-dom'
 import Servers from './components/Servers/servers';
+import Details from './components/Servers/Details/Details';
 
 class App extends React.Component {
     render() {
@@ -13,6 +14,8 @@ class App extends React.Component {
                         <Switch>
                             <Route exact path='/' component={Servers} />
                             <Route path='/home' component={Sidebar} />
+                            
+                            <Route path='/servers/:id' component={Details} />
                             <Route path='/servers' component={Servers} />
                         </Switch>
                     </div>
