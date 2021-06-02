@@ -1,5 +1,5 @@
 import React from 'react';
-import ServersList from './ServersList/ServersList';
+import { ServersList } from './ServersList/ServersList';
 
 class Servers extends React.Component {
     render() {

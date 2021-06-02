@@ -20,8 +20,8 @@ class Sidebar extends React.Component {
                   <Link to='/users' className="nav-link px-sm-0 px-2 text-info"><i className="fs-5 bi-speedometer2"></i><span className="ms-1 p-1 d-none d-sm-inline ">Users</span></Link>
                   </li>
                </ul>
-               <div className="dropdown py-sm-4 mt-sm-auto ms-auto ms-sm-0 flex-shrink-1">
-                  <a href="#" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+               {/* <div className="dropdown py-sm-4 mt-sm-auto ms-auto ms-sm-0 flex-shrink-1">
+                  <a href="#"className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                      id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                      <img src="https://github.com/mdo.png" alt="hugenerd" width="28" height="28"
                         className="rounded-circle" />
@@ -36,7 +36,7 @@ class Sidebar extends React.Component {
                      </li>
                      <li><a className="dropdown-item" href="#">Sign out</a></li>
                   </ul>
-               </div>
+               </div> */}
             </div>
          </div>
       )

@@ -1,46 +1,43 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { handleControlServer, useServerStore } from './store';
 
-class ServerItem extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            server: this.props.data
-        };
-    }
+export const ServerItem = ({ index, id, name, hv, state, status, cpu}) => {
+    useEffect(() => {
+        // handleControlServer({token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU1OTk4MzMsIlVzZXIiOnsiaWQiOiIxMjkiLCJuYW1lIjoi0JDQtNC80LjQvdC40YHRgtGA0LDRgtC-0YAiLCJlbWFpbCI6ImFkbWluIiwiY29tcGFueSI6ItCc0L7RjyDQutC-0LzQv9Cw0L3QuNGPIiwicm9sZSI6MX0sIlR5cGUiOiJhY2Nlc3MifQ.BGob5kbj3yuLoKvuTjfSCE0EjH4gKsbB19tdz6SaDVepeJF9hJ-ZgHUDLZlLYUm4IfqcP72K8we7C2vX3doh3Q'})
+    }, [])
 
-    render() {
-        if (this.state.server.state == "Off") {
-            this.setState({
-                server: {
-                    id: this.props.data.id,
-                    hv: this.props.data.hv,
-                    name: this.props.data.name,
-                    state: "",
-                    status: this.props.data.status
-                }
-            })
+    const {servers, isLoading} = useServerStore()
+
+    const ControlPower = () => {
+        let com = 'start_power'
+        if (state === 'Running') {
+            com = 'stop_power'
         }
 
-
-
-        return (
-            <div className="row border-0 rounded p-1 m-2 server-item bg-secondary  align-items-center" id={"server-" + this.state.server.id}>
-                <div className="col-1">{this.state.server.hv}</div>
-                <div className="col-3">{this.state.server.name}</div>
-                <div className="col">{this.state.server.state}</div>
-                <div className="col">79%</div>
-                <div className="col">Exporting 78 %</div>
-                <div className="col">
-                    <button className="bi bi-power btn btn-outline-light btn-sm mr-1" value=""><Link to={"/servers/" + this.state.server.id} hv={this.state.hv} name={this.state.name}></Link></button>
-                    <button type="button" className="bi bi-bar-chart btn btn-outline-light btn-sm mr-1" value=""></button>
-                    <button type="button" className="bi bi-display btn btn-outline-light btn-sm mr-1" value=""></button>
-                    <Link to={"/servers/" + this.state.server.id} hv={this.state.hv} name={this.state.name}>
-                    <button type="button" className="bi bi-gear btn btn-outline-light btn-sm mr-1" value=""></button>
-                    </Link>               
-                </div>
-            </div>
-        )
+        // handleControlServer({
+        //     token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU1OTk4MzMsIlVzZXIiOnsiaWQiOiIxMjkiLCJuYW1lIjoi0JDQtNC80LjQvdC40YHRgtGA0LDRgtC-0YAiLCJlbWFpbCI6ImFkbWluIiwiY29tcGFueSI6ItCc0L7RjyDQutC-0LzQv9Cw0L3QuNGPIiwicm9sZSI6MX0sIlR5cGUiOiJhY2Nlc3MifQ.BGob5kbj3yuLoKvuTjfSCE0EjH4gKsbB19tdz6SaDVepeJF9hJ-ZgHUDLZlLYUm4IfqcP72K8we7C2vX3doh3Q',
+        //     i: index,
+        //     id: id,
+        //     command: com
+        // })
     }
+
+    return (
+        <div className="row border-0 rounded p-1 m-2 server-item bg-secondary  align-items-center" id={"server-" + id}>
+            <div className="col-1">{hv}</div>
+            <div className="col-3">{name}</div>
+            <div className="col">{state}</div>
+            <div className="col">{cpu}</div>
+            <div className="col">{status}</div>
+            <div className="col">
+                <button className="bi bi-power btn btn-outline-light btn-sm mr-1" value="" onClick={ControlPower}></button>
+                {/* <button type="button" className="bi bi-bar-chart btn btn-outline-light btn-sm mr-1" value="" onClick={ControlPower}></button> */}
+                <button type="button" className="bi bi-display btn btn-outline-light btn-sm mr-1" value=""></button>
+                <Link to={"/servers/" + id} hv={hv} name={name}>
+                    <button type="button" className="bi bi-gear btn btn-outline-light btn-sm mr-1" value=""></button>
+                </Link>
+            </div>
+        </div>
+    )
 }
-export default ServerItem;
