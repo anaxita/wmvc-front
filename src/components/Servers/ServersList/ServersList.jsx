@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import { SpinnerServers } from '../Spinner/SpinnerServers';
-import { handleServersFetch, useServersStore } from '../store';
+import { handleGetServers, useServersStore } from '../store';
 import { ServerItem } from './Item/Item';
 
 export const ServersList = () => {
 
     useEffect(() => {
-        handleServersFetch({token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU1OTk4MzMsIlVzZXIiOnsiaWQiOiIxMjkiLCJuYW1lIjoi0JDQtNC80LjQvdC40YHRgtGA0LDRgtC-0YAiLCJlbWFpbCI6ImFkbWluIiwiY29tcGFueSI6ItCc0L7RjyDQutC-0LzQv9Cw0L3QuNGPIiwicm9sZSI6MX0sIlR5cGUiOiJhY2Nlc3MifQ.BGob5kbj3yuLoKvuTjfSCE0EjH4gKsbB19tdz6SaDVepeJF9hJ-ZgHUDLZlLYUm4IfqcP72K8we7C2vX3doh3Q'})
+        handleGetServers({token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU1OTk4MzMsIlVzZXIiOnsiaWQiOiIxMjkiLCJuYW1lIjoi0JDQtNC80LjQvdC40YHRgtGA0LDRgtC-0YAiLCJlbWFpbCI6ImFkbWluIiwiY29tcGFueSI6ItCc0L7RjyDQutC-0LzQv9Cw0L3QuNGPIiwicm9sZSI6MX0sIlR5cGUiOiJhY2Nlc3MifQ.BGob5kbj3yuLoKvuTjfSCE0EjH4gKsbB19tdz6SaDVepeJF9hJ-ZgHUDLZlLYUm4IfqcP72K8we7C2vX3doh3Q'})
     }, [])
 
     const {servers, isLoading} = useServersStore()
     const serversItems = servers.map((el, index) => {
         return (
-            <ServerItem key={el.id} index={index} id={el.id} name={el.name} hv={el.hv} state={el.state} status="" cpu="5%"/>
+            <ServerItem key={el.id} index={index} id={el.id} name={el.name} hv={el.hv} srvstate={el.state} status={el.status} cpu={el.cpu} isLoading={el.isLoading} err={el.error}/>
         )
     })
 
