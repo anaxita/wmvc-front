@@ -4,7 +4,7 @@ import { MAIN_URL } from '../../Constants/Constants'
 
 // Events
 export const handleServersLoading = createEvent()
-// export const handleServerLoading = createEvent()
+export const handleServerLoading = createEvent()
 export const handleServersError = createEvent()
 
 // Effects
@@ -35,50 +35,50 @@ export const handleGetServers = createEffect(async ({ token }) => {
 })
 
 // Stop server
-// export const handleControlPower = createEffect(async ({ i, token, id, command }) => {
-//     const state = $servers.getState()
+export const handleControlPower = createEffect(async ({ i, token, id, command }) => {
+    const state = $servers.getState()
 
-//     state.servers[i].isLoading = true
-//     handleServerLoading(state.servers)
+    state.servers[i].isLoading = true
+    handleServerLoading(state.servers)
 
-//     const jBody = JSON.stringify({
-//         server_id: id,
-//         command: command
-//     })
-//     let f = await fetch(`${MAIN_URL}/servers/control`, {
-//         method: 'POST',
-//         headers: {
-//             'Authorization': `Bearer ${token}`,
-//             'Contnet-Type': 'application/json'
-//         },
-//         body: jBody
-//     })
+    const jBody = JSON.stringify({
+        server_id: id,
+        command: command
+    })
+    let f = await fetch(`${MAIN_URL}/servers/control`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Contnet-Type': 'application/json'
+        },
+        body: jBody
+    })
 
-//     state.servers[i].isLoading = false
-//     handleServerLoading(state.servers)
+    state.servers[i].isLoading = false
+    handleServerLoading(state.servers)
 
-//     const response = await f.json()
+    const response = await f.json()
 
-//     if (response.status === "ok") {
-//         switch (command) {
-//             case 'stop_power':
-//                 state.servers[i].state = "Off";
+    if (response.status === "ok") {
+        switch (command) {
+            case 'stop_power':
+                state.servers[i].state = "Off";
 
-//                 break;
-//             case 'start_power':
-//                 state.servers[i].state = "Running";
+                break;
+            case 'start_power':
+                state.servers[i].state = "Running";
 
-//                 break;
-//             default:
-//         }
+                break;
+            default:
+        }
 
-//         return state.servers
-//     } else {
-//         state.servers[i].error = "Ошибка"
-//     }
+        return state.servers
+    } else {
+        state.servers[i].error = "Ошибка"
+    }
 
-//     return state.servers
-// })
+    return state.servers
+})
 
 // Servers store
 const $servers = createStore({
@@ -90,9 +90,9 @@ const $servers = createStore({
     .on(handleServersLoading, (state, isLoading) => ({
         ...state, isLoading
     }))
-    // .on(handleServerLoading, (state, servers) => ({
-    //     ...state, servers
-    // }))
+    .on(handleServerLoading, (state, servers) => ({
+        ...state, servers
+    }))
     .on(handleServersError, (state, error) => ({
         ...state, error
     }))
@@ -100,9 +100,9 @@ const $servers = createStore({
     .on(handleGetServers.doneData, (state, servers) => ({
         ...state, servers
     }))
-    // .on(handleControlPower.doneData, (state, servers) => ({
-    //     ...state, servers
-    // }))
+    .on(handleControlPower.doneData, (state, servers) => ({
+        ...state, servers
+    }))
 
 
 // Import name of the store

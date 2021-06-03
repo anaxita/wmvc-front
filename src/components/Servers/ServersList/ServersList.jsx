@@ -12,7 +12,7 @@ export const ServersList = () => {
     const {servers, isLoading} = useServersStore()
     const serversItems = servers.map((el, index) => {
         return (
-            <ServerItem key={el.id} index={index} id={el.id} name={el.name} hv={el.hv} srvstate={el.state} status={el.status} cpu={el.cpu} isLoading={el.isLoading} err={el.error}/>
+            <ServerItem key={el.id} index={index} id={el.id} name={el.name} hv={el.hv} state={el.state} status={el.status} cpu={el.cpu} isLoading={el.isLoading} err={el.error}/>
         )
     })
 
