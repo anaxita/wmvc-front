@@ -41,8 +41,8 @@ export const ServerItem = ({ index, id, name, hv, state, status, cpu, isLoading,
             <div className="col">{cpu}%</div>
             <div className="col">{status}</div>
             <div className="col">
-                <button type="button" className="bi bi-box-arrow-left btn btn-outline-light btn-sm mr-1" value="" onClick={ControlPower}></button>
-                <button type="button" className="bi bi-power btn btn-outline-light btn-sm mr-1" value="" onClick={StopPowerForce}></button>
+                <button type="button" className="bi bi-box-arrow-left btn btn-outline-light btn-sm mr-1" value="1" onClick={ControlPower}></button>
+                <button type="button" className="bi bi-power btn btn-outline-light btn-sm mr-1" value="2" onClick={StopPowerForce}></button>
                 <button type="button" className="bi bi-display btn btn-outline-light btn-sm mr-1" value=""></button>
                 <Link to={"/servers/" + id} hv={hv} name={name}>
                     <button type="button" className="bi bi-gear btn btn-outline-light btn-sm mr-1" value=""></button>

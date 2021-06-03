@@ -5,6 +5,8 @@ import { MAIN_URL } from '../../Constants/Constants'
 // Events
 export const handleServersLoading = createEvent()
 export const handleServerLoading = createEvent()
+export const handleSetState = createEvent()
+export const handleSetError = createEvent()
 export const handleServersError = createEvent()
 
 // Effects
@@ -29,18 +31,14 @@ export const handleGetServers = createEffect(async ({ token }) => {
 
         return result
     }
-    
+
     handleServersError(response.message.err)
     return []
 })
 
 // Stop server
 export const handleControlPower = createEffect(async ({ i, token, id, command }) => {
-    const state = $servers.getState()
-
-    state.servers[i].isLoading = true
-    handleServerLoading(state.servers)
-
+    handleServerLoading(i)
     const jBody = JSON.stringify({
         server_id: id,
         command: command
@@ -54,35 +52,54 @@ export const handleControlPower = createEffect(async ({ i, token, id, command })
         body: jBody
     })
 
-    state.servers[i].isLoading = false
-    handleServerLoading(state.servers)
+    handleServerLoading(i)
 
     const response = await f.json()
 
-    if (response.status === "ok") {
-        switch (command) {
-            case 'stop_power':
-                state.servers[i].state = "Off";
+    switch (f.status) {
+        case 200:
+            if (response.status === "ok") {
+                switch (command) {
+                    case 'stop_power':
+                        handleSetState({ index: i, state: "Off" });
+                        break;
+                    case 'start_power':
+                        handleSetState({ index: i, state: "Running" });
+                        break;
+                    default:
+                }
+            } else {
+                handleSetError({ index: i, error: response.message.err })
+            }
+            break
+        default:
+            handleSetError({ index: i, error: "server error" })
+            setTimeout(
+                () => {
+                    handleSetError({ index: i, error: "" })
 
-                break;
-            case 'start_power':
-                state.servers[i].state = "Running";
-
-                break;
-            default:
-        }
-
-        return state.servers
-    } else {
-        state.servers[i].error = "Ошибка"
+                },
+                5
+            );
     }
-
+    const state = $servers.getState()
     return state.servers
 })
 
 // Servers store
 const $servers = createStore({
-    servers: [],
+    servers: [
+        {
+        id: "",
+        name: "",
+        hv: "",
+        state: "",
+        status: "",
+        cpu: "",
+        isLoading: false,
+        error: ""
+    },
+],
     isLoading: false,
     error: '',
 })
@@ -90,9 +107,30 @@ const $servers = createStore({
     .on(handleServersLoading, (state, isLoading) => ({
         ...state, isLoading
     }))
-    .on(handleServerLoading, (state, servers) => ({
-        ...state, servers
-    }))
+    .on(handleServerLoading, (state, index) => {
+        let server = { ...state.servers[index] }
+        server.isLoading = !server.isLoading
+
+        return {
+            ...state, servers: [ ...state.servers.slice(0, index), server, ...state.servers.slice(index + 1) ]
+        }
+    })
+    .on(handleSetState, (state, server) => {
+        let s = { ...state.servers[server.index] }
+        s.state = server.state
+
+        return {
+            ...state, servers: [ ...state.servers.slice(0, server.index), s, ...state.servers.slice(server.index + 1) ]
+        }
+    })
+    .on(handleSetError, (state, server) => {
+        let s = { ...state.servers[server.index] }
+        s.error = server.error
+
+        return {
+            ...state, servers: [ ...state.servers.slice(0, server.index), s, ...state.servers.slice(server.index + 1) ]
+        }
+    })
     .on(handleServersError, (state, error) => ({
         ...state, error
     }))

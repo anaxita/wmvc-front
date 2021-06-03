@@ -1,7 +1,7 @@
 export const Error = ({err}) => {
     return (
-        <div className="alert alert-danger" role="alert">
-            !!!{err}
+        <div className="text-warning" role="alert">
+            {err}
         </div>
     )
 }
