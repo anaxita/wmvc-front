@@ -13,6 +13,7 @@ export const handleServersError = createEvent()
 // Get servers
 export const handleGetServers = createEffect(async ({ token }) => {
     handleServersLoading(true)
+    
     let f = await fetch(`${MAIN_URL}/servers`, {
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -38,6 +39,7 @@ export const handleGetServers = createEffect(async ({ token }) => {
 
 // Stop server
 export const handleControlPower = createEffect(async ({ i, token, id, command }) => {
+    handleSetError({ index: i, error: "" })
     handleServerLoading(i)
     const jBody = JSON.stringify({
         server_id: id,
@@ -63,23 +65,26 @@ export const handleControlPower = createEffect(async ({ i, token, id, command })
                     case 'stop_power':
                         handleSetState({ index: i, state: "Off" });
                         break;
+                    case 'stop_power_force':
+                        handleSetState({ index: i, state: "Off" });
+                        break;   
                     case 'start_power':
                         handleSetState({ index: i, state: "Running" });
                         break;
                     default:
+                        handleSetError({ index: i, error: 'request error' })
                 }
             } else {
                 handleSetError({ index: i, error: response.message.err })
             }
-            break
+            break;
         default:
             handleSetError({ index: i, error: "server error" })
             setTimeout(
                 () => {
                     handleSetError({ index: i, error: "" })
-
                 },
-                5
+                5000
             );
     }
     const state = $servers.getState()

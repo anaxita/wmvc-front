@@ -1,15 +1,10 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Error } from '../../../Error/Errors';
 import { SpinnerServer } from '../../Spinner/SpinnerServer';
 import { handleControlPower } from '../../store';
 
-export const ServerItem = ({ index, id, name, hv, state, status, cpu, isLoading, err}) => {
-
-    useState({
-        isLoading: false
-    })
-
+export const ServerItem = ({ index, id, name, hv, state, status, cpu_load, isLoading, err}) => {
+    
     const ControlPower = () => {
         let command = 'stop_power'
         if (state === 'Off') {
@@ -38,13 +33,13 @@ export const ServerItem = ({ index, id, name, hv, state, status, cpu, isLoading,
             <div className="col-1">{hv}</div>
             <div className="col-3">{name}</div>
             <div className="col">{isLoading ? <SpinnerServer /> : (err ? <Error err={err}/> : state)}</div>
-            <div className="col">{cpu}%</div>
+            <div className="col">{`${cpu_load}%`}</div>
             <div className="col">{status}</div>
             <div className="col">
                 <button type="button" className="bi bi-box-arrow-left btn btn-outline-light btn-sm mr-1" value="1" onClick={ControlPower}></button>
                 <button type="button" className="bi bi-power btn btn-outline-light btn-sm mr-1" value="2" onClick={StopPowerForce}></button>
                 <button type="button" className="bi bi-display btn btn-outline-light btn-sm mr-1" value=""></button>
-                <Link to={"/servers/" + id} hv={hv} name={name}>
+                <Link to={`/servers/${hv}/${name}`}>
                     <button type="button" className="bi bi-gear btn btn-outline-light btn-sm mr-1" value=""></button>
                 </Link>
             </div>
