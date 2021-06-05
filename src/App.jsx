@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import { Route, Switch } from 'react-router-dom'
 import Servers from './components/Servers/servers';
 import { Details } from './components/Servers/Details/Details';
+import { UsersList } from './components/Users/UsersList';
 
 export const App = () =>{
         return (
@@ -16,6 +17,8 @@ export const App = () =>{
                             
                             <Route path='/servers/:hv/:name' component={Details} />
                             <Route path='/servers' component={Servers} />
+                            {/* <Route path='/servers/:hv/:name' component={Details} /> */}
+                            <Route path='/users' component={UsersList} />
                         </Switch>
                     </div>
                 </main>

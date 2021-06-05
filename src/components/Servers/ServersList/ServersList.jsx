@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { SpinnerServers } from '../Spinner/SpinnerServers';
+import { FixedError } from '../../Error/FixedError';
+import { SpinnerServers } from '../../Spinner/SpinnerServers';
 import { handleGetServers, useServersStore } from '../store';
 import { ServerItem } from './Item/Item';
 
@@ -9,7 +10,7 @@ export const ServersList = () => {
         handleGetServers({token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU1OTk4MzMsIlVzZXIiOnsiaWQiOiIxMjkiLCJuYW1lIjoi0JDQtNC80LjQvdC40YHRgtGA0LDRgtC-0YAiLCJlbWFpbCI6ImFkbWluIiwiY29tcGFueSI6ItCc0L7RjyDQutC-0LzQv9Cw0L3QuNGPIiwicm9sZSI6MX0sIlR5cGUiOiJhY2Nlc3MifQ.BGob5kbj3yuLoKvuTjfSCE0EjH4gKsbB19tdz6SaDVepeJF9hJ-ZgHUDLZlLYUm4IfqcP72K8we7C2vX3doh3Q'})
     }, [])
 
-    const {servers, isLoading} = useServersStore()
+    const {servers, isLoading, error} = useServersStore()
     const serversItems = servers.map((el, index) => {
         return (
             <ServerItem key={el.id} index={index} id={el.id} name={el.name} hv={el.hv} state={el.state} status={el.status} cpu_load={el.cpu_load} isLoading={el.isLoading} err={el.error}/>
@@ -18,7 +19,7 @@ export const ServersList = () => {
 
     // html
     return (
-        <div>
+        <div className="mr-2">
             <div className="row main-rows p-0 m-0 mt-2 mb-2 bg-dark border-0 rounded align-items-center">
                 <div className="col-2 p-2">
                     <select name="cars" id="cars" form="carform" className="form-select bg-dark text-light">
@@ -59,8 +60,7 @@ export const ServersList = () => {
                         <div className="col">Status</div>
                         <div className="col">Actions</div>
                     </div>
-                    
-                    {isLoading ? <SpinnerServers /> : serversItems}
+                    {isLoading ? <SpinnerServers /> : (error ? <FixedError err={error} /> : serversItems)}
                 </div>
             </div>
         </div>

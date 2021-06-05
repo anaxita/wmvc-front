@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Error } from '../../../Error/Errors';
-import { SpinnerServer } from '../../Spinner/SpinnerServer';
+import { SpinnerServer } from '../../../Spinner/SpinnerServer';
 import { handleControlPower } from '../../store';
 
 export const ServerItem = ({ index, id, name, hv, state, status, cpu_load, isLoading, err}) => {

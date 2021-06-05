@@ -23,3 +23,15 @@ body {
 .my-p-16 {
   padding: 8px 16px;
 }
+
+.my-bg-secondary {
+  background-color: rgb(11, 141, 141);
+}
+
+.my-fixed-error {
+  max-width: 25vw;
+
+  position: fixed;
+  right: 0%;
+  top: 10%;
+}
