@@ -90,8 +90,8 @@ export const ModalUserEdit = ({ setModalShow, editUser, user }) => {
                             <div className="row mb-3">
                                 <label for="inputRole" className="col-sm-2 col-form-label">Role</label>
                                 <div className="col-sm-10">
-                                    <select className="form-select" name="role" id="role" onChange={onChangeRole}>
-                                        <option selected value="0">User</option>
+                                    <select className="form-select" name="role" id="role" onChange={onChangeRole} value={user.role}>
+                                        <option value="0">User</option>
                                         <option value="1">Administrator</option>
                                     </select>
                                 </div>

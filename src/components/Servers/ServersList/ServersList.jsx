@@ -13,14 +13,15 @@ export const ServersList = () => {
     const { servers, isLoading, error } = useServersStore()
     const serversItems = servers.map((el, index) => {
         return (
-            <ServerItem key={el.id} index={index} id={el.id} name={el.name} hv={el.hv} state={el.state} network={el.network} status={el.status} cpu_load={el.cpu_load} isLoading={el.isLoading} err={el.error} />
+            <ServerItem key={el.id} index={index} id={el.id} name={el.name} hv={el.hv} state={el.state} network={el.network} status={el.status} cpu_load={el.cpu_load} isLoading={el.isLoading} isNetworkLoading={el.isNetworkLoading} err={el.error} />
         )
     })
 
     // html
     return (
         <div>
-            <div className="row main-rows p-1 m-0 mt-2 mb-2 bg-dark border-0 rounded align-items-center">
+                        <div className="row main-rows p-1 m-0 mt-2 mb-2 bg-dark border-0 rounded align-items-center">
+
                 <div className="col p-1">
                     SERVERS LIST
                 </div>

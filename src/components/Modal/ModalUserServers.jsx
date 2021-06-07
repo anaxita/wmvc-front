@@ -57,7 +57,7 @@ export const ModalUserServers = ({ setModalShow, userID}) => {
         }
         FetchData()
             
-    }, [])
+    }, [userID])
 
     const changeAddedStatus = (userID) => {
         const newServers = servers.map(el => {
