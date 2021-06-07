@@ -3,19 +3,13 @@ import { MAIN_URL, TOKEN_ACCESS } from "../../Constants/Constants"
 import { Error } from "../Error/Errors"
 import { SpinnerBtn } from "../Spinner/SpinnerBtn"
 
-export const ModalAddUser = ({ setModalShow, setUser }) => {
-    const closeModal = () => {
+export const ModalUserEdit = ({ setModalShow, editUser, user }) => {
+
+    const onClickCloseModal = () => {
         setModalShow(false)
     }
 
-    const [state, setState] = useState({
-        id: '',
-        role: 0,
-        name: '',
-        company: '',
-        email: '',
-        password: '',
-    })
+    const [state, setState] = useState(user)
     const [isLoading, setLoading] = useState(false)
     const [error, setError] = useState('')
 
@@ -37,25 +31,19 @@ export const ModalAddUser = ({ setModalShow, setUser }) => {
         setState(newState)
     }
 
-    const onChangeLogin = (e) => {
-        let newState = { ...state }
-        newState.email = e.target.value
-        setState(newState)
-    }
-
     const onChangePassword = (e) => {
         let newState = { ...state }
         newState.password = e.target.value
         setState(newState)
     }
 
-    const createUser = async () => {
+    const onClickEditUser = async () => {
         setError('');
         setLoading(true);
 
         try {
             let f = await fetch(`${MAIN_URL}/users`, {
-                method: 'POST',
+                method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${TOKEN_ACCESS}`,
                     'Contnet-Type': 'application/json'
@@ -66,11 +54,9 @@ export const ModalAddUser = ({ setModalShow, setUser }) => {
 
             if (response.status === "ok") {
                 let newState = { ...state }
-                newState.id = response.message.id
                 newState.password = ''
-
-                setUser(newState);
-                closeModal()
+                editUser(newState);
+                setModalShow(false)
             } else {
                 setError(response.message.err);
             }
@@ -87,7 +73,7 @@ export const ModalAddUser = ({ setModalShow, setUser }) => {
     }
 
     return (
-        <div className="my-modal" style={{ zIndex: 2 }}>
+        <div className="my-modal">
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content bg-dark">
                     <div className="modal-header">
@@ -95,6 +81,12 @@ export const ModalAddUser = ({ setModalShow, setUser }) => {
                     </div>
                     <div className="modal-body">
                         <form>
+                            <div className="row mb-3">
+                                <label for="inputLogin" className="col-sm-2 col-form-label">Login</label>
+                                <div className="col-sm-10">
+                                    <input type="text" className="form-control" id="inputLogin my-disabled-input" autoComplete="off" value={state.email} readOnly/>
+                                </div>
+                            </div>
                             <div className="row mb-3">
                                 <label for="inputRole" className="col-sm-2 col-form-label">Role</label>
                                 <div className="col-sm-10">
@@ -107,25 +99,19 @@ export const ModalAddUser = ({ setModalShow, setUser }) => {
                             <div className="row mb-3">
                                 <label for="inputName" className="col-sm-2 col-form-label">Name</label>
                                 <div className="col-sm-10">
-                                    <input type="text" className="form-control bg-light" id="inputName" autocomplete="off" onChange={onChangeName} />
+                                    <input type="text" className="form-control bg-light" id="inputName" autoComplete="off" onChange={onChangeName} value={state.name}/>
                                 </div>
                             </div>
                             <div className="row mb-3">
                                 <label for="inputCompany" className="col-sm-2 col-form-label">Company</label>
                                 <div className="col-sm-10">
-                                    <input type="text" className="form-control bg-light" id="inputCompany" autocomplete="off" onChange={onChangeCompany} />
-                                </div>
-                            </div>
-                            <div className="row mb-3">
-                                <label for="inputLogin" className="col-sm-2 col-form-label">Login</label>
-                                <div className="col-sm-10">
-                                    <input type="text" className="form-control bg-light" id="inputLogin" autocomplete="off" onChange={onChangeLogin} />
+                                    <input type="text" className="form-control bg-light" id="inputCompany" autoComplete="off" onChange={onChangeCompany} value={state.company}/>
                                 </div>
                             </div>
                             <div className="row mb-3">
                                 <label for="inputPassword" className="col-sm-2 col-form-label">Password</label>
                                 <div className="col-sm-10">
-                                    <input type="password" className="form-control bg-light" id="inputPassword" autocomplete="off" onChange={onChangePassword} />
+                                    <input type="password" className="form-control bg-light" id="inputPassword" autoComplete="off" onChange={onChangePassword} value={state.password}/>
                                 </div>
                             </div>
                         </form>
@@ -136,9 +122,9 @@ export const ModalAddUser = ({ setModalShow, setUser }) => {
                                 {error ? <Error err={error} /> : null}
                             </div>
                         </div>
-                        <button type="button" className="btn btn-secondary" onClick={closeModal}>Отмена</button>
+                        <button type="button" className="btn btn-secondary" onClick={onClickCloseModal}>Отмена</button>
                         {isLoading ? <button type="button" className="btn btn-primary" disabled><SpinnerBtn /> Создать</button> :
-                            <button type="button" className="btn btn-primary" onClick={createUser}>Создать</button>}
+                            <button type="button" className="btn btn-primary" onClick={onClickEditUser}>Создать</button>}
                     </div>
                 </div>
             </div>

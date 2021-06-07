@@ -34,7 +34,7 @@ export const Details = (props) => {
                 setVm(response.message)
             })
 
-    }, [])
+    }, [vm.hv, vm.name])
 
     return (
         <DetailsView vm={vm} isLoading={isLoading}/>

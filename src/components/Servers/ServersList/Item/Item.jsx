@@ -3,8 +3,8 @@ import { Error } from '../../../Error/Errors';
 import { SpinnerServer } from '../../../Spinner/SpinnerServer';
 import { handleControlPower } from '../../store';
 
-export const ServerItem = ({ index, id, name, hv, state, status, cpu_load, isLoading, err}) => {
-    
+export const ServerItem = ({ index, id, name, hv, state, status, network, cpu_load, isLoading, err }) => {
+
     const ControlPower = () => {
         let command = 'stop_power'
         if (state === 'Off') {
@@ -29,19 +29,28 @@ export const ServerItem = ({ index, id, name, hv, state, status, cpu_load, isLoa
     }
 
     return (
-        <div className="row border-0 rounded p-1 m-2 server-item bg-secondary  align-items-center" id={"server-" + id}>
-            <div className="col-1">{hv}</div>
-            <div className="col-3">{name}</div>
-            <div className="col">{isLoading ? <SpinnerServer /> : (err ? <Error err={err}/> : state)}</div>
-            <div className="col">{`${cpu_load}%`}</div>
-            <div className="col">{status}</div>
-            <div className="col">
-                <button type="button" className="bi bi-box-arrow-left btn btn-outline-light btn-sm mr-1" value="1" onClick={ControlPower}></button>
-                <button type="button" className="bi bi-power btn btn-outline-light btn-sm mr-1" value="2" onClick={StopPowerForce}></button>
-                <button type="button" className="bi bi-display btn btn-outline-light btn-sm mr-1" value=""></button>
-                <Link to={`/servers/${hv}/${name}`}>
-                    <button type="button" className="bi bi-gear btn btn-outline-light btn-sm mr-1" value=""></button>
-                </Link>
+        <div className="row border-0 rounded p-1 mt-2 mr-1 ml-1 server-item bg-secondary  align-items-center" id={"server-" + id}>
+            <div className="col-12 col-md-3 text-warning">{name}</div>
+            {/* <div className="col-8 col-md-1 d-flex justify-content-end justify-content-md-start">{hv}</div> */}
+            <div className="col-8 col-md-1 d-none d-md-block">{hv}</div>
+            <div className="col-4 col-md-1">{isLoading ? <SpinnerServer /> : (err ? <Error err={err} /> : ((state === 'Running') ? 'Включен' : 'Выключен'))}</div>
+            <div className="col-8 col-md-2 d-flex justify-content-end justify-content-md-start">{(status === 'Работает нормально' && state === 'Off') ? null : status}</div>
+            <div className="col-12 col-md-2 d-flex justify-content-start justify-content-md-start">{network ? 'Сеть ОК' : 'Нет сети'}</div>
+            <div className="col-md-1 d-none d-md-block">{`${cpu_load}%`}</div>
+            <div className="col col-md-2">
+                <div className="row m-0">
+                    <div className="col-6 col-md-4 m-0 p-0 d-flex justify-content-start">
+                        <button type="button" className="bi bi-box-arrow-left btn btn-outline-light btn-sm mr-1" value="1" onClick={ControlPower}></button>
+                        <button type="button" className="bi bi-reception-4 btn btn-outline-light btn-sm mr-1" value=""></button>
+                    </div>
+                    <div className="col-6 col-md-4 m-0 p-0 d-flex justify-content-end justify-content-md-start">
+                        <button type="button" className="bi bi-power btn btn-outline-light btn-sm mr-1" value="2" onClick={StopPowerForce}></button>
+                    <Link to={`/servers/${hv}/${name}`}>
+                        <button type="button" className="bi bi-gear btn btn-outline-light btn-sm mr-1" value=""></button>
+                    </Link>
+                    </div>
+
+                </div>
             </div>
         </div>
     )
