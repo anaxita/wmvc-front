@@ -1,6 +1,28 @@
+import { Error } from '../../Error/Errors';
 import { SpinnerServer } from '../../Spinner/SpinnerServer';
 
-export const DetailsView = ({vm, isLoading}) => {
+export const DetailsView = ({params, services, isLoading, error}) => {
+
+    const servicesList = services.map((el) => {
+        return (
+            <div className="row text-info">
+            <div className="col bg-dark text-info border-bottom border-secondary">
+                {el.display_name}
+                </div>
+            <div className="col-2 bg-dark text-info border-bottom border-secondary">
+            {el.status}
+                </div>
+            <div className="col bg-dark text-info border-bottom border-secondary">
+                {el.user}
+                </div>
+            <div className="col-2 bg-dark text-info border-bottom border-secondary">
+                <i className="bi bi-power m-1"></i>
+                <i className="bi bi-bar-chart m-1"></i>
+                <i className="bi bi-display m-1 "></i>
+            </div>
+        </div>
+        )
+    })
     return (
         <div className="col d-flex flex-column h-sm-100">
             <main className="row overflow-auto text-light bg-secondary">
@@ -10,7 +32,6 @@ export const DetailsView = ({vm, isLoading}) => {
                             <button type="button" className="btn btn-outline-light  border-0"> <i
                                 className="bi bi-arrow-left-circle"></i></button>
                         </div>
-
                         <div className="col p-2">
                             <button type="button" className="btn btn-sm btn-info mr-1"> <i
                                 className="bi bi-power m-1"></i>Power</button>
@@ -20,7 +41,7 @@ export const DetailsView = ({vm, isLoading}) => {
                                 className="bi bi-display m-1 "></i>Connect</button>
                         </div>
                         <div className="col text-center text-info text-warning">
-                            {vm.name}
+                            {params.name}
                         </div>
                         <div className="col"></div>
                     </div>
@@ -32,14 +53,18 @@ export const DetailsView = ({vm, isLoading}) => {
                                 </div>
                             </div>
                             <div className="row">
+
+                         
                                 <div className="col pr-0">
+                                {
+                                   error.params ? <Error err={error.params}/> : (
                                     <ul className="list-group list-group-flush">
                                         <li className="list-group-item bg-dark text-info border-secondary"><div className="row">
                                             <div className="col">
                                                 HV
                                                 </div>
                                             <div className="col">
-                                                {isLoading ? <SpinnerServer /> : vm.hv}
+                                                {isLoading.params ? <SpinnerServer /> : params.hv}
                                             </div>
                                         </div>  </li>
 
@@ -48,7 +73,7 @@ export const DetailsView = ({vm, isLoading}) => {
                                                 CPU CORES
                                                 </div>
                                             <div className="col">
-                                                {isLoading ? <SpinnerServer /> : vm.cpu_cores}
+                                                {isLoading.params ? <SpinnerServer /> : params.cpu_cores}
                                             </div>
                                         </div>  </li>
 
@@ -57,7 +82,7 @@ export const DetailsView = ({vm, isLoading}) => {
                                                 WEIGHT
                                                 </div>
                                             <div className="col">
-                                                {isLoading ? <SpinnerServer /> : vm.weight}
+                                                {isLoading.params ? <SpinnerServer /> : params.weight}
                                             </div>
                                         </div>  </li>
                                         <li className="list-group-item bg-dark text-info border-secondary"><div className="row">
@@ -65,7 +90,7 @@ export const DetailsView = ({vm, isLoading}) => {
                                                 RAM
                                                 </div>
                                             <div className="col">
-                                                {isLoading ? <SpinnerServer /> : (`${vm.memory} GB`)}
+                                                {isLoading.params ? <SpinnerServer /> : (`${params.memory} GB`)}
                                             </div>
                                         </div>  </li>
                                         <li className="list-group-item bg-dark text-info border-secondary"><div className="row">
@@ -73,7 +98,7 @@ export const DetailsView = ({vm, isLoading}) => {
                                                 LAN
                                                 </div>
                                             <div className="col">
-                                                {isLoading ? <SpinnerServer /> : vm.network}
+                                                {isLoading.params ? <SpinnerServer /> : params.network}
                                             </div>
                                         </div>  </li>
                                         <li className="list-group-item bg-dark text-info border-secondary"><div className="row">
@@ -81,7 +106,7 @@ export const DetailsView = ({vm, isLoading}) => {
                                                 LAST BACKUP
                                                 </div>
                                             <div className="col">
-                                                {isLoading ? <SpinnerServer /> : vm.backup}
+                                                {isLoading.params ? <SpinnerServer /> : params.backup}
                                             </div>
                                         </div>  </li>
 
@@ -90,10 +115,12 @@ export const DetailsView = ({vm, isLoading}) => {
                                                 INFO
                                                 </div>
                                             <div className="col">
-                                                {isLoading ? <SpinnerServer /> : vm.description}
+                                                {isLoading.params ? <SpinnerServer /> : params.description}
                                             </div>
                                         </div>  </li>
                                     </ul>
+                                    )
+                                }
                                 </div>
                             </div>
                         </div>
@@ -225,46 +252,34 @@ export const DetailsView = ({vm, isLoading}) => {
                                 </div>
                             </div>
 
-                            <div className="row overflow-auto mt-4 ">
+                            <div className="row mt-4 ">
                                 <hr />
-                                <div className="col-6">
+                                <div className="col-8">
                                     <div className="row">
                                         <div className="col text-center">
                                             <p className="text-muted">Services</p>
                                         </div>
                                     </div>
-                                    <div className="row text-info">
-                                        <div className="col-3">
+                                    <div className="overflow-auto h-25">
+
+                                    <div className="row text-info text-uppercase font-weight-bold border-bottom border-secondary">
+                                        <div className="col">
                                             Service
                                             </div>
                                         <div className="col-2">
                                             Status
                                             </div>
-                                        <div className="col-2">
+                                        <div className="col">
                                             Account
                                             </div>
-                                        <div className="col">
+                                        <div className="col-2">
                                             Action
                                             </div>
                                     </div>
-                                    <div className="row">
-                                        <div className="col-3">
-                                            Service
-                                            </div>
-                                        <div className="col-2">
-                                            Status
-                                            </div>
-                                        <div className="col-2">
-                                            Account
-                                            </div>
-                                        <div className="col">
-                                            <i className="bi bi-power m-1"></i>
-                                            <i className="bi bi-bar-chart m-1"></i>
-                                            <i className="bi bi-display m-1 "></i>
-                                        </div>
+                                        {error.params ? <Error err={error.params}/> : (isLoading.services ? <SpinnerServer/> : servicesList)}
                                     </div>
                                 </div>
-                                <div className="col-6">
+                                <div className="col">
                                     <div className="row">
                                         <div className="col text-center">
                                             <p className="text-muted">Users</p>
