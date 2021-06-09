@@ -3,6 +3,8 @@
 :root {
   --bg-secondary: #6c757d;
   --bg-dark: #343a40;
+  --bg-primary: #0d6efd;
+  --bg-gold: #ffcc00;
 }
 html body {
   margin: 0;
@@ -56,39 +58,31 @@ button {
   overflow-y: auto;
 }
 
-/* Сайдбар */
-nav ul li {
-  list-style-type: none;
-  padding: 8px;
-}
-nav ul {
-  padding: 8px;
-}
-
-nav {
-  background-color: #343a40;
-  border-right: 1px solid #6c757d;
-}
-
-
 /* Кнопки */
 .btn {
   appearance: none;
   padding: 8px 16px;
-  border: 1px solid #4676D7;
+  border: 1px solid var(--bg-gold);
   border-radius: 5px;
-  background: #4676D7;
+  background: var(--bg-dark);
   color: #fff;
   font-family: inherit;
+  transition: 0.3s;
 }
 
 .btn:hover {
-  background: #1d49aa;
+  background: var(--bg-gold);
+  color: var(--bg-dark);
+  cursor: pointer;
 }
 
-.btn:focus {
+.btn:active {
   outline: none;
-  box-shadow: 0 0 0 2px #cbd6ee;
+  background: var(--bg-primary);
+  border: 1px solid var(--bg-primary);
+  border-radius: 5px;
+  color: #fff;
+  transition: 0.3s;
 }
 
 .btn[disabled] {

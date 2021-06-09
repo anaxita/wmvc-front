@@ -1,14 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
+import { NavLink } from 'react-router-dom';
+import './style.css'
 class Sidebar extends React.Component {
    render() {
       return (
          <nav className="menu">
             <ul>
-               <li>SERVERS</li>
-               <li>USERS</li>
-               <li>LOGOUT</li>
+               <li>
+               <NavLink to="/servers">SERVERS</NavLink>
+               </li>
+               <li>
+               <NavLink to="/users">USERS</NavLink>
+               </li>
+               <li>
+               <NavLink to="/logout">LOGOUT</NavLink>
+               </li>
             </ul>
          </nav>
       )

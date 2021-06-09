@@ -1,0 +1,28 @@
+/* Сайдбар */
+nav ul li {
+list-style-type: none;
+padding: 8px;
+}
+nav ul {
+padding: 8px;
+}
+
+nav {
+background-color: var(--bg-dark);
+border-right: 1px solid #6c757d;
+}
+
+a{
+color: rgba(255, 166, 0, 0.467);
+text-decoration: none;
+}
+
+a:hover {
+color: var(--bg-gold);
+}
+
+.active {
+color: rgb(255, 204, 0);
+text-decoration: underline;
+}
+
