@@ -1,56 +1,60 @@
-import React from 'react';
-import ServerItem from '../ServerItem/ServerItem';
+import React, { useEffect } from 'react';
+import { FixedError } from '../../Error/FixedError';
+import { SpinnerServers } from '../../Spinner/SpinnerServers';
+import { handleGetServers, useServersStore } from '../store';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-class ServersList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            errors: null,
-            servers: []
-        };
-    }
+import { ServerItem } from './Item/Item';
+import './style.css'
+export const ServersList = () => {
 
-    componentDidMount() {
-        fetch("https://dc.kmsys.ru:53338/servers", {
-            headers: { Authorization: "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjYyNDI0ODYsIlVzZXIiOnsiaWQiOiIxMjkiLCJuYW1lIjoi0JDQtNC80LjQvdC40YHRgtGA0LDRgtC-0YAiLCJlbWFpbCI6ImFkbWluIiwiY29tcGFueSI6ItCc0L7RjyDQutC-0LzQv9Cw0L3QuNGPIiwicm9sZSI6MX0sIlR5cGUiOiJhY2Nlc3MifQ.CJw5DFaKfO99U-s-UeaJ0VFmBamoplIDqkL_InZOOnLBmc57aJFJs3ycYCrBWwOQ-nyzKaf6V5UCIgDvQCBEKQ" }
-        })
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        servers: result.message.servers
-                    });
-                },
-                (error) => {
-                    this.setState({
-                        error
-                    });
-                }
-            )
-    }
+    useEffect(() => {
+        handleGetServers()
+    }, [])
 
-    render() {
-        const serversItems = this.state.servers.map((element) => {
+    const { servers, isLoading, error } = useServersStore()
+
+    let serversItems = ''
+    if (servers.length > 1) {
+        serversItems = servers.map((el, index) => {
             return (
-                <ServerItem key={element.id} data={element} />
+                <ServerItem key={el.id} index={index} id={el.id} name={el.name} hv={el.hv} state={el.state} network={el.network} status={el.status} cpu_load={el.cpu_load} isLoading={el.isLoading} isNetworkLoading={el.isNetworkLoading} err={el.error} />
             )
         })
+    } else {
+        serversItems = 'No servers'
+    }
 
-        return (
-            <div className="row main-rows vh-100 p-0 m-0 border-0 rounded bg-dark">
-                <div className="col border-0 rounded">
-                    <div className="row p-1 mr-2 ml-2 mt-2 align-items-center">
-                        <div className="col">HV</div>
-                        <div className="col">Name</div>
-                        <div className="col">State</div>
-                        <div className="col">CPU</div>
-                        <div className="col">Status</div>
-                        <div className="col">Actions</div>
-                    </div>
-                    {serversItems}
+    // html
+    return (
+        <div className="main">
+            <div className="header">
+
+                <div className="header-btn">
+                    <button type="button" className="btn" onClick={() => { }}>New Server</button>
+                </div>
+                <div className="header-h">
+                    SERVERS LIST
+                </div>
+                <div className="header-input">
+                    <input type="search" className="w-100"
+                        placeholder="Search server ..." />
                 </div>
             </div>
-        )
-    }
+            <div className="content">
+                <div className="server-list ">
+                    <div className="server-list-header">
+                        <div className="srv-list-item">Name</div>
+                        <div className="srv-list-item">HV</div>
+                        <div className="srv-list-item">State</div>
+                        <div className="srv-list-item">Status</div>
+                        <div className="srv-list-item">Network</div>
+                        <div className="srv-list-item">CPU</div>
+                        <div className="srv-list-item"></div>
+                    </div>
+                    {isLoading ? <SpinnerServers /> : (error ? <FixedError err={error} /> : serversItems)}
+                </div>
+            </div>
+        </div>
+    )
 }
-export default ServersList;
