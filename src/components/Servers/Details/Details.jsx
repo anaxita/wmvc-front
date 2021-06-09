@@ -1,5 +1,5 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
-import { MAIN_URL, TOKEN_ACCESS } from '../../../Constants/Constants';
 import { DetailsView } from './DetailsView';
 import { handleGetServerParams, handleGetServerServices, useServerDetails } from './store';
 

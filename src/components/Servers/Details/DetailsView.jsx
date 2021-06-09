@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Error } from '../../Error/Errors';
 import { SpinnerServer } from '../../Spinner/SpinnerServer';
 

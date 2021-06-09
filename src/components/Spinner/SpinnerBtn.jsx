@@ -1,5 +1,7 @@
+import React from 'react';
+
 export const SpinnerBtn = () => {
     return (
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span class="spinner" role="status" aria-hidden="true"></span>
     )
 }

@@ -1,6 +1,8 @@
+import React from 'react';
+
 export const SpinnerUser = () => {
     return (
-            <div className="spinner-border spinner-border-sm" role="status">
+            <div className="spinner" role="status">
             </div>
     )
 }

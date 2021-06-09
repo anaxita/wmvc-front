@@ -1,8 +1,10 @@
+import React from 'react';
+
 export const SpinnerServers = () => {
     return (
-            <div className="d-flex  align-items-center">
+            <div className="">
                 Загружаем список серверов ...
-            <div className="spinner-border ml-3" role="status">
+            <div className="spinner" role="status">
             </div>
         </div>
     )

@@ -7,6 +7,7 @@ import sound_server_stopped from '../../sounds/server-stopped.mp3'
 import sound_server_started from '../../sounds/server-started.mp3'
 import sound_network_started from '../../sounds/network-started.mp3'
 import sound_network_stopped from '../../sounds/network-stopped.mp3'
+import { handleFetch, useFetch } from '../Fetch/store'
 
 // Events
 export const handleServersLoading = createEvent()
@@ -19,134 +20,117 @@ export const handleServerNetworkLoading = createEvent()
 
 // Effects
 // Get servers
-export const handleGetServers = createEffect(async ({ token }) => {
-
+export const handleGetServers = createEffect(async () => {
     handleServersLoading(true)
-
-    let f = await fetch(`${MAIN_URL}/servers`, {
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Contnet-Type': 'application/json'
-        }
-    })
-    const response = await f.json()
+    const { data, err } = await handleFetch('GET', '/servers', '')
     handleServersLoading(false)
 
-    if (response.status === "ok") {
-        let result = response.message.servers.map(el => {
+    if (!err) {
+        let result = data.servers.map(el => {
             el.isLoading = false
             el.isNetworkLoading = false
             el.error = ''
+
             return el
         })
 
         return result
     }
 
-    handleServersError(response.message.err)
+    handleServersError(err)
     return []
 })
 
 // Stop server
+// export const handleControlPower = createEffect(async ({ i, token, id, command }) => {
+//     handleServerLoading(i)
+//     const { data, err } = await handleFetch('POST', '/servers/control', body)
+//     if (!err) {
+//         sound = sound_server_stopped
+//         return id
+//     } else {
+//         sound = sound_server_stopped
+//     }
+// })
 export const handleControlPower = createEffect(async ({ i, token, id, command }) => {
     handleSetError({ index: i, error: "" })
 
-    if (command === 'stop_power' || command === 'start_power' ) {
+    if (command === 'stop_power' || command === 'start_power' || command === 'stop_power_force') {
         handleServerLoading(i)
     } else {
         handleServerNetworkLoading(i)
     }
-    const jBody = JSON.stringify({
+
+    const { err } = await handleFetch('POST', '/servers/control', {
         server_id: id,
         command: command
     })
-    let f = await fetch(`${MAIN_URL}/servers/control`, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Contnet-Type': 'application/json'
-        },
-        body: jBody
-    })
 
-    if (command === 'stop_power' || command === 'start_power' || command === 'start_power_force' ) {
+    if (command === 'stop_power' || command === 'start_power' || command === 'stop_power_force') {
         handleServerLoading(i)
     } else {
         handleServerNetworkLoading(i)
     }
 
-    const response = await f.json()
+
     let sound = ''
-    switch (f.status) {
-        case 200:
-            if (response.status === "ok") {
-                switch (command) {
-                    case 'stop_power':
-                        handleSetState({ index: i, state: "Off" });
-                        sound = sound_server_stopped
-                        break;
-                    case 'stop_power_force':
-                        handleSetState({ index: i, state: "Off" });
-                        sound = sound_server_stopped
-                        break;
-                    case 'start_power':
-                        handleSetState({ index: i, state: "Running" });
-                        sound = sound_server_started
-                        break;
-                    case 'start_network':
-                        handleSetNetwork({ index: i, network: "DMZ - Virtual Switch" });
-                        sound = sound_network_started
-                        break
-                    case 'stop_network':
-                        handleSetNetwork({ index: i, network: '' });
-                        sound = sound_network_stopped
-                        break;
-                    default:
-                        handleSetError({ index: i, error: 'request error' })
+    if (!err) {
+        switch (command) {
+            case 'stop_power':
+                handleSetState({ index: i, state: "Off" });
+                sound = sound_server_stopped
+                break;
+            case 'stop_power_force':
+                handleSetState({ index: i, state: "Off" });
+                sound = sound_server_stopped
+                break;
+            case 'start_power':
+                handleSetState({ index: i, state: "Running" });
+                sound = sound_server_started
+                break;
+            case 'start_network':
+                handleSetNetwork({ index: i, network: "DMZ - Virtual Switch" });
+                sound = sound_network_started
+                break
+            case 'stop_network':
+                handleSetNetwork({ index: i, network: '' });
+                sound = sound_network_stopped
+                break;
+            default:
+                handleSetError({ index: i, error: 'request error' })
 
-                }
-            } else {
-                handleSetError({ index: i, error: response.message.err })
-                sound = sound_error
-            }
-            break;
-        default:
-            handleSetError({ index: i, error: "server timeout" })
-            sound = sound_server_timeout
+        }
+    } else {
+        handleSetError({ index: i, error: err })
+        sound = sound_server_timeout
 
-            setTimeout(
-                () => {
-                    handleSetError({ index: i, error: "" })
-                },
-                5000
-            );
+        setTimeout(
+            () => {
+                handleSetError({ index: i, error: "" })
+            },
+            3000
+        );
     }
 
     var audio = new Audio(sound);
     audio.play();
-    // const voices = window.speechSynthesis.getVoices();
-    // const lastVoice = voices[voices.length - 2];
-    // const utterance = new SpeechSynthesisUtterance(toSay);
-    // utterance.voice = lastVoice
-    // window.speechSynthesis.speak(utterance);
 
-    const state = $servers.getState()
-    return state.servers
+    return $servers.getState().servers
 })
 
 // Servers store
 const $servers = createStore({
     servers: [
         {
-            id: "",
-            name: "",
-            hv: "",
-            state: "",
-            status: "",
-            cpu: "",
+            id: '',
+            name: '',
+            hv: '',
+            state: '',
+            status: '',
+            cpu: '',
             isLoading: false,
             isNetworkLoading: false,
-            error: ""
+            error: ''
         },
     ],
     isLoading: false,
@@ -157,12 +141,10 @@ const $servers = createStore({
         ...state, isLoading
     }))
     .on(handleServerLoading, (state, index) => {
-        let server = { ...state.servers[index] }
-        server.isLoading = !server.isLoading
+        let newState = { ...state }
+        newState.servers[index].isLoading = !newState.servers[index].isLoading
 
-        return {
-            ...state, servers: [...state.servers.slice(0, index), server, ...state.servers.slice(index + 1)]
-        }
+        return newState
     })
 
     .on(handleServerNetworkLoading, (state, index) => {
