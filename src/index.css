@@ -5,7 +5,9 @@
   --bg-dark: #343a40;
   --bg-primary: #0d6efd;
   --bg-gold: #ffcc00;
+  --bg-info: #17a2b8;
 }
+
 html body {
   margin: 0;
   padding: 0;
@@ -50,12 +52,48 @@ button {
   border-bottom: 1px solid #6c757d;
 }
 
+.header-h {
+  padding: 8px 0px 0px 0px; /* vertical text align*/
+  text-align: center;
+}
+
+.header-btn {
+  padding: 0px;
+}
+
+
+.header-input {
+  padding: 0px;
+  text-align: end;
+}
+
 /* CONTENT */
 .content {
   /* background-color: rgba(186, 58, 171, 0.686); */
   background-color: var(--bg-dark);
   padding: 8px;
   overflow-y: auto;
+}
+
+/* Цвета */
+.bg-secondary {
+  background-color: #6c757d;
+}
+
+.bg-secondary-light {
+  background-color: #8f9ba7;
+}
+.bg-dark {
+  background-color: #343a40;
+}
+.bg-primary {
+  background-color: #0d6efd;
+}
+.bg-gold {
+  background-color: #ffcc00;
+}
+.bg-info {
+  background-color: #17a2b8;
 }
 
 /* Кнопки */
@@ -91,11 +129,35 @@ button {
   cursor: not-allowed;
 }
 
-/* Инпуты */
+
+/* Кнопки действий */
+.actions-btn button{
+  /* color: #ffffff; */
+  color: var(--bg-gold);
+  border: 1px solid var(--bg-gold);
+  border-radius: 5px;
+  padding: 8px;
+  margin-right: 8px;
+  width: 32px
+}
+
+.actions-btn button:hover{
+  cursor: pointer;
+}
+
+/* Формы */
 
 input{
   appearance: none;
   padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+select{
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-family: inherit;

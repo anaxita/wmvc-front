@@ -41,17 +41,6 @@ export const handleGetServers = createEffect(async () => {
     return []
 })
 
-// Stop server
-// export const handleControlPower = createEffect(async ({ i, token, id, command }) => {
-//     handleServerLoading(i)
-//     const { data, err } = await handleFetch('POST', '/servers/control', body)
-//     if (!err) {
-//         sound = sound_server_stopped
-//         return id
-//     } else {
-//         sound = sound_server_stopped
-//     }
-// })
 export const handleControlPower = createEffect(async ({ i, token, id, command }) => {
     handleSetError({ index: i, error: "" })
 

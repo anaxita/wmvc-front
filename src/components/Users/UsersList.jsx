@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { MAIN_URL, TOKEN_ACCESS } from '../../Constants/Constants';
 import { ModalAddUser } from '../Modal/Modal';
-import { SpinnerUsers } from '../Spinner/SpinnerUsers';
+import { Spinner } from '../Spinner/Spinner';
 import { UserItem } from './Item/Item';
 import { Error } from '../Error/Errors';
+import './style.css'
 
 
 export const UsersList = () => {
@@ -95,10 +96,11 @@ export const UsersList = () => {
     }, [])
 
     const usersItems = users.map((el, index) => {
-        let color = 'my-bg-secondary'
+        let color = 'bg-secondary-light'
         if (index % 2) {
             color = 'bg-secondary'
         }
+        
         return (
             <UserItem key={el.id} index={index} id={el.id} name={el.name} email={el.email} company={el.company} role={el.role} isLoading={el.isLoading} color={color} deleteUser={deleteUser} editUser={editUser} />
         )
@@ -106,34 +108,32 @@ export const UsersList = () => {
 
     // html
     return (
-        <div>
-            <div className="row main-rows p-1 m-0 mt-2 mb-2 bg-dark border-0 rounded align-items-center">
-                <div className="col p-1 ">
+        <div className="main">
+            <div className="header">
+
+                <div className="header-btn">
+                    <button type="button" className="btn" onClick={() => setModalShow(true)}>New User</button>
+                </div>
+                <div className="header-h">
                     USERS
                 </div>
-                <div className="col d-flex justify-content-end p-1">
-                    <button type="button" className="btn btn-success btn-sm" onClick={() => setModalShow(true)}>Add User</button>
-                </div>
-                <div className="col-sm mt-2 mt-md-0 p-1">
-                    <input type="search" className="form-control form-control-sm border-seconadry bg-dark text-light"
+                <div className="header-input">
+                    <input type="search" className="w-100"
                         placeholder="Search user ..." />
                 </div>
             </div>
-            <div className="row main-rows h-userlist p-0 m-0 border-0 rounded bg-dark">
-                {isModalShow ? <ModalAddUser setModalShow={setModalShow} setUser={setUser} /> : null}
-
-                <div className="col m-0 p-1 border-0 rounded">
-                    <div className="row d-none d-md-flex p-1 m-0 mt-2 align-items-center">
-                        <div className="col">Name</div>
-                        <div className="col">Login</div>
-                        <div className="col">Company</div>
-                        <div className="col">Role</div>
-                        <div className="col">Created</div>
-                        <div className="col-3">Actions</div>
+            <div className="content">
+                <div className="user-list ">
+                    {isModalShow ? <ModalAddUser setModalShow={setModalShow} setUser={setUser} /> : null}
+                    <div className="user-list-header">
+                        <div className="usr-list-item">Name</div>
+                        <div className="usr-list-item">Login</div>
+                        <div className="usr-list-item">Company</div>
+                        <div className="usr-list-item">Role</div>
+                        <div className="usr-list-item">Created</div>
+                        <div className="usr-list-item">Actions</div>
                     </div>
-
-                    {isLoading ? <SpinnerUsers /> : (error ? <Error err={error} /> : usersItems)}
-
+                    {isLoading ? <Spinner text={'Loading users...'} /> : (error ? <Error err={error} /> : usersItems)}
                 </div>
             </div>
         </div>
