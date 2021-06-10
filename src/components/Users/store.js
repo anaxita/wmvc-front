@@ -7,22 +7,13 @@ export const handleModalShow = createEvent()
 export const setError = createEvent()
 export const handleAddUsers = createEvent()
 export const handleAddNewUser = createEvent()
+export const handleDeleteUser = createEvent()
 
 const $usersStore = createStore({
     users: [],
     isLoading: false,
     isModalShow: false,
     error: '',
-})
-
-
-
-export const handleDeleteUser = createEffect(async ({ id }) => {
-    handleAddUsers((users) => {
-        return [
-            ...users.filter(user => user.id !== id).map(u => (u))
-        ]
-    })
 })
 
 export const handleEditUser = createEffect(async ({ user }) => {
@@ -75,6 +66,12 @@ $usersStore
 .on(handleAddUsers, (state, users) => ({
     ...state, users
 }))
+.on(handleDeleteUser, (state, id) => {
+    const users = state.users.filter(u => u.id !== id)
+   return {
+    ...state, users
+}
+})
 .on(handleGetUsers.doneData, (state, users) => ({
     ...state, users
 }))

@@ -166,6 +166,14 @@ input{
   box-sizing: border-box;
 }
 
+input:focus{
+  outline:none;
+  border-color: rgb(54, 120, 220);
+}
+input:read-only {
+  /* color: #d2d5db; */
+  background: var(--bg-secondary)
+}
 select{
   padding: 8px;
   border: 1px solid #ccc;
@@ -174,10 +182,6 @@ select{
   box-sizing: border-box;
 }
 
-input:focus{
-  outline:none;
-  border-color: rgb(54, 120, 220);
-}
 
 /* Высота Ширина */
 .w-100 {

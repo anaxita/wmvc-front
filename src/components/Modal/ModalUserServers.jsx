@@ -75,7 +75,7 @@ export const ModalUserServers = ({ setModalShow, userID}) => {
         setError('');
         setLoading(true);
 
-        const serversToSend = servers.filter(el => el.is_added).map((el) => (el))
+        const serversToSend = servers.filter(el => el.is_added)
 
         try {
             let f = await fetch(`${MAIN_URL}/users/servers`, {

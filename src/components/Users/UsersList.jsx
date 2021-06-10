@@ -3,7 +3,7 @@ import { ModalAddUser } from '../Modal/Modal';
 import { Spinner } from '../Spinner/Spinner';
 import { UserItem } from './Item/Item';
 import { Error } from '../Error/Errors';
-import { useServersStore, handleModalShow, handleAddUser, handleDeleteUser, handleEditUser, handleGetUsers } from './store';
+import { useServersStore, handleModalShow, handleDeleteUser, handleEditUser, handleGetUsers } from './store';
 import './style.css'
 
 

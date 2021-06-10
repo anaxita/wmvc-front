@@ -7,7 +7,7 @@ import { ModalUserServers } from '../../Modal/ModalUserServers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-export const UserItem = ({ id, name, role, email, company, isLoading, deleteUser, editUser }) => {
+export const UserItem = ({ id, name, role, email, company, isLoading, handleDeleteUser, handleEditUser }) => {
     const [error, setError] = useState('')
     const [isModalShow, setModalEditUserShow] = useState(false)
     const [isModalEditUserServers, setModalEditUserServersShow] = useState(false)
@@ -31,7 +31,7 @@ export const UserItem = ({ id, name, role, email, company, isLoading, deleteUser
             let response = await f.json()
 
             if (response.status === "ok") {
-                deleteUser(id)
+                handleDeleteUser(id)
             } else {
                 setError(response.message.err);
             }
@@ -48,7 +48,7 @@ export const UserItem = ({ id, name, role, email, company, isLoading, deleteUser
 
     return (
             <div className="user-item" id={"server-" + id}>
-            {isModalShow ? <ModalUserEdit setModalShow={setModalEditUserShow} editUser={editUser} user={{ id, name, role, email, company, password: '' }} /> : null}
+            {isModalShow ? <ModalUserEdit setModalShow={setModalEditUserShow} handleEditUser={handleEditUser} user={{ id, name, role, email, company, password: '' }} /> : null}
             {isModalEditUserServers ? <ModalUserServers setModalShow={setModalEditUserServersShow} userID={id} /> : null}
                 <div className="usr-name">{isLoading ? <SpinnerUser /> : name}</div>
                 <div className="usr-login">{isLoading ? <SpinnerUser /> : email}</div>
