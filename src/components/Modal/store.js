@@ -1,9 +1,11 @@
 import { createStore, createEvent, createEffect } from 'effector'
 import { useStore } from 'effector-react'
+import { handleFetch } from '../Fetch/store'
+import { handleAddNewUser, handleModalShow } from '../Users/store'
 
 
-export const setLoading = createEvent()
-export const setError = createEvent()
+export const handleSetLoading = createEvent()
+export const handleSetError = createEvent()
 export const handleChangeUser = createEvent()
 
 const $modalStore = createStore({
@@ -17,23 +19,31 @@ const $modalStore = createStore({
     error: '',
 })
 
-// export const handleDeleteUser = createEffect(async ({ id }) => {
-//     handleAddUsers((users) => {
-//         return [
-//             ...users.filter(user => user.id !== id).map(u => (u))
-//         ]
-//     })
-// })
+export const handleAddUser = createEffect(async () => {
+    let curState = $modalStore.getState()
+    const {data, err} = await handleFetch('POST', '/users', curState);
+    handleModalShow(false)
+    if(!err) {
+        handleAddNewUser({
+            ...curState,
+            id: data.id,
+        });
+        return data.id;
+    } else {
+        handleSetError(err);
+        return '';
+    }
+})
+
 
 const onChangeUser = (state, {field, value}) => {
-    console.log(state);
     let newState = { ...state };
     newState[field] = value;
     return newState;
 }
 
-
 $modalStore
-.on(handleChangeUser, onChangeUser);
+.on(handleChangeUser, onChangeUser)
+.on(handleAddUser.doneData, (state, id) => ({...state, id: id}))
 
-export const useServersStore = () => useStore($modalStore);
+export const useModalsAddUserStore = () => useStore($modalStore);

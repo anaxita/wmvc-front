@@ -27,14 +27,13 @@ export const ServersList = () => {
 
     // html
     return (
-        <div className="main">
+        <div>
             <div className="header">
-
                 <div className="header-btn">
                     <button type="button" className="btn" onClick={() => { }}>New Server</button>
                 </div>
                 <div className="header-h">
-                    SERVERS LIST
+                    SERVERS
                 </div>
                 <div className="header-input">
                     <input type="search" className="w-100"
@@ -50,7 +49,7 @@ export const ServersList = () => {
                         <div className="srv-list-item">Status</div>
                         <div className="srv-list-item">Network</div>
                         <div className="srv-list-item">CPU</div>
-                        <div className="srv-list-item"></div>
+                        <div className="srv-list-item">Actions</div>
                     </div>
                     {isLoading ? <SpinnerServers /> : (error ? <FixedError err={error} /> : serversItems)}
                 </div>

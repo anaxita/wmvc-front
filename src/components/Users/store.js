@@ -6,6 +6,7 @@ export const setLoading = createEvent()
 export const handleModalShow = createEvent()
 export const setError = createEvent()
 export const handleAddUsers = createEvent()
+export const handleAddNewUser = createEvent()
 
 const $usersStore = createStore({
     users: [],
@@ -59,6 +60,8 @@ export const handleGetUsers = createEffect(async () => {
     }
 })
 
+
+
 $usersStore
 .on(setLoading, (state, isLoading) => ({
     ...state, isLoading
@@ -75,5 +78,10 @@ $usersStore
 .on(handleGetUsers.doneData, (state, users) => ({
     ...state, users
 }))
+.on(handleAddNewUser, (state, user) => {
+    let newState = {...state};
+    newState.users.push(user);
+    return newState;
+})
 
 export const useServersStore = () => useStore($usersStore);

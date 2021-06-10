@@ -53,31 +53,3 @@
 .srv-actions {
     grid-area: srv-actions;
 }
-
-.srv-actions button{
-    color: white;
-    border: 1px solid white;
-    border-radius: 5px;
-    padding: 8px;
-    margin-right: 8px;
-    /* background-color: white; */
-}
-
-.srv-actions button:hover{
-    cursor: pointer;
-}
-
-.header-h {
-    padding: 8px 0px 0px 0px; /* vertical text align*/
-    text-align: center;
-}
-
-.header-btn {
-    padding: 0px;
-}
-
-
-.header-input {
-    padding: 0px;
-    text-align: end;
-}
