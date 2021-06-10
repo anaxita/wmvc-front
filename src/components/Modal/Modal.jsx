@@ -4,88 +4,25 @@ import { useState } from "react"
 import { MAIN_URL, TOKEN_ACCESS } from "../../Constants/Constants"
 import { Error } from "../Error/Errors"
 import { SpinnerBtn } from "../Spinner/SpinnerBtn"
+import { handleModalShow } from '../Users/store';
+import { handleChangeUser, useModalsAddUserStore, handleAddUser } from './store';
 
-export const ModalAddUser = ({ setModalShow, setUser }) => {
+
+export const ModalAddUser = () => {
+
+    const { isLoading, error } = useModalsAddUserStore()
+
     const closeModal = () => {
-        setModalShow(false)
+        handleModalShow(false)
     }
 
-    const [state, setState] = useState({
-        id: '',
-        role: 0,
-        name: '',
-        company: '',
-        email: '',
-        password: '',
-    })
-    const [isLoading, setLoading] = useState(false)
-    const [error, setError] = useState('')
-
-    const onChangeRole = (e) => {
-        let newState = { ...state }
-        newState.role = parseInt(e.target.value, 10)
-        setState(newState)
-    }
-
-    const onChangeName = (e) => {
-        let newState = { ...state }
-        newState.name = e.target.value
-        setState(newState)
-    }
-
-    const onChangeCompany = (e) => {
-        let newState = { ...state }
-        newState.company = e.target.value
-        setState(newState)
-    }
-
-    const onChangeLogin = (e) => {
-        let newState = { ...state }
-        newState.email = e.target.value
-        setState(newState)
-    }
-
-    const onChangePassword = (e) => {
-        let newState = { ...state }
-        newState.password = e.target.value
-        setState(newState)
-    }
-
-    const createUser = async () => {
-        setError('');
-        setLoading(true);
-
-        try {
-            let f = await fetch(`${MAIN_URL}/users`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${TOKEN_ACCESS}`,
-                    'Contnet-Type': 'application/json'
-                },
-                body: JSON.stringify(state)
-            })
-            let response = await f.json()
-
-            if (response.status === "ok") {
-                let newState = { ...state }
-                newState.id = response.message.id
-                newState.password = ''
-
-                setUser(newState);
-                closeModal()
-            } else {
-                setError(response.message.err);
-            }
+    const onChangeUser = (e) => {
+        let field = e.target.name;
+        let value = e.target.value;
+        if(field === 'role') {
+            value = parseInt(value, 10);
         }
-        catch (e) {
-            setError('Ошибка соединения с сервером  ');
-        }
-        finally {
-            setLoading(false)
-            setTimeout(() => {
-                setError('');
-            }, 10000)
-        }
+        handleChangeUser({field, value});
     }
 
     return (
@@ -97,29 +34,29 @@ export const ModalAddUser = ({ setModalShow, setUser }) => {
                 <div className="modal-body">
                     <form>
                         <label for="inputRole" className="">Role</label>
-                        <select className="form-select" name="role" id="role" onChange={onChangeRole}>
+                        <select className="form-select" name="role" id="role" onChange={onChangeUser}>
                             <option selected value="0">User</option>
                             <option value="1">Administrator</option>
                         </select>
 
                         <label for="inputName" className="">Name</label>
-                        <input type="text" className="" id="inputName" autocomplete="off" onChange={onChangeName} />
+                        <input type="text" className="" id="inputName" autocomplete="off" name="name" onChange={onChangeUser} />
 
 
                         <label for="inputCompany" className="">Company</label>
 
-                        <input type="text" className="" id="inputCompany" autocomplete="off" onChange={onChangeCompany} />
+                        <input type="text" className="" id="inputCompany" autocomplete="off" name="company" onChange={onChangeUser} />
 
 
 
                         <label for="inputLogin" className="">Login</label>
 
-                        <input type="text" className="" id="inputLogin" autocomplete="off" onChange={onChangeLogin} />
+                        <input type="text" className="" id="inputLogin" autocomplete="off" name="email" onChange={onChangeUser} />
 
 
                         <label for="inputPassword" className="">Password</label>
 
-                        <input type="password" className="" id="inputPassword" autocomplete="off" onChange={onChangePassword} />
+                        <input type="password" className="" id="inputPassword" autocomplete="off" name="password" onChange={onChangeUser} />
                             
                     </form>
             </div>
@@ -127,7 +64,7 @@ export const ModalAddUser = ({ setModalShow, setUser }) => {
                 {error ? <Error err={error} /> : null}
                 <button type="button" className="btn" onClick={closeModal}>Отмена</button>
                 {isLoading ? <button type="button" className="btn" disabled><SpinnerBtn /> Создать</button> :
-                    <button type="button" className="btn" onClick={createUser}>Создать</button>}
+                    <button type="button" className="btn" onClick={handleAddUser}>Создать</button>}
             </div>
         </div>
         </div >

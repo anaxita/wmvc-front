@@ -1,108 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { MAIN_URL, TOKEN_ACCESS } from '../../Constants/Constants';
+import React, { useEffect } from 'react';
 import { ModalAddUser } from '../Modal/Modal';
 import { Spinner } from '../Spinner/Spinner';
 import { UserItem } from './Item/Item';
 import { Error } from '../Error/Errors';
+import { useServersStore, handleModalShow, handleAddUser, handleDeleteUser, handleEditUser, handleGetUsers } from './store';
 import './style.css'
 
 
 export const UsersList = () => {
 
-    const [users, setUsers] = useState(
-        [
-            // User's fields example
-            // {
-            //     id: '',
-            //     name: 'props.match.params.name',
-            //     email: '',
-            //     company: '',
-            //     password: '',
-            //     role: 0,
-            // },
-            // {
-            //     id: '',
-            //     name: 'props.match.params.name',
-            //     email: '',
-            //     company: '',
-            //     password: '',
-            //     role: 1,
-            // }
-        ]
-    )
-
-    const [isLoading, setLoading] = useState(false)
-    const [isModalShow, setModalShow] = useState(false)
-    const [error, setError] = useState('')
-
-    const setUser = (user) => {
-        setUsers((users) => {
-            return [
-                ...users,
-                user
-            ]
-        })
-    }
-
-    const deleteUser = (id) => {
-        setUsers((users) => {
-            return [
-                ...users.filter(user => user.id !== id).map(u => (u))
-            ]
-        })
-    }
-
-    const editUser = (user) => {
-        setUsers((users) => {
-            let newwUsers = users.map((u) => {
-                if (u.id === user.id) {
-                    u = user
-                }
-                return u
-            })
-            return [...newwUsers]
-        })
-    }
+    const { users, isLoading, isModalShow, error  } = useServersStore()
 
     useEffect(() => {
-        async function FetchData() {
-            setLoading(true);
-
-            try {
-                let f = await fetch(`${MAIN_URL}/users`, {
-                    headers: {
-                        'Authorization': `Bearer ${TOKEN_ACCESS}`,
-                        'Contnet-Type': 'application/json'
-                    },
-                })
-
-                let response = await f.json()
-
-                if (response.status === "ok") {
-                    setUsers(response.message.users);
-                } else {
-                    setError(response.message.err);
-                }
-            }
-            catch (e) {
-                setError('Ошибка соединения с сервером  ');
-            }
-            finally {
-                setLoading(false);
-            }
-        }
-        FetchData()
-
+        handleGetUsers()
     }, [])
 
     const usersItems = users.map((el, index) => {
-        let color = 'bg-secondary-light'
-        if (index % 2) {
-            color = 'bg-secondary'
-        }
-        
         return (
-            <UserItem key={el.id} index={index} id={el.id} name={el.name} email={el.email} company={el.company} role={el.role} isLoading={el.isLoading} color={color} deleteUser={deleteUser} editUser={editUser} />
+            <UserItem key={el.id} index={index} id={el.id} name={el.name} email={el.email} company={el.company} role={el.role} isLoading={el.isLoading} handleDeleteUser={handleDeleteUser} handleEditUser={handleEditUser} />
         )
     })
 
@@ -111,7 +26,7 @@ export const UsersList = () => {
         <div>
             <div className="header">
                 <div className="header-btn">
-                    <button type="button" className="btn" onClick={() => setModalShow(true)}>New User</button>
+                    <button type="button" className="btn" onClick={() => handleModalShow(true)}>New User</button>
                 </div>
                 <div className="header-h">
                     USERS
@@ -123,7 +38,7 @@ export const UsersList = () => {
             </div>
             <div className="content">
                 <div className="user-list ">
-                    {isModalShow ? <ModalAddUser setModalShow={setModalShow} setUser={setUser} /> : null}
+                    {isModalShow ? <ModalAddUser /> : null}
                     <div className="user-list-header">
                         <div className="usr-list-item">Name</div>
                         <div className="usr-list-item">Login</div>
