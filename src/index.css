@@ -14,6 +14,7 @@ html body {
   background-color: #6c757d;
   color: rgb(250, 243, 243);
   font-family: 'Roboto', sans-serif;
+  font-size: 16px;
 }
 
 button {
@@ -92,6 +93,10 @@ button {
 .bg-gold {
   background-color: #ffcc00;
 }
+
+.text-gold {
+  color: #ffcc00;
+}
 .bg-info {
   background-color: #17a2b8;
 }
@@ -132,9 +137,8 @@ button {
 
 /* Кнопки действий */
 .actions-btn button{
-  /* color: #ffffff; */
   color: var(--bg-gold);
-  border: 1px solid var(--bg-gold);
+  border: 1px solid #ffffff;
   border-radius: 5px;
   padding: 8px;
   margin-right: 8px;
@@ -142,7 +146,13 @@ button {
 }
 
 .actions-btn button:hover{
+  color: var(--bg-gold);
+  border: 1px solid var(--bg-gold);
   cursor: pointer;
+}
+
+.actions-btn button:active{
+  border-width: 2px;
 }
 
 /* Формы */
@@ -194,4 +204,67 @@ input:focus{
 }
 @-webkit-keyframes spin {
   to { -webkit-transform: rotate(360deg); }
+}
+
+/* Модальное окно */
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(51, 51, 51, 0.7);
+}
+
+.modal-content {
+  max-width: 600px;
+  width: 85%;
+
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-dark);
+  border: 1px solid var(--bg-secondary);
+  border-radius: 5px;
+  padding:8px;
+}
+
+.modal-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+/* font-size: inherit; */
+}
+
+.modal-body {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+
+.modal-body select, .modal-body input {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.modal-body label {
+  display: block;
+  width: 100%;
+  padding: 8px;
+}
+
+.modal-footer {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.modal-footer button {
+  margin-right: 8px;
+}
+
+.err {
+  padding: 8px;
+  margin: 8px;
 }

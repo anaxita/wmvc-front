@@ -108,9 +108,8 @@ export const UsersList = () => {
 
     // html
     return (
-        <div className="main">
+        <div>
             <div className="header">
-
                 <div className="header-btn">
                     <button type="button" className="btn" onClick={() => setModalShow(true)}>New User</button>
                 </div>

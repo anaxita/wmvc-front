@@ -89,61 +89,47 @@ export const ModalAddUser = ({ setModalShow, setUser }) => {
     }
 
     return (
-        <div className="my-modal" style={{ zIndex: 2 }}>
-            <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content bg-dark">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="addUserLabel">Создание пользователя</h5>
-                    </div>
-                    <div className="modal-body">
-                        <form>
-                            <div className="row mb-3">
-                                <label for="inputRole" className="col-sm-2 col-form-label">Role</label>
-                                <div className="col-sm-10">
-                                    <select className="form-select" name="role" id="role" onChange={onChangeRole}>
-                                        <option selected value="0">User</option>
-                                        <option value="1">Administrator</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="row mb-3">
-                                <label for="inputName" className="col-sm-2 col-form-label">Name</label>
-                                <div className="col-sm-10">
-                                    <input type="text" className="form-control bg-light" id="inputName" autocomplete="off" onChange={onChangeName} />
-                                </div>
-                            </div>
-                            <div className="row mb-3">
-                                <label for="inputCompany" className="col-sm-2 col-form-label">Company</label>
-                                <div className="col-sm-10">
-                                    <input type="text" className="form-control bg-light" id="inputCompany" autocomplete="off" onChange={onChangeCompany} />
-                                </div>
-                            </div>
-                            <div className="row mb-3">
-                                <label for="inputLogin" className="col-sm-2 col-form-label">Login</label>
-                                <div className="col-sm-10">
-                                    <input type="text" className="form-control bg-light" id="inputLogin" autocomplete="off" onChange={onChangeLogin} />
-                                </div>
-                            </div>
-                            <div className="row mb-3">
-                                <label for="inputPassword" className="col-sm-2 col-form-label">Password</label>
-                                <div className="col-sm-10">
-                                    <input type="password" className="form-control bg-light" id="inputPassword" autocomplete="off" onChange={onChangePassword} />
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div className="modal-footer">
-                        <div className="row">
-                            <div className="col">
-                                {error ? <Error err={error} /> : null}
-                            </div>
-                        </div>
-                        <button type="button" className="btn btn-secondary" onClick={closeModal}>Отмена</button>
-                        {isLoading ? <button type="button" className="btn btn-primary" disabled><SpinnerBtn /> Создать</button> :
-                            <button type="button" className="btn btn-primary" onClick={createUser}>Создать</button>}
-                    </div>
+        <div className="modal">
+            <div className="modal-content">
+                <div className="modal-header text-gold">
+                    Создание пользователя
                 </div>
+                <div className="modal-body">
+                    <form>
+                        <label for="inputRole" className="">Role</label>
+                        <select className="form-select" name="role" id="role" onChange={onChangeRole}>
+                            <option selected value="0">User</option>
+                            <option value="1">Administrator</option>
+                        </select>
+
+                        <label for="inputName" className="">Name</label>
+                        <input type="text" className="" id="inputName" autocomplete="off" onChange={onChangeName} />
+
+
+                        <label for="inputCompany" className="">Company</label>
+
+                        <input type="text" className="" id="inputCompany" autocomplete="off" onChange={onChangeCompany} />
+
+
+
+                        <label for="inputLogin" className="">Login</label>
+
+                        <input type="text" className="" id="inputLogin" autocomplete="off" onChange={onChangeLogin} />
+
+
+                        <label for="inputPassword" className="">Password</label>
+
+                        <input type="password" className="" id="inputPassword" autocomplete="off" onChange={onChangePassword} />
+                            
+                    </form>
+            </div>
+            <div className="modal-footer">
+                {error ? <Error err={error} /> : null}
+                <button type="button" className="btn" onClick={closeModal}>Отмена</button>
+                {isLoading ? <button type="button" className="btn" disabled><SpinnerBtn /> Создать</button> :
+                    <button type="button" className="btn" onClick={createUser}>Создать</button>}
             </div>
         </div>
+        </div >
     )
 }
