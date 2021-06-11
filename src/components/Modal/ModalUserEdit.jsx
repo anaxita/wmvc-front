@@ -4,8 +4,9 @@ import { useState } from "react"
 import { MAIN_URL, TOKEN_ACCESS } from "../../Constants/Constants"
 import { Error } from "../Error/Errors"
 import { SpinnerBtn } from "../Spinner/SpinnerBtn"
+import { handleEditUser } from '../Users/store';
 
-export const ModalUserEdit = ({ setModalShow, handleEditUser, user }) => {
+export const ModalUserEdit = ({ setModalShow, user }) => {
 
     const onClickCloseModal = () => {
         setModalShow(false)
@@ -57,7 +58,7 @@ export const ModalUserEdit = ({ setModalShow, handleEditUser, user }) => {
             if (response.status === "ok") {
                 let newState = { ...state }
                 newState.password = ''
-                handleEditUser(newState);
+               handleEditUser(newState)
                 setModalShow(false)
             } else {
                 setError(response.message.err);
@@ -78,7 +79,7 @@ export const ModalUserEdit = ({ setModalShow, handleEditUser, user }) => {
         <div className="modal">
             <div className="modal-content">
                 <div className="modal-header text-gold">
-                    <h5 className="modal-title" id="addUserLabel">Создание пользователя</h5>
+                    Редактирование пользователя
                 </div>
                 <div className="modal-body">
                     <form>
@@ -109,9 +110,9 @@ export const ModalUserEdit = ({ setModalShow, handleEditUser, user }) => {
                 </div>
                 <div className="modal-footer">
                     {error ? <Error err={error} /> : null}
-                    <button type="button" className="btn btn-secondary" onClick={onClickCloseModal}>Отмена</button>
-                    {isLoading ? <button type="button" className="btn btn-primary" disabled><SpinnerBtn /> Создать</button> :
-                        <button type="button" className="btn btn-primary" onClick={onClickEditUser}>Создать</button>}
+                    <button type="button" className="btn" onClick={onClickCloseModal}>Отмена</button>
+                    {isLoading ? <button type="button" className="btn" disabled><SpinnerBtn /> Сохранить</button> :
+                        <button type="button" className="btn" onClick={onClickEditUser}>Сохранить</button>}
                 </div>
 
             </div>

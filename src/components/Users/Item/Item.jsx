@@ -7,7 +7,7 @@ import { ModalUserServers } from '../../Modal/ModalUserServers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-export const UserItem = ({ id, name, role, email, company, isLoading, handleDeleteUser, handleEditUser }) => {
+export const UserItem = ({ id, name, role, email, company, isLoading, handleDeleteUser }) => {
     const [error, setError] = useState('')
     const [isModalShow, setModalEditUserShow] = useState(false)
     const [isModalEditUserServers, setModalEditUserServersShow] = useState(false)
@@ -48,7 +48,7 @@ export const UserItem = ({ id, name, role, email, company, isLoading, handleDele
 
     return (
             <div className="user-item" id={"server-" + id}>
-            {isModalShow ? <ModalUserEdit setModalShow={setModalEditUserShow} handleEditUser={handleEditUser} user={{ id, name, role, email, company, password: '' }} /> : null}
+            {isModalShow ? <ModalUserEdit setModalShow={setModalEditUserShow} user={{ id, name, role, email, company, password: '' }} /> : null}
             {isModalEditUserServers ? <ModalUserServers setModalShow={setModalEditUserServersShow} userID={id} /> : null}
                 <div className="usr-name">{isLoading ? <SpinnerUser /> : name}</div>
                 <div className="usr-login">{isLoading ? <SpinnerUser /> : email}</div>
@@ -57,7 +57,10 @@ export const UserItem = ({ id, name, role, email, company, isLoading, handleDele
                 <div className="usr-created">{isLoading ? <SpinnerUser /> : '25-05-2022'}</div>
                 <div className="usr-actions actions-btn">
                     <button type="button"  onClick={() => setModalEditUserShow(true)}><FontAwesomeIcon icon="user-edit" /></button>
-                    <button type="button"  onClick={() => setModalEditUserServersShow(true)}><FontAwesomeIcon icon="server" /></button>
+                    {
+                        (role) ? <button type="button" disabled><FontAwesomeIcon icon="server"/></button> :
+                        <button type="button"  onClick={() => setModalEditUserServersShow(true)}><FontAwesomeIcon icon="server" /></button>
+                    }
                     <button type="button"  onClick={onDeleteUser}><FontAwesomeIcon icon="times" /></button>
                 </div>
             </div>

@@ -8,6 +8,7 @@ export const setError = createEvent()
 export const handleAddUsers = createEvent()
 export const handleAddNewUser = createEvent()
 export const handleDeleteUser = createEvent()
+export const handleEditUser = createEvent()
 
 const $usersStore = createStore({
     users: [],
@@ -16,17 +17,6 @@ const $usersStore = createStore({
     error: '',
 })
 
-export const handleEditUser = createEffect(async ({ user }) => {
-    handleAddUsers((users) => {
-        let newwUsers = users.map((u) => {
-            if (u.id === user.id) {
-                u = user
-            }
-            return u
-        })
-        return [...newwUsers]
-    })
-})
 
 export const handleAddUser = createEffect( async (user) => {
     const {data, err} = await handleFetch('post', '/users', user);
@@ -66,6 +56,12 @@ $usersStore
 .on(handleAddUsers, (state, users) => ({
     ...state, users
 }))
+.on(handleEditUser, (state, user) => {
+    const index = state.users.findIndex((u) => u.id === user.id)
+    let newState = {...state}
+    newState.users[index] = user
+    return newState
+})
 .on(handleDeleteUser, (state, id) => {
     const users = state.users.filter(u => u.id !== id)
    return {

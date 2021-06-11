@@ -110,6 +110,7 @@ button {
   background: var(--bg-dark);
   color: #fff;
   font-family: inherit;
+  font-size: inherit;
   transition: 0.3s;
 }
 
@@ -123,7 +124,6 @@ button {
   outline: none;
   background: var(--bg-primary);
   border: 1px solid var(--bg-primary);
-  border-radius: 5px;
   color: #fff;
   transition: 0.3s;
 }
@@ -142,7 +142,7 @@ button {
   border-radius: 5px;
   padding: 8px;
   margin-right: 8px;
-  width: 32px
+  width: 31px
 }
 
 .actions-btn button:hover{
@@ -152,12 +152,19 @@ button {
 }
 
 .actions-btn button:active{
-  border-width: 2px;
+  border-width: 0px;
+}
+
+.actions-btn button[disabled] {
+  color: #d2d5db;
+  background: #6c7589;
+  border: 1px solid #ffffff;
+  cursor: not-allowed;
 }
 
 /* Формы */
 
-input{
+input[type="text"], input[type="search"], input[type="password"]{
   appearance: none;
   padding: 8px 16px;
   border: 1px solid #ccc;
@@ -166,6 +173,9 @@ input{
   box-sizing: border-box;
 }
 
+input[type="search"] {
+  background-color: var(--bg-secondary);
+}
 input:focus{
   outline:none;
   border-color: rgb(54, 120, 220);
@@ -194,8 +204,10 @@ select{
 /* Спиннер */
 .spinner {
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 1rem;
+  max-width: 100%;
+  height: 1rem;
+  max-width: 100%;
   border: 3px solid rgba(255,255,255,.3);
   border-radius: 50%;
   border-top-color: #fff;
@@ -226,9 +238,6 @@ select{
 .modal-content {
   max-width: 600px;
   width: 85%;
-
-  display: flex;
-  flex-direction: column;
   background-color: var(--bg-dark);
   border: 1px solid var(--bg-secondary);
   border-radius: 5px;
@@ -239,7 +248,7 @@ select{
   width: 100%;
   display: flex;
   justify-content: center;
-/* font-size: inherit; */
+  margin-bottom: 8px;
 }
 
 .modal-body {
@@ -253,7 +262,11 @@ select{
   margin-bottom: 8px;
 }
 
-.modal-body label {
+.modal-body input[type="checkbox"] {
+  width: auto;
+}
+
+.modal-body label{
   display: block;
   width: 100%;
   padding: 8px;

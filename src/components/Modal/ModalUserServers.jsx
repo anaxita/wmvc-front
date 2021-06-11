@@ -112,28 +112,23 @@ export const ModalUserServers = ({ setModalShow, userID}) => {
     })
 
     return (
-        <div className="my-modal">
-            <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content bg-dark">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="addUserLabel">Доступ к серверам</h5>
+                <div className="modal">
+                    <div className="modal-content">
+
+                    <div className="modal-header text-gold">
+                        Доступ к серверам
                     </div>
                     <div className="modal-body">
                         <input type="search" name="" id="" className="form-control form-control-sm mb-2 bg-light"  placeholder="Search server ..."/>
                         {serversList}
                     </div>
                     <div className="modal-footer">
-                        <div className="row">
-                            <div className="col">
                                 {error ? <Error err={error} /> : null}
-                            </div>
-                        </div>
                         <button type="button" className="btn btn-secondary" onClick={onClickCloseModal}>Отмена</button>
                         {isLoading ? <button type="button" className="btn btn-primary" disabled><SpinnerBtn /> Создать</button> :
                             <button type="button" className="btn btn-primary" onClick={onClickSetServers}>Создать</button>}
                     </div>
+                            </div>
                 </div>
-            </div>
-        </div>
     )
 }

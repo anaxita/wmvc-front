@@ -3,7 +3,7 @@ import { ModalAddUser } from '../Modal/Modal';
 import { Spinner } from '../Spinner/Spinner';
 import { UserItem } from './Item/Item';
 import { Error } from '../Error/Errors';
-import { useServersStore, handleModalShow, handleDeleteUser, handleEditUser, handleGetUsers } from './store';
+import { useServersStore, handleModalShow, handleDeleteUser, handleGetUsers } from './store';
 import './style.css'
 
 
@@ -17,7 +17,7 @@ export const UsersList = () => {
 
     const usersItems = users.map((el, index) => {
         return (
-            <UserItem key={el.id} index={index} id={el.id} name={el.name} email={el.email} company={el.company} role={el.role} isLoading={el.isLoading} handleDeleteUser={handleDeleteUser} handleEditUser={handleEditUser} />
+            <UserItem key={el.id} index={index} id={el.id} name={el.name} email={el.email} company={el.company} role={el.role} isLoading={el.isLoading} handleDeleteUser={handleDeleteUser} />
         )
     })
 
