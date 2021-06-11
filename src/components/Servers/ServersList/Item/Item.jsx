@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom';
-import { Error } from '../../../Error/Errors';
+import { ErrorAbsolute } from '../../../Error/ErrorAbsolute';
 import { SpinnerServer } from '../../../Spinner/SpinnerServer';
 import { handleFetch } from '../../../Fetch/store';
 import sound_server_timeout from '../../../../sounds/server-timeout.mp3';
@@ -91,8 +91,8 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
 
     return (
         <div className="server-item" id={"server-" + id}>
-            {isLoading ? <div className="server-item-spineer"><SpinnerServer /> Loading</div> : null}
-            {error ? <Error err={error}/> : null}
+            {isLoading ? <div className="server-item-shadow"><SpinnerServer /> Loading</div> : null}
+            {error ? <ErrorAbsolute err={error}/> : null}
             <div className="srv-name">{name}</div>
             <div className="srv-hv">{hv}</div>
             <div className="srv-state">{(powerState === 'Running') ? 'Включен' : 'Выключен'}</div>

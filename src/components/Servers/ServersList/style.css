@@ -50,7 +50,7 @@
 .srv-actions {
     grid-area: srv-actions;
 }
-.server-item-spineer {
+.server-item-shadow {
     position: absolute;
     top: 0;
     left: 0;
@@ -63,6 +63,6 @@
     border-radius: 5px;
 }
 
-.server-item-spineer .spinner {
+.server-item-shadow .spinner {
     margin-right: 8px;
 }
