@@ -184,9 +184,6 @@ input[type="text"], input[type="search"], input[type="password"]{
   box-sizing: border-box;
 }
 
-input[type="search"] {
-  background-color: var(--bg-secondary);
-}
 input:focus{
   outline:none;
   border-color: rgb(54, 120, 220);
