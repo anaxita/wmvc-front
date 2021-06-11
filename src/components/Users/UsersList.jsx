@@ -3,8 +3,9 @@ import { ModalAddUser } from '../Modal/Modal';
 import { Spinner } from '../Spinner/Spinner';
 import { UserItem } from './Item/Item';
 import { Error } from '../Error/Errors';
-import { useServersStore, handleModalShow, handleDeleteUser, handleGetUsers } from './store';
+import { useServersStore, handleModalShow, handleDeleteUser, handleGetUsers, handleSortUsers } from './store';
 import './style.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 export const UsersList = () => {
@@ -15,6 +16,9 @@ export const UsersList = () => {
         handleGetUsers()
     }, [])
 
+    const sortUsers = (e) => {
+        handleSortUsers(e.target.name)   
+    }
     const usersItems = users.map((el, index) => {
         return (
             <UserItem key={el.id} index={index} id={el.id} name={el.name} email={el.email} company={el.company} role={el.role} isLoading={el.isLoading} handleDeleteUser={handleDeleteUser} />
@@ -40,12 +44,12 @@ export const UsersList = () => {
                 <div className="user-list ">
                     {isModalShow ? <ModalAddUser /> : null}
                     <div className="user-list-header">
-                        <div className="usr-list-item">Name</div>
-                        <div className="usr-list-item">Login</div>
-                        <div className="usr-list-item">Company</div>
-                        <div className="usr-list-item">Role</div>
+                        <div className="usr-list-item"><button name="name" onClick={sortUsers}>Name</button></div>
+                        <div className="usr-list-item"><button name="email" onClick={sortUsers}>Login</button></div>
+                        <div className="usr-list-item"><button name="company" onClick={sortUsers}>Company</button></div>
+                        <div className="usr-list-item"><button name="role" onClick={sortUsers}>Role</button></div>
                         <div className="usr-list-item">Created</div>
-                        <div className="usr-list-item">Actions</div>
+                        <div className="usr-list-item" onClick={handleSortUsers}>Actions</div>
                     </div>
                     {isLoading ? <Spinner text={'Loading users...'} /> : (error ? <Error err={error} /> : usersItems)}
                 </div>

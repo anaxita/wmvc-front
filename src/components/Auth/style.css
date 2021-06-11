@@ -1,0 +1,12 @@
+.auth{
+  background: rgb(53, 59, 65, 1) !important;
+}
+.err {
+    display: inline-block;
+}
+
+@media (max-width: 576px) {
+    .auth button {
+        width: 100%;
+    }
+}

@@ -53,9 +53,9 @@ export const ServerItem = ({ index, id, name, hv, state, status, network, cpu_lo
             <div className="srv-network">{isNetworkLoading ? <SpinnerServer /> : (network ? 'ок' : 'выкл')}</div>
             <div className="srv-cpu">{`${cpu_load}%`}</div>
             <div className="srv-actions actions-btn">
-                        <button type="button icon" className="" onClick={ControlPower}><FontAwesomeIcon icon="play-circle" /></button>
-                        <button type="button" className="" onClick={ControlNetwork}><FontAwesomeIcon icon="network-wired" /></button>
-                        <button type="button" className=""  onClick={StopPowerForce}><FontAwesomeIcon icon="power-off" /></button>
+                        <button type="button" onClick={ControlPower}><FontAwesomeIcon icon="play-circle"/></button>
+                        <button type="button" onClick={ControlNetwork}><FontAwesomeIcon icon="network-wired"/></button>
+                        <button type="button" onClick={StopPowerForce}><FontAwesomeIcon icon="power-off"/></button>
                     <Link to={`/servers/${hv}/${name}`}>
                         <button type="button" className="" ><FontAwesomeIcon icon="cog" /></button>
                     </Link>

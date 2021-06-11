@@ -9,12 +9,17 @@ export const handleAddUsers = createEvent()
 export const handleAddNewUser = createEvent()
 export const handleDeleteUser = createEvent()
 export const handleEditUser = createEvent()
+export const handleSortUsers = createEvent()
 
 const $usersStore = createStore({
     users: [],
     isLoading: false,
     isModalShow: false,
     error: '',
+    sort: {
+        field: 'id', // поле для сортировки
+        type: true //  тип сортировки? где true = asc / false = desc ; asc - возрастание сверху вниз А-Я
+    }
 })
 
 
@@ -41,12 +46,28 @@ export const handleGetUsers = createEffect(async () => {
     }
 })
 
+export const onSortUsers = (state, field) => {
+    let newState = {...state}
+    state.users.sort((a, b) => {
+        if (a[field] > b[field]) {
+            return 1
+        }
 
+        if (a[field] < b[field]) {
+            return -1
+        }
+
+        return 0
+    })
+
+    return newState
+}
 
 $usersStore
 .on(setLoading, (state, isLoading) => ({
     ...state, isLoading
 }))
+.on(handleSortUsers, onSortUsers)
 .on(handleModalShow, (state, isModalShow) => ({
     ...state, isModalShow
 }))
