@@ -1,63 +1,110 @@
 import React from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom';
 import { Error } from '../../../Error/Errors';
 import { SpinnerServer } from '../../../Spinner/SpinnerServer';
-import { handleControlPower } from '../../store';
+import { handleFetch } from '../../../Fetch/store';
+import sound_server_timeout from '../../../../sounds/server-timeout.mp3';
+import sound_server_stopped from '../../../../sounds/server-stopped.mp3';
+import sound_server_started from '../../../../sounds/server-started.mp3';
+import sound_network_started from '../../../../sounds/network-started.mp3';
+import sound_network_stopped from '../../../../sounds/network-stopped.mp3';
 
-export const ServerItem = ({ index, id, name, hv, state, status, network, cpu_load, isLoading, isNetworkLoading, err }) => {
+export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) => {
 
-    const ControlPower = () => {
-        let command = 'stop_power'
-        if (state === 'Off') {
-            command = 'start_power'
+    const [powerState, handleSetState] = useState(state)
+    const [networkState, handleSetNetwork] = useState(network)
+    const [error, handleSetError] = useState('')
+    const [isLoading, handleSetIsLoading] = useState(false)
+
+    const handleControl = async(e) => {
+        handleSetIsLoading(true);
+        let body = {
+            server_id: id,
+            command: '',
         }
+        let sound = '';
+        console.log('target: ',e.target.name);
+        console.log('powerState: ',powerState)
+        console.log('networkState: ',networkState)
 
-        handleControlPower({
-            token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU1OTk4MzMsIlVzZXIiOnsiaWQiOiIxMjkiLCJuYW1lIjoi0JDQtNC80LjQvdC40YHRgtGA0LDRgtC-0YAiLCJlbWFpbCI6ImFkbWluIiwiY29tcGFueSI6ItCc0L7RjyDQutC-0LzQv9Cw0L3QuNGPIiwicm9sZSI6MX0sIlR5cGUiOiJhY2Nlc3MifQ.BGob5kbj3yuLoKvuTjfSCE0EjH4gKsbB19tdz6SaDVepeJF9hJ-ZgHUDLZlLYUm4IfqcP72K8we7C2vX3doh3Q',
-            i: index,
-            id: id,
-            command: command
-        })
-    }
-
-    const ControlNetwork = () => {
-        let command = 'start_network'
-        if (network) {
-            command = 'stop_network'
+        switch (e.target.name) {
+            case ('power'):
+                if (powerState === 'Off') {
+                    body.command = 'start_power'
+                } else {
+                    body.command = 'stop_power'
+                }
+                break;
+            case ('network'):
+                if (networkState === 'Off') {
+                    body.command = 'start_network'
+                } else {
+                    body.command = 'stop_network'
+                }
+                break;
+            case ('stop_power_force'):
+                    body.command = 'stop_power_force'
+                break;
+            default:
+                body.command = ''
         }
-
-        handleControlPower({
-            token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU1OTk4MzMsIlVzZXIiOnsiaWQiOiIxMjkiLCJuYW1lIjoi0JDQtNC80LjQvdC40YHRgtGA0LDRgtC-0YAiLCJlbWFpbCI6ImFkbWluIiwiY29tcGFueSI6ItCc0L7RjyDQutC-0LzQv9Cw0L3QuNGPIiwicm9sZSI6MX0sIlR5cGUiOiJhY2Nlc3MifQ.BGob5kbj3yuLoKvuTjfSCE0EjH4gKsbB19tdz6SaDVepeJF9hJ-ZgHUDLZlLYUm4IfqcP72K8we7C2vX3doh3Q',
-            i: index,
-            id: id,
-            command: command
-        })
+        const {data, err} = await handleFetch('post', '/servers/control' , body);
+        if(!err) {
+            switch (e.target.name) {
+                case ('power'):
+                    if (state === 'Off') {
+                        handleSetState('Running')
+                        sound = sound_server_started;
+                    } else {
+                        handleSetState('Off')
+                        sound = sound_server_stopped;
+                    }
+                    break;
+                case ('network'):
+                    if (network === 'Off') {
+                        handleSetNetwork('Running')
+                        sound = sound_network_started
+                    } else {
+                        handleSetNetwork('Off')
+                        sound = sound_network_stopped
+                    }
+                    break;
+                case ('stop_power_force'):
+                        handleSetState('Off')
+                        sound = sound_server_stopped
+                    break;
+                default:
+                    handleSetState(powerState);
+                    handleSetNetwork(networkState);
+            }
+        } else {
+            handleSetError(err);
+            sound = sound_server_timeout
+        }
+        var audio = new Audio(sound);
+        audio.play();
+        handleSetIsLoading(false);
     }
-
-    const StopPowerForce = () => {
-        handleControlPower({
-            token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU1OTk4MzMsIlVzZXIiOnsiaWQiOiIxMjkiLCJuYW1lIjoi0JDQtNC80LjQvdC40YHRgtGA0LDRgtC-0YAiLCJlbWFpbCI6ImFkbWluIiwiY29tcGFueSI6ItCc0L7RjyDQutC-0LzQv9Cw0L3QuNGPIiwicm9sZSI6MX0sIlR5cGUiOiJhY2Nlc3MifQ.BGob5kbj3yuLoKvuTjfSCE0EjH4gKsbB19tdz6SaDVepeJF9hJ-ZgHUDLZlLYUm4IfqcP72K8we7C2vX3doh3Q',
-            i: index,
-            id: id,
-            command: 'stop_power_force'
-        })
-    }
+    
 
     return (
         <div className="server-item" id={"server-" + id}>
+            {isLoading ? <div className="server-item-spineer"><SpinnerServer /> Loading</div> : null}
+            {error ? <Error err={error}/> : null}
             <div className="srv-name">{name}</div>
             <div className="srv-hv">{hv}</div>
-            <div className="srv-state">{isLoading ? <SpinnerServer /> : (err ? <Error err={err} /> : ((state === 'Running') ? 'Включен' : 'Выключен'))}</div>
+            <div className="srv-state">{(powerState === 'Running') ? 'Включен' : 'Выключен'}</div>
             <div className="srv-status">{(status === 'Работает нормально' && state === 'Off') ? null : status}</div>
-            <div className="srv-network">{isNetworkLoading ? <SpinnerServer /> : (network ? 'ок' : 'выкл')}</div>
+            <div className="srv-network">{networkState === "Off" ? 'выкл' : 'ок'}</div>
             <div className="srv-cpu">{`${cpu_load}%`}</div>
             <div className="srv-actions actions-btn">
-                        <button type="button" onClick={ControlPower}><FontAwesomeIcon icon="play-circle"/></button>
-                        <button type="button" onClick={ControlNetwork}><FontAwesomeIcon icon="network-wired"/></button>
-                        <button type="button" onClick={StopPowerForce}><FontAwesomeIcon icon="power-off"/></button>
+                    <button className="bg_play"  type="button" name="power" onClick={handleControl}></button>
+                    <button className="bg_network"  type="button" name="network" onClick={handleControl}></button>
+                    <button className="bg_powerOff" type="button" name="stop_power_force" onClick={handleControl}></button>
                     <Link to={`/servers/${hv}/${name}`}>
-                        <button type="button" className="" ><FontAwesomeIcon icon="cog" /></button>
+                        <button className="bg_gear" type="button"></button>
                     </Link>
             </div>
         </div>
