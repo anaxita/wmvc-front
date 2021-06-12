@@ -1,0 +1,39 @@
+.params {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 0 !important;
+}
+
+.params-item {
+    padding: 8px;
+    margin: 8px;
+    border-bottom: 1px solid;
+    color: #17a2b8;
+}
+
+.disks {
+    border-left: 1px solid;
+}
+
+.disks ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+}
+
+.disks-item{
+   list-style-type: none;
+   padding: 8px;
+   margin: 8px;;
+}
+
+.disks-item input {
+    min-width: 350px;
+    padding: 0;
+    margin: 0;
+}
+
+.disks-item-footer {
+    font-size: 12px;
+}

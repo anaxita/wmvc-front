@@ -27,7 +27,7 @@ export const UsersList = () => {
 
     // html
     return (
-        <div>
+        <div className="main">
             <div className="header">
                 <div className="header-btn">
                     <button type="button" className="btn" onClick={() => handleModalShow(true)}>New User</button>

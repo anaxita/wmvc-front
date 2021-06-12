@@ -27,7 +27,7 @@ export const ServersList = () => {
 
     // html
     return (
-        <div>
+        <div className="main">
             <div className="header">
                 <div className="header-btn">
                     <button type="button" className="btn" onClick={() => { }}>New Server</button>
