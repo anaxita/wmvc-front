@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { FixedError } from '../../Error/FixedError';
 import { SpinnerServers } from '../../Spinner/SpinnerServers';
 import { handleGetServers, useServersStore } from '../store';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { ServerItem } from './Item/Item';
 import './style.css'
@@ -16,9 +15,9 @@ export const ServersList = () => {
 
     let serversItems = ''
     if (servers.length > 1) {
-        serversItems = servers.map((el, index) => {
+        serversItems = servers.map((el) => {
             return (
-                <ServerItem key={el.id} index={index} id={el.id} name={el.name} hv={el.hv} state={el.state} network={el.network} status={el.status} cpu_load={el.cpu_load} isLoading={el.isLoading} isNetworkLoading={el.isNetworkLoading} err={el.error} />
+                <ServerItem key={el.id} id={el.id} name={el.name} hv={el.hv} state={el.state} network={el.network} status={el.status} cpu_load={el.cpu_load}/>
             )
         })
     } else {

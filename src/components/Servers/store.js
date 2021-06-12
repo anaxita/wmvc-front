@@ -1,13 +1,11 @@
 import { createStore, createEvent, createEffect } from 'effector'
 import { useStore } from 'effector-react'
-import { MAIN_URL } from '../../Constants/Constants'
-import sound_error from '../../sounds/error.mp3'
 import sound_server_timeout from '../../sounds/server-timeout.mp3'
 import sound_server_stopped from '../../sounds/server-stopped.mp3'
 import sound_server_started from '../../sounds/server-started.mp3'
 import sound_network_started from '../../sounds/network-started.mp3'
 import sound_network_stopped from '../../sounds/network-stopped.mp3'
-import { handleFetch, useFetch } from '../Fetch/store'
+import { handleFetch } from '../Fetch/store'
 
 // Events
 export const handleServersLoading = createEvent()
@@ -39,72 +37,6 @@ export const handleGetServers = createEffect(async () => {
 
     handleServersError(err)
     return []
-})
-
-export const handleControlPower = createEffect(async ({ i, token, id, command }) => {
-    handleSetError({ index: i, error: "" })
-
-    if (command === 'stop_power' || command === 'start_power' || command === 'stop_power_force') {
-        handleServerLoading(i)
-    } else {
-        handleServerNetworkLoading(i)
-    }
-
-    const { err } = await handleFetch('POST', '/servers/control', {
-        server_id: id,
-        command: command
-    })
-
-    if (command === 'stop_power' || command === 'start_power' || command === 'stop_power_force') {
-        handleServerLoading(i)
-    } else {
-        handleServerNetworkLoading(i)
-    }
-
-
-    let sound = ''
-    if (!err) {
-        switch (command) {
-            case 'stop_power':
-                handleSetState({ index: i, state: "Off" });
-                sound = sound_server_stopped
-                break;
-            case 'stop_power_force':
-                handleSetState({ index: i, state: "Off" });
-                sound = sound_server_stopped
-                break;
-            case 'start_power':
-                handleSetState({ index: i, state: "Running" });
-                sound = sound_server_started
-                break;
-            case 'start_network':
-                handleSetNetwork({ index: i, network: "DMZ - Virtual Switch" });
-                sound = sound_network_started
-                break
-            case 'stop_network':
-                handleSetNetwork({ index: i, network: '' });
-                sound = sound_network_stopped
-                break;
-            default:
-                handleSetError({ index: i, error: 'request error' })
-
-        }
-    } else {
-        handleSetError({ index: i, error: err })
-        sound = sound_server_timeout
-
-        setTimeout(
-            () => {
-                handleSetError({ index: i, error: "" })
-            },
-            3000
-        );
-    }
-
-    var audio = new Audio(sound);
-    audio.play();
-
-    return $servers.getState().servers
 })
 
 // Servers store
@@ -174,10 +106,6 @@ const $servers = createStore({
     .on(handleGetServers.doneData, (state, servers) => ({
         ...state, servers
     }))
-    .on(handleControlPower.doneData, (state, servers) => ({
-        ...state, servers
-    }))
-
 
 // Import name of the store
 export const useServersStore = () => useStore($servers)

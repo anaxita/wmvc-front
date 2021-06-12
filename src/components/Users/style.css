@@ -6,7 +6,7 @@
     margin-bottom: 8px;
     border-radius: 5px;
     padding: 8px 8px 8px 16px;
-
+    align-items: center;
 }
 
 .user-list-header {
@@ -19,26 +19,21 @@
 
 .usr-name {
     grid-area: usr-name;
-    padding: 8px 0px 0px 0px; /* vertical text align*/
 }
 .usr-login {
     grid-area: usr-login;
-    padding: 8px 0px 0px 0px; /* vertical text align*/
 
 }
 .usr-company {
     grid-area: user-company;
-    padding: 8px 0px 0px 0px; /* vertical text align*/
 
 }
 .usr-role {
     grid-area: usr-role;
-    padding: 8px 0px 0px 0px; /* vertical text align*/
 
 }
 .usr-created {
     grid-area: usr-created;
-    padding: 8px 0px 0px 0px; /* vertical text align*/
 
 }
 

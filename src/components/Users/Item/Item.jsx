@@ -4,18 +4,18 @@ import { useState } from "react"
 import { MAIN_URL, TOKEN_ACCESS } from '../../../Constants/Constants';
 import { ModalUserEdit } from '../../Modal/ModalUserEdit';
 import { ModalUserServers } from '../../Modal/ModalUserServers';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Error } from '../../Error/Errors';
 
-
-export const UserItem = ({ id, name, role, email, company, isLoading, handleDeleteUser }) => {
-    const [error, setError] = useState('')
+export const UserItem = ({ id, name, role, email, company, handleDeleteUser }) => {
+    const [error, handleSetError] = useState('');
+    const [isLoading, handleSetIsLoading] = useState(false);
     const [isModalShow, setModalEditUserShow] = useState(false)
     const [isModalEditUserServers, setModalEditUserServersShow] = useState(false)
-
     const onDeleteUser = async (e) => {
         e.preventDefault();
-        setError('');
-
+        handleSetError('');
+        handleSetIsLoading(true);
         try {
             let f = await fetch(`${MAIN_URL}/users`, {
                 method: 'DELETE',
@@ -29,19 +29,19 @@ export const UserItem = ({ id, name, role, email, company, isLoading, handleDele
             })
 
             let response = await f.json()
-
             if (response.status === "ok") {
                 handleDeleteUser(id)
             } else {
-                setError(response.message.err);
+                handleSetError(response.message.err);
             }
         }
         catch (e) {
-            setError('Ошибка соединения с сервером  ');
+            handleSetError('Ошибка соединения с сервером  ');
         }
         finally {
+            handleSetIsLoading(false);
             setTimeout(() => {
-                setError('');
+                handleSetError('');
             }, 10000)
         }
     }
@@ -56,12 +56,15 @@ export const UserItem = ({ id, name, role, email, company, isLoading, handleDele
                 <div className="usr-role">{isLoading ? <SpinnerUser /> : (role ? <span>Administrator</span> : <span>User</span>)}</div>
                 <div className="usr-created">{isLoading ? <SpinnerUser /> : '25-05-2022'}</div>
                 <div className="usr-actions actions-btn">
+                    
                     <button type="button"  onClick={() => setModalEditUserShow(true)}><FontAwesomeIcon icon="user-edit" /></button>
                     {
                         (role) ? <button type="button" disabled><FontAwesomeIcon icon="server"/></button> :
                         <button type="button"  onClick={() => setModalEditUserServersShow(true)}><FontAwesomeIcon icon="server" /></button>
                     }
                     <button type="button"  onClick={onDeleteUser}><FontAwesomeIcon icon="times" /></button>
+                    {error ? <Error err={error} /> : null}
+                
                 </div>
             </div>
     )

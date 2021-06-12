@@ -59,10 +59,10 @@ button:hover{
   background-color: var(--bg-dark);
   /* background-color: rgb(173, 209, 136); */
   border-bottom: 1px solid #6c757d;
+  align-items: center;
 }
 
 .header-h {
-  padding: 8px 0px 0px 0px; /* vertical text align*/
   text-align: center;
 }
 
@@ -148,12 +148,44 @@ button:hover{
 
 
 /* Кнопки действий */
+.actions-btn {
+  display: flex;
+  align-items: center;
+}
 .actions-btn button{
   color: var(--bg-gold);
   border: 1px solid #ffffff;
   border-radius: 5px;
-  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 8px;
+  width: 34px;
+  height: 34px;
+}
+.bg_play {
+  background-image: url('./img/servers/play.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 17px;
+}
+.bg_network {
+  background-image: url('./img/servers/network.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 17px;
+}
+.bg_powerOff {
+  background-image: url('./img/servers/powerOff.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 17px;
+}
+.bg_gear {
+  background-image: url('./img/servers/gear.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 17px;
 }
 
 .actions-btn button:hover{
@@ -289,13 +321,30 @@ select{
 .modal-footer {
   width: 100%;
   margin-bottom: 8px;
+  display: flex;
 }
 
 .modal-footer button {
   margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+.modal-footer button .spinner {
+  margin-right: 8px;
 }
 
 .err {
-  padding: 8px;
-  margin: 8px;
+  margin: 0 8px;
+}
+.err-shadow {
+  position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00000094;
+    border-radius: 5px;
 }
