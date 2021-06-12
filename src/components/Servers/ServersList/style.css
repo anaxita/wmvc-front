@@ -2,15 +2,12 @@
     display: grid;
     grid-template-areas: "srv-name srv-hv srv-state srv-status srv-network srv-cpu srv-actions";
     grid-template-columns: 3fr 2fr 2fr 3fr 2fr 1fr 3fr;
-
-
-    
     background-color: #6c757d;
     margin-bottom: 8px;
     border-radius: 5px;
     /* padding: 8px; */
     padding: 8px 8px 8px 16px;
-
+    position: relative;
 }
 
 .server-list-header {
@@ -52,4 +49,20 @@
 }
 .srv-actions {
     grid-area: srv-actions;
+}
+.server-item-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00000094;
+    border-radius: 5px;
+}
+
+.server-item-shadow .spinner {
+    margin-right: 8px;
 }
