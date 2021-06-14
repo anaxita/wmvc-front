@@ -8,5 +8,9 @@
 @media (max-width: 576px) {
     .auth button {
         width: 100%;
+        text-align: center;
+        justify-content: center;
+        margin-top: 2px;
+        margin-right: 0 !important;
     }
 }
