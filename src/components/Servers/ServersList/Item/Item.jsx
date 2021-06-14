@@ -24,10 +24,6 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             command: '',
         }
         let sound = '';
-        console.log('target: ',e.target.name);
-        console.log('powerState: ',powerState)
-        console.log('networkState: ',networkState)
-
         switch (e.target.name) {
             case ('power'):
                 if (powerState === 'Off') {
@@ -80,6 +76,9 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             }
         } else {
             handleSetError(err);
+            setTimeout(() => {
+                handleSetError('');
+            }, 3000)
             sound = sound_server_timeout
         }
         var audio = new Audio(sound);
