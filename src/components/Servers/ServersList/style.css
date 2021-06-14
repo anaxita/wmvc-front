@@ -62,3 +62,31 @@
 .server-item-shadow .spinner {
     margin-right: 8px;
 }
+
+  @media (max-width: 768px) {
+    .server-list-header {
+        display: none;
+      }
+
+      .srv-hv {
+        display: none;
+    }
+    .srv-status {
+        display: none;
+    }
+    .srv-network {
+        display: none;   
+    }
+    .srv-cpu {
+        display: none; 
+    }
+
+    .srv-actions {
+        margin-top: 8px;
+    }
+      .server-item{
+        grid-template-areas: 'srv-name srv-state'
+        'srv-actions srv-actions';
+        grid-template-columns: 1fr;
+      }
+  }

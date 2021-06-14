@@ -9,7 +9,7 @@ export const ServerProcesses = (props) => {
         [
             {
                 user: 'u01',
-                state: 'active',
+                state: 'Откл',
                 cpu: '25%',
                 ram: 2560,
                 isShowProcesses: false,
@@ -33,7 +33,7 @@ export const ServerProcesses = (props) => {
             },
             {
                 user: 'u02',
-                state: 'active',
+                state: '',
                 cpu: '25%',
                 ram: 2560,
                 isShowProcesses: false,
@@ -63,7 +63,7 @@ export const ServerProcesses = (props) => {
 
     return (
         <div className="main">
-            <div className="header">
+            <div className="header header-servers-details">
                 <div className="header-btn">
                     <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/info`} className="btn">
                         Инфо
@@ -88,9 +88,10 @@ export const ServerProcesses = (props) => {
                     <div className="processes-header">
                         <div className="">Users</div>
                         <div className="">State</div>
-                        <div className="">CPU (78%)</div>
-                        <div className="">RAM (7542)</div>
-                        <div className="div">Actions</div>
+                        <div className="">78%</div>
+                        <div className="">75452(98%)</div>
+                        <div className="div"></div>
+                        <div className="div"></div>
                     </div>
                     {usersList}
                 </div>

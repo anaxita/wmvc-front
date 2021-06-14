@@ -18,3 +18,26 @@
     margin-bottom: 8px;
     padding: 8px 16px;
 }
+
+
+@media (max-width:768px) {
+    .sc-i-display-name {
+        display: none;
+    }
+    .sc-items-header{
+        display: none;
+    }
+    
+    .sc-i-name {
+        margin-bottom: 8px;
+        color: var(--bg-gold)
+    }
+
+    .sc-i-state {
+        margin-bottom: 8px;
+    }
+    .sc-i {
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 5fr 3fr;
+    }
+}

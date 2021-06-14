@@ -5,7 +5,7 @@ import './style.css'
 export const ServerServices = (props) => {
     return (
         <div className="main">
-            <div className="header">
+            <div className="header header-servers-details">
                 <div className="header-btn">
                     <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/info`} className="btn">
                         Инфо
@@ -39,7 +39,7 @@ export const ServerServices = (props) => {
                             <div className="sc-i-name">Anydesk</div>
                             <div className="sc-i-display-name">Энидеск</div>
                             <div className="sc-i-state">Running</div>
-                            <div className="sc-i-user">SYSTEM</div>
+                            <div className="sc-i-user">FSDTGWEGFWEFWEF</div>
                             <div className="sc-i-actions actions-btn">
                                 <button></button>
                                 <button></button>

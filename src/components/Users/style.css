@@ -22,7 +22,6 @@
 }
 .usr-login {
     grid-area: usr-login;
-
 }
 .usr-company {
     grid-area: user-company;
@@ -41,3 +40,37 @@
     grid-area: usr-actions;
 }
 
+
+@media (max-width: 768px) {
+    .usr-created {
+        display: none;
+    }
+
+    .usr-role {
+        display: none;
+    }
+
+    .user-list-header {
+        display: none;
+    }
+
+    .usr-name{
+        color: var(--bg-gold);
+        margin-bottom: 8px;
+    }
+    .usr-company {
+        margin-bottom: 8px;
+    }
+
+    .usr-login {
+        margin-bottom: 8px;
+        color: var(--bg-dark);
+    }
+
+    .user-item {
+        grid-template-areas: 'usr-name usr-login'
+        'user-company user-company'
+        'usr-actions usr-actions';
+        grid-template-columns: 1fr;
+    }
+  }

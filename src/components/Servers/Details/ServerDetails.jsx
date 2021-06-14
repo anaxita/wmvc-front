@@ -11,7 +11,7 @@ export const ServerDetails = (props) => {
     // })
     return (
         <div className="main">
-            <div className="header">
+            <div className="header header-servers-details">
                 <div className="header-btn">
                     <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/info`} className="btn bg-gold text-dark">
                         Инфо

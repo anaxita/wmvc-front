@@ -53,19 +53,22 @@ button:hover{
 /* HEADER */
 .header {
   display: grid;
+  grid-template-areas: 'header-btn header-h  header-input';
   grid-template-columns: 4fr 2fr 4fr;
   padding: 8px;
   background-color: var(--bg-dark);
-  /* background-color: rgb(173, 209, 136); */
   border-bottom: 1px solid #6c757d;
   align-items: center;
+  justify-content: center;
 }
 
 .header-h {
+  grid-area: header-h;
   text-align: center;
 }
 
 .header-btn {
+  grid-area: header-btn;
   padding: 0px;
 }
 
@@ -75,7 +78,7 @@ button:hover{
 
 
 .header-input {
-  max-width: 400px;
+  grid-area: header-input;
   padding: 0px;
 }
 
@@ -176,8 +179,8 @@ button:hover{
   align-items: center;
   justify-content: center;
   margin-right: 8px;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
 }
 
 
@@ -203,32 +206,32 @@ button:hover{
   background-image: url('./img/servers/play.svg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 17px;
+  background-size: 16px;
 }
 .bg_network {
   background-image: url('./img/servers/network.svg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 17px;
+  background-size: 16px;
 }
 .bg_powerOff {
   background-image: url('./img/servers/powerOff.svg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 17px;
+  background-size: 16px;
 }
 .bg_gear {
   background-image: url('./img/servers/gear.svg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 17px;
+  background-size: 16px;
 }
 
 .bg_close {
   background-image: url('./img/close.svg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 17px;
+  background-size: 16px;
   color: var(--bg-gold);
 }
 
@@ -236,7 +239,7 @@ button:hover{
   background-image: url('./img/logout.svg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 17px;
+  background-size: 16px;
 }
 
 
@@ -382,4 +385,44 @@ select{
     justify-content: center;
     background-color: #00000094;
     border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  html body {
+  font-size: 14px;
+  }
+  .grid {
+    grid-template-rows: 1fr 15fr;
+    grid-template-columns: auto;
+  }
+  .menu ul {
+    margin: 0;
+    border-bottom: 1px solid var(--bg-secondary)
+  }
+  .menu ul li{
+    display: inline-block;
+  }
+
+  .main {
+  grid-template-rows: 1fr 8fr !important;
+  }
+  .header {
+    grid-template-areas: 'header-btn header-h'
+    'header-input header-input';
+    grid-template-columns: 1fr;
+  }
+
+  .header-input {
+    margin-top: 8px;
+  }
+
+  .actions-btn button {
+    max-width: 24px;
+    max-height:  24px;
+    margin-right: 16px;
+  }
+
+.btn{
+  padding: 4px 8px;
+}
 }
