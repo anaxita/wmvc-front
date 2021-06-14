@@ -1,0 +1,20 @@
+.header-btn a {
+    margin-right: 8px;
+}
+
+.sc-items-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 2fr 1fr;
+    border-radius: 5px;
+    padding: 8px 16px;
+    color:  #6c757d;
+}
+.sc-i {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 2fr 1fr;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #6c757d;
+    margin-bottom: 8px;
+    padding: 8px 16px;
+}

@@ -5,46 +5,42 @@
     background-color: #6c757d;
     margin-bottom: 8px;
     border-radius: 5px;
-    /* padding: 8px; */
-    padding: 8px 8px 8px 16px;
+    padding: 8px;
+    align-items: center;
     position: relative;
 }
 
 .server-list-header {
     display: grid;
     grid-template-columns: 3fr 2fr 2fr 3fr 2fr 1fr 3fr;
+    align-items: center;
+
     background-color: #343a40;
-    padding: 8px 8px 8px 16px;
+    padding: 8px;
     color: var(--bg-secondary);
 }
 
 .srv-name {
     grid-area: srv-name;
-    padding: 8px 0px 0px 0px;
 }
 .srv-hv {
     grid-area: srv-hv;
-    padding: 8px 0px 0px 0px;
 
 }
 .srv-state {
     grid-area: srv-state;
-    padding: 8px 0px 0px 0px;
 
 }
 .srv-status {
     grid-area: srv-status;
-    padding: 8px 0px 0px 0px;
 
 }
 .srv-network {
     grid-area: srv-network;
-    padding: 8px 0px 0px 0px;
 
 }
 .srv-cpu {
     grid-area: srv-cpu;
-    padding: 8px 0px 0px 0px;
 
 }
 .srv-actions {

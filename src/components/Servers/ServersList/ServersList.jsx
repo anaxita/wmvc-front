@@ -40,7 +40,6 @@ export const ServersList = () => {
                 </div>
             </div>
             <div className="content">
-                <div className="server-list ">
                     <div className="server-list-header">
                         <div className="srv-list-item">Name</div>
                         <div className="srv-list-item">HV</div>
@@ -51,7 +50,6 @@ export const ServersList = () => {
                         <div className="srv-list-item">Actions</div>
                     </div>
                     {isLoading ? <SpinnerServers /> : (error ? <FixedError err={error} /> : serversItems)}
-                </div>
             </div>
         </div>
     )

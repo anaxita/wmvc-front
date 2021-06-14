@@ -90,39 +90,43 @@ button:hover{
 
 /* Цвета */
 .bg-secondary {
-  background-color: #6c757d;
+  background-color: #6c757d !important;
 }
 
 .border-secondary {
-  border-color: #6c757d;
+  border-color: #6c757d !important;
 }
 
 .bg-secondary-light {
-  background-color: #8f9ba7;
+  background-color: #8f9ba7 !important;
 }
 .bg-dark {
-  background-color: #343a40;
+  background-color: #343a40 !important;
 }
 .bg-primary {
-  background-color: #0d6efd;
+  background-color: #0d6efd !important;
 }
 .bg-gold {
-  background-color: #ffcc00;
+  background-color: #ffcc00 !important;
 }
 
 .text-gold {
-  color: #ffcc00;
+  color: #ffcc00 !important;
 }
 
 .text-red {
-  color: rgb(232, 66, 66)
+  color: rgb(232, 66, 66) !important;
 }
 
 .text-info {
-  color: #17a2b8;
+  color: #17a2b8 !important;
+}
+
+.text-dark {
+  color: #343a40 !important;
 }
 .bg-info {
-  background-color: #17a2b8;
+  background-color: #17a2b8 !important;
 }
 
 /* Кнопки */
@@ -139,22 +143,22 @@ button:hover{
 }
 
 .btn:hover {
-  background: var(--bg-gold);
-  color: var(--bg-dark);
+  background: var(--bg-gold) !important;
+  color: var(--bg-dark) !important;
   cursor: pointer;
 }
 
 .btn:active {
   outline: none;
-  background: var(--bg-primary);
-  border: 1px solid var(--bg-primary);
-  color: #fff;
+  background: var(--bg-primary) !important;
+  border: 1px solid var(--bg-primary) !important;
+  color: #fff !important;
   transition: 0.3s;
 }
 
 .btn[disabled] {
-  color: #d2d5db;
-  background: #6c7589;
+  color: #d2d5db !important;
+  background: #6c7589 !important;
   cursor: not-allowed;
 }
 
@@ -175,6 +179,26 @@ button:hover{
   width: 34px;
   height: 34px;
 }
+
+
+.actions-btn button:hover{
+  color: var(--bg-gold);
+  border: 1px solid var(--bg-gold);
+  cursor: pointer;
+}
+
+.actions-btn button:active{
+  border-width: 0px;
+}
+
+.actions-btn button[disabled] {
+  color: #d2d5db;
+  background: #6c7589;
+  border: 1px solid #ffffff;
+  cursor: not-allowed;
+}
+
+/* Иконки */
 .bg_play {
   background-image: url('./img/servers/play.svg');
   background-repeat: no-repeat;
@@ -200,22 +224,21 @@ button:hover{
   background-size: 17px;
 }
 
-.actions-btn button:hover{
+.bg_close {
+  background-image: url('./img/close.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 17px;
   color: var(--bg-gold);
-  border: 1px solid var(--bg-gold);
-  cursor: pointer;
 }
 
-.actions-btn button:active{
-  border-width: 0px;
+.bg_logout {
+  background-image: url('./img/logout.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 17px;
 }
 
-.actions-btn button[disabled] {
-  color: #d2d5db;
-  background: #6c7589;
-  border: 1px solid #ffffff;
-  cursor: not-allowed;
-}
 
 /* Формы */
 

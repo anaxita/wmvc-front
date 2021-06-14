@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import { Error } from "../Error/Errors"
 import { handleFetch } from '../Fetch/store';

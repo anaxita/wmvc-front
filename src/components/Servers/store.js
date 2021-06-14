@@ -1,10 +1,5 @@
 import { createStore, createEvent, createEffect } from 'effector'
 import { useStore } from 'effector-react'
-import sound_server_timeout from '../../sounds/server-timeout.mp3'
-import sound_server_stopped from '../../sounds/server-stopped.mp3'
-import sound_server_started from '../../sounds/server-started.mp3'
-import sound_network_started from '../../sounds/network-started.mp3'
-import sound_network_stopped from '../../sounds/network-stopped.mp3'
 import { handleFetch } from '../Fetch/store'
 
 // Events

@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './style.css'
 
-export const ServerDetails = ({ params, services, isLoading, error }) => {
+export const ServerDetails = (props) => {
 
     // const servicesList = services.map((el) => {
     //     return (
@@ -12,12 +13,18 @@ export const ServerDetails = ({ params, services, isLoading, error }) => {
         <div className="main">
             <div className="header">
                 <div className="header-btn">
-                    <button type="button" className="btn" onClick={() => { }} >Инфо</button>
-                    <button type="button" className="btn" onClick={() => { }}>Службы</button>
-                    <button type="button" className="btn" onClick={() => { }}>Процессы</button>
+                    <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/info`} className="btn bg-gold text-dark">
+                        Инфо
+                </Link>
+                    <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/services`} className="btn">
+                        Службы
+                </Link>
+                    <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/processes`} className="btn">
+                        Процессы
+                </Link>
                 </div>
                 <div className="header-h">
-                    Свойства сервера
+                    {props.match.params.name}
                 </div>
                 <div className="header-input">
                     <input type="search" className="w-100"

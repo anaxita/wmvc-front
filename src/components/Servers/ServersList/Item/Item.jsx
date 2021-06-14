@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom';
 import { ErrorAbsolute } from '../../../Error/ErrorAbsolute';
 import { SpinnerServer } from '../../../Spinner/SpinnerServer';
@@ -50,7 +49,7 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             default:
                 body.command = ''
         }
-        const {data, err} = await handleFetch('post', '/servers/control' , body);
+        const {err} = await handleFetch('post', '/servers/control' , body);
         if(!err) {
             switch (e.target.name) {
                 case ('power'):
@@ -103,7 +102,7 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
                     <button className="bg_play"  type="button" name="power" onClick={handleControl}></button>
                     <button className="bg_network"  type="button" name="network" onClick={handleControl}></button>
                     <button className="bg_powerOff" type="button" name="stop_power_force" onClick={handleControl}></button>
-                    <Link to={`/servers/${hv}/${name}`}>
+                    <Link to={`/servers/${hv}/${name}/info`}>
                         <button className="bg_gear" type="button"></button>
                     </Link>
             </div>

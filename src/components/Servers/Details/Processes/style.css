@@ -1,0 +1,55 @@
+.prc-usr {
+    grid-area: prc-usr;
+}
+
+.prc-state {
+    grid-area: prc-state;
+}
+.prc-cpu {
+    grid-area: prc-cpu;
+}
+.prc-ram {
+    grid-area: prc-ram;
+}
+
+.prc-actions {
+    grid-area: prc-actions;
+}
+
+.user-processes{
+    grid-area: prc-pl;
+}
+
+.processes-header{
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+    border-radius: 5px;
+    padding: 8px 16px;
+    color:  #6c757d;
+}
+.processes-list{
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+    grid-template-areas:
+    'prc-usr prc-state prc-cpu prc-ram prc-actions'
+    'prc-pl prc-pl prc-pl prc-pl prc-pl';
+
+    align-items: center;
+    border-radius: 5px;
+    background-color: #6c757d;
+    margin-bottom: 8px;
+    padding: 8px 16px;
+}
+
+.process-item{
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr ;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.process-item:hover {
+    background-color: #8f9ba7;
+    border-radius: 5px;
+}
