@@ -26,9 +26,11 @@ export const Auth = () => {
 
     const signIn = async () => {
         setState({ ...state, isLoading: true })
-        const { err } = await handleFetch('POST', '/signin', state.data)
+        const { data, err } = await handleFetch('POST', '/signin', state.data)
         setState({ ...state, isLoading: false })
         if (!err) {
+            localStorage.setItem('cacheToken', data.access_token)
+            localStorage.setItem('cacheRefreshToken', data.refresh_token)
             setRedirect(true)
         } else {
             setState({ ...state, error: err })
