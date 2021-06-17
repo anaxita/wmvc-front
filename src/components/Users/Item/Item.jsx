@@ -1,13 +1,13 @@
 import React from 'react';
-import { SpinnerUser } from '../../Spinner/SpinnerUser';
 import { useState } from "react"
 import { MAIN_URL, TOKEN_ACCESS } from '../../../Constants/Constants';
 import { ModalUserEdit } from '../../Modal/ModalUserEdit';
 import { ModalUserServers } from '../../Modal/ModalUserServers';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { ErrorAbsolute } from '../../Error/ErrorAbsolute';
 import { SpinnerItem } from '../../Spinner/SpinnerItem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
 
 export const UserItem = ({ id, name, role, email, company, handleDeleteUser }) => {
     const [error, handleSetError] = useState('');
@@ -59,12 +59,8 @@ export const UserItem = ({ id, name, role, email, company, handleDeleteUser }) =
                 <div className="usr-role">{role ? <span>Administrator</span> : <span>User</span>}</div>
                 <div className="usr-created">25-05-2022 </div>
                 <div className="usr-actions actions-btn">
-                    
                     <button type="button"  onClick={() => setModalEditUserShow(true)}>
                         <FontAwesomeIcon icon="user-edit" />
-                        <FontAwesomeIcon icon={["fa", "coffee"]} />
-                        <FontAwesomeIcon icon={["far", "coffee"]} />
-                        <FontAwesomeIcon icon={["fas", "coffee"]} />
                     </button>
                     {
                         (role) ? <button type="button" disabled><FontAwesomeIcon icon="server"/></button> :

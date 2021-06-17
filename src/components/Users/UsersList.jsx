@@ -5,6 +5,8 @@ import { UserItem } from './Item/Item';
 import { Error } from '../Error/Errors';
 import { useServersStore, handleModalShow, handleDeleteUser, handleGetUsers, handleSortUsers } from './store';
 import './style.css'
+import { useGlobalRedirect } from '../../store';
+import { Redirect } from 'react-router';
 
 export const UsersList = () => {
 
@@ -22,7 +24,6 @@ export const UsersList = () => {
             <UserItem key={el.id} index={index} id={el.id} name={el.name} email={el.email} company={el.company} role={el.role} handleDeleteUser={handleDeleteUser} />
         )
     })
-
     // html
     return (
         <div className="main">
