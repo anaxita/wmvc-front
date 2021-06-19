@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ErrorAbsolute } from '../../../Error/ErrorAbsolute';
-import { SpinnerServer } from '../../../Spinner/SpinnerServer';
+import { SpinnerItem } from '../../../Spinner/SpinnerItem';
 import { handleFetch } from '../../../Fetch/store';
 import sound_server_timeout from '../../../../sounds/server-timeout.mp3';
 import sound_server_stopped from '../../../../sounds/server-stopped.mp3';
@@ -24,10 +24,6 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             command: '',
         }
         let sound = '';
-        console.log('target: ',e.target.name);
-        console.log('powerState: ',powerState)
-        console.log('networkState: ',networkState)
-
         switch (e.target.name) {
             case ('power'):
                 if (powerState === 'Off') {
@@ -80,6 +76,9 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             }
         } else {
             handleSetError(err);
+            setTimeout(() => {
+                handleSetError('');
+            }, 3000)
             sound = sound_server_timeout
         }
         var audio = new Audio(sound);
@@ -90,7 +89,7 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
 
     return (
         <div className="server-item" id={"server-" + id}>
-            {isLoading ? <div className="server-item-shadow"><SpinnerServer /> Loading</div> : null}
+            {isLoading ? <SpinnerItem /> : null}
             {error ? <ErrorAbsolute err={error}/> : null}
             <div className="srv-name">{name}</div>
             <div className="srv-hv">{hv}</div>
