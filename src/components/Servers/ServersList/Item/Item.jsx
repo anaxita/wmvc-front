@@ -9,6 +9,7 @@ import sound_server_stopped from '../../../../sounds/server-stopped.mp3';
 import sound_server_started from '../../../../sounds/server-started.mp3';
 import sound_network_started from '../../../../sounds/network-started.mp3';
 import sound_network_stopped from '../../../../sounds/network-stopped.mp3';
+import { getUserInfo } from '../../../../Constants/Constants';
 
 export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) => {
 
@@ -86,6 +87,7 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
         handleSetIsLoading(false);
     }
     
+    const { role } = getUserInfo();
 
     return (
         <div className="server-item" id={"server-" + id}>
@@ -101,9 +103,13 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
                     <button className="bg_play"  type="button" name="power" onClick={handleControl}></button>
                     <button className="bg_network"  type="button" name="network" onClick={handleControl}></button>
                     <button className="bg_powerOff" type="button" name="stop_power_force" onClick={handleControl}></button>
-                    <Link to={`/servers/${hv}/${name}/info`}>
+                    
+                    {role ? <Link to={`/servers/${hv}/${name}/info`}>
                         <button className="bg_gear" type="button"></button>
-                    </Link>
+                    </Link>:
+                        null
+                    }
+                    
             </div>
         </div>
     )
