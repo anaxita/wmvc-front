@@ -41,9 +41,8 @@ export const ServerServices = (props) => {
                             <div className="sc-i-state">Running</div>
                             <div className="sc-i-user">FSDTGWEGFWEFWEF</div>
                             <div className="sc-i-actions actions-btn">
-                                <button></button>
-                                <button></button>
-                                <button></button>
+                                <button>Включить/выключить</button>
+                                <button>Перезагрузить</button>
                             </div>
                         </div>
                         <div className="sc-i">
