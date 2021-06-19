@@ -9,23 +9,21 @@ import { ServerProcesses } from './components/Servers/Details/Processes/ServerPr
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
 import { faUserEdit, faServer, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Sidebar } from './components/Sidebar/Sidebar'
-import { getUserInfo } from './Constants/Constants';
 
 library.add(faUserEdit, faServer, faTimes)
 dom.watch()
 export const App = () => {
-    const { role } = getUserInfo();
     return (
         <div className="grid">
-                <Sidebar />
+                {localStorage.getItem('cacheUserInfo') ? <Sidebar /> : null}
                 <Switch>
                     <Route exact path='/' component={Auth} />
                     <Route path='/logout' component={Auth} />
-                    {role ? <Route path='/servers/:hv/:name/info' component={ServerDetails} /> : null}
-                    {role ? <Route path='/servers/:hv/:name/services' component={ServerServices} /> : null}
-                    {role ? <Route path='/servers/:hv/:name/processes' component={ServerProcesses} /> : null}
+                    <Route path='/servers/:hv/:name/info' component={ServerDetails} />
+                    <Route path='/servers/:hv/:name/services' component={ServerServices} />
+                    <Route path='/servers/:hv/:name/processes' component={ServerProcesses} />
                     <Route path='/servers' component={ServersList} />
-                    {role ? <Route path='/users' component={UsersList} /> : null}
+                    <Route path='/users' component={UsersList} />
                 </Switch>
         </div>
     )

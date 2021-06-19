@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ModalAddUser } from '../Modal/Modal';
 import { Spinner } from '../Spinner/Spinner';
 import { UserItem } from './Item/Item';
 import { Error } from '../Error/Errors';
 import { useServersStore, handleModalShow, handleDeleteUser, handleGetUsers, handleSortUsers } from './store';
 import './style.css'
+import { getSearch } from '../../Constants/Constants';
 
 export const UsersList = () => {
 
     const { users, isLoading, isModalShow, error  } = useServersStore()
+    const [isSearch, setSearch] = useState(false);
+    const [usersSearch, setUsersSearch] = useState([]);
 
     useEffect(() => {
         handleGetUsers()
@@ -17,11 +20,33 @@ export const UsersList = () => {
     const sortUsers = (e) => {
         handleSortUsers(e.target.name)   
     }
-    const usersItems = users.map((el, index) => {
-        return (
-            <UserItem key={el.id} index={index} id={el.id} name={el.name} email={el.email} company={el.company} role={el.role} handleDeleteUser={handleDeleteUser} />
-        )
-    })
+    const onSearch = (e) => {
+        let value = e.target.value;
+        if(value) {
+            setSearch(true);
+            setUsersSearch(getSearch(users, value));
+        } else {
+            setSearch(false);
+        }
+    }
+
+    let usersItems = []
+  
+    
+    if(!isSearch) {
+        usersItems = users.map((el, index) => {
+            return (
+                <UserItem key={el.id} index={index} id={el.id} name={el.name} email={el.email} company={el.company} role={el.role} handleDeleteUser={handleDeleteUser} />
+            )
+        })
+    } else {    
+        usersItems = usersSearch.map((el, index) => {
+            return (
+                <UserItem key={el.id} index={index} id={el.id} name={el.name} email={el.email} company={el.company} role={el.role} handleDeleteUser={handleDeleteUser} />
+            )
+        })
+    }
+
     // html
     return (
         <div className="main">
@@ -33,7 +58,7 @@ export const UsersList = () => {
                     USERS
                 </div>
                 <div className="header-input">
-                    <input type="search" className="w-100"
+                    <input type="search" className="w-100" maxLength="255" onChange={onSearch}
                         placeholder="Search user ..." />
                 </div>
             </div>

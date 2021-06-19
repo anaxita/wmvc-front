@@ -41,7 +41,6 @@ const handleRefreshToken = async (method, uri, body ='') => {
 }
 
 export const handleFetch = async (method, uri, body = '') => {
-    
     let result = {
         data: [],
         err: '',

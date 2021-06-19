@@ -12,6 +12,7 @@ export const Sidebar = () => {
    const clearCacheToken = () => {
       localStorage.removeItem('cacheToken')
       localStorage.removeItem('cacheRefreshToken')
+      localStorage.removeItem('cacheUserInfo')
    }
    const {isRedirect} = useGlobalRedirect()
    if(isRedirect) {

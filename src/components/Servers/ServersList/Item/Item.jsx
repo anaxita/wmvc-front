@@ -96,7 +96,7 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             <div className="srv-name">{name}</div>
             <div className="srv-hv">{hv}</div>
             <div className="srv-state">{(powerState === 'Running') ? 'Включен' : 'Выключен'}</div>
-            <div className="srv-status">{(status === 'Работает нормально' && state === 'Off') ? null : status}</div>
+            <div className="srv-status">{(status === 'Работает нормально' ) ? '' : status}</div>
             <div className="srv-network">{networkState === "Off" ? 'выкл' : 'ок'}</div>
             <div className="srv-cpu">{`${cpu_load}%`}</div>
             <div className="srv-actions actions-btn">

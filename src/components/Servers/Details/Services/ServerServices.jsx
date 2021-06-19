@@ -9,13 +9,13 @@ export const ServerServices = (props) => {
                 <div className="header-btn">
                     <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/info`} className="btn">
                         Инфо
-                </Link>
+                    </Link>
                     <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/services`} className="btn bg-gold text-dark">
                         Службы
-                </Link>
+                    </Link>
                     <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/processes`} className="btn">
                         Процессы
-                </Link>
+                    </Link>
                 </div>
                 <div className="header-h">
                 {props.match.params.name}
