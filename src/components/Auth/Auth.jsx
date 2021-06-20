@@ -3,11 +3,11 @@ import { Redirect } from 'react-router';
 import { Error } from "../Error/Errors"
 import { handleFetch } from '../Fetch/store';
 import { SpinnerBtn } from "../Spinner/SpinnerBtn"
+import jwt from 'jsonwebtoken';
 import './style.css'
 
 
 export const Auth = () => {
-
     const [state, setState] = useState({
         data: {
             name: '',
@@ -31,7 +31,11 @@ export const Auth = () => {
         if (!err) {
             localStorage.setItem('cacheToken', data.access_token)
             localStorage.setItem('cacheRefreshToken', data.refresh_token)
-            setRedirect(true)
+            let tokenPayload = jwt.decode(data.access_token);
+            let jsonPayload = JSON.stringify(tokenPayload.User)
+            localStorage.setItem('cacheUserInfo', jsonPayload)
+
+            setRedirect(true);
         } else {
             setState({ ...state, error: err })
         }
@@ -48,10 +52,10 @@ export const Auth = () => {
                     </div>
                     <div className="modal-body">
                         <form>
-                            <label for="inputLogin" className="">Login</label>
-                            <input type="text" className="" id="inputLogin" autocomplete="off" name="email" onChange={onChange} />
-                            <label for="inputPassword" className="">Password</label>
-                            <input type="password" className="" id="inputPassword" autocomplete="off" name="password" onChange={onChange} />
+                            <label htmlFor="inputLogin" className="">Login</label>
+                            <input type="text" className="" id="inputLogin" autoComplete="off" name="email" onChange={onChange} />
+                            <label htmlFor="inputPassword" className="">Password</label>
+                            <input type="password" className="" id="inputPassword" autoComplete="off" name="password" onChange={onChange} />
                         </form>
                     </div>
                     <div className="modal-footer">

@@ -59,7 +59,7 @@ export const ServerDetails = (props) => {
                                 Локальный диск C:
                             </div>
                             <div className="disks-item-body">
-                                <input type="range" min="0" max="100" value="75" id="disk-c" />
+                                <input readOnly type="range" min="0" max="100" value="75" id="disk-c" />
                             </div>
                             <div className="disks-item-footer">
                                 25 ГБ свободно из 100 ГБ
@@ -70,7 +70,7 @@ export const ServerDetails = (props) => {
                                 Локальный диск C:
                             </div>
                             <div className="disks-item-body">
-                                <input type="range" min="0" max="100" value="75" id="disk-c" />
+                                <input readOnly type="range" min="0" max="100" value="75" id="disk-c" />
                             </div>
                             <div className="disks-item-footer">
                                 25 ГБ свободно из 100 ГБ
@@ -81,7 +81,7 @@ export const ServerDetails = (props) => {
                                 Локальный диск C:
                             </div>
                             <div className="disks-item-body">
-                                <input type="range" min="0" max="100" value="75" id="disk-c" />
+                                <input readOnly type="range" min="0" max="100" value="75" id="disk-c" />
                             </div>
                             <div className="disks-item-footer">
                                 25 ГБ свободно из 100 ГБ
@@ -92,7 +92,7 @@ export const ServerDetails = (props) => {
                                 Локальный диск C:
                             </div>
                             <div className="disks-item-body">
-                                <input type="range" min="0" max="100" value="75" id="disk-c" />
+                                <input readOnly type="range" min="0" max="100" value="75" id="disk-c" />
                             </div>
                             <div className="disks-item-footer">
                                 25 ГБ свободно из 100 ГБ

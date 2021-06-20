@@ -28,7 +28,6 @@ const handleRefreshToken = async (method, uri, body ='') => {
             localStorage.setItem('cacheRefreshToken', resp.message.refresh_token)
             return await handleRepeatFetch(method, uri, body);
         }
-        console.log('qweqwe')
         localStorage.removeItem('cacheToken');
         localStorage.removeItem('cacheRefreshToken');
         handleGlobalRedirect(true)
@@ -42,7 +41,6 @@ const handleRefreshToken = async (method, uri, body ='') => {
 }
 
 export const handleFetch = async (method, uri, body = '') => {
-    
     let result = {
         data: [],
         err: '',
@@ -135,3 +133,5 @@ export const handleRepeatFetch = async (method, uri, body = '') => {
 
     return result
 }
+
+

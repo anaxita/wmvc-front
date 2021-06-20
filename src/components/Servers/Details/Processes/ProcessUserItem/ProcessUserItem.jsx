@@ -3,7 +3,7 @@ import { useState } from 'react/cjs/react.development';
 import { ProcessItem } from '../ProcessItem/ProcessItem';
 
 export const ProcessUserItem = ({ u }) => {
-    const prcList = u.processes.map(el => {
+    const prcList = u.processes.map((el) => {
         return <ProcessItem processes={el} />
     })
 
@@ -14,7 +14,7 @@ export const ProcessUserItem = ({ u }) => {
     return (
         <div className="processes-list" key={u.user}>
         <div className="prc-usr collapse-processes">
-            <input type="checkbox" name={u.user} onChange={showProcesses} />
+            <input  type="checkbox" name={u.user} onChange={showProcesses} />
             {u.user}
         </div>
         <div className="prc-state">{u.state}</div>
