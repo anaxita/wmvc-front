@@ -22,7 +22,11 @@ color: var(--bg-gold);
 }
 
 .active {
-color: rgb(255, 204, 0);
-text-decoration: underline;
+    color: rgb(255, 204, 0);
+    text-decoration: underline;
 }
 
+.menu_email {
+    font-size: 14px;
+    color: var(--bg-secondary-light);
+}

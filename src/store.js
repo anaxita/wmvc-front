@@ -5,6 +5,7 @@ export const handleGlobalRedirect = createEvent()
 
 const $servers = createStore({
     isRedirect: false,
+
 })
     .on(handleGlobalRedirect, (state, isRedirect) => {
         return {...state, isRedirect}

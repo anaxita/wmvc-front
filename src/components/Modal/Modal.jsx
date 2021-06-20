@@ -30,30 +30,30 @@ export const ModalAddUser = () => {
                 </div>
                 <div className="modal-body">
                     <form>
-                        <label for="inputRole" className="">Role</label>
+                        <label htmlFor="inputRole" className="">Role</label>
                         <select className="form-select" name="role" id="role" onChange={onChangeUser}>
                             <option selected value="0">User</option>
                             <option value="1">Administrator</option>
                         </select>
 
-                        <label for="inputName" className="">Name</label>
-                        <input type="text" className="" id="inputName" autocomplete="off" name="name" onChange={onChangeUser} />
+                        <label htmlFor="inputName" className="">Name</label>
+                        <input type="text" className="" id="inputName" autoComplete="off" name="name" onChange={onChangeUser} />
 
 
-                        <label for="inputCompany" className="">Company</label>
+                        <label htmlFor="inputCompany" className="">Company</label>
 
-                        <input type="text" className="" id="inputCompany" autocomplete="off" name="company" onChange={onChangeUser} />
-
-
-
-                        <label for="inputLogin" className="">Login</label>
-
-                        <input type="text" className="" id="inputLogin" autocomplete="off" name="email" onChange={onChangeUser} />
+                        <input type="text" className="" id="inputCompany" autoComplete="off" name="company" onChange={onChangeUser} />
 
 
-                        <label for="inputPassword" className="">Password</label>
 
-                        <input type="password" className="" id="inputPassword" autocomplete="off" name="password" onChange={onChangeUser} />
+                        <label htmlFor="inputLogin" className="">Login</label>
+
+                        <input type="text" className="" id="inputLogin" autoComplete="off" name="email" onChange={onChangeUser} />
+
+
+                        <label htmlFor="inputPassword" className="">Password</label>
+
+                        <input type="password" className="" id="inputPassword" autoComplete="off" name="password" onChange={onChangeUser} />
                             
                     </form>
             </div>

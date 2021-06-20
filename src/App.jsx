@@ -15,7 +15,7 @@ dom.watch()
 export const App = () => {
     return (
         <div className="grid">
-                <Sidebar />
+                {localStorage.getItem('cacheUserInfo') ? <Sidebar /> : null}
                 <Switch>
                     <Route exact path='/' component={Auth} />
                     <Route path='/logout' component={Auth} />

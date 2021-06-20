@@ -83,26 +83,26 @@ export const ModalUserEdit = ({ setModalShow, user }) => {
                 </div>
                 <div className="modal-body">
                     <form>
-                        <label for="inputLogin" className="col-sm-2 col-form-label">Login</label>
+                        <label htmlFor="inputLogin" className="col-sm-2 col-form-label">Login</label>
 
                         <input type="text" className="form-control" id="inputLogin my-disabled-input" autoComplete="off" value={state.email} readOnly />
 
-                        <label for="inputRole" className="col-sm-2 col-form-label">Role</label>
+                        <label htmlFor="inputRole" className="col-sm-2 col-form-label">Role</label>
 
                         <select className="form-select" name="role" id="role" onChange={onChangeRole} value={user.role}>
                             <option value="0">User</option>
                             <option value="1">Administrator</option>
                         </select>
 
-                        <label for="inputName" className="col-sm-2 col-form-label">Name</label>
+                        <label htmlFor="inputName" className="col-sm-2 col-form-label">Name</label>
 
                         <input type="text" className="form-control bg-light" id="inputName" autoComplete="off" onChange={onChangeName} value={state.name} />
 
-                        <label for="inputCompany" className="col-sm-2 col-form-label">Company</label>
+                        <label htmlFor="inputCompany" className="col-sm-2 col-form-label">Company</label>
 
                         <input type="text" className="form-control bg-light" id="inputCompany" autoComplete="off" onChange={onChangeCompany} value={state.company} />
 
-                        <label for="inputPassword" className="col-sm-2 col-form-label">Password</label>
+                        <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Password</label>
 
                         <input type="password" className="form-control bg-light" id="inputPassword" autoComplete="off" onChange={onChangePassword} value={state.password} />
 
