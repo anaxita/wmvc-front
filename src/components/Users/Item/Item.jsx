@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from "react"
-import { MAIN_URL, TOKEN_ACCESS } from '../../../Constants/Constants';
+import { TOKEN_ACCESS } from '../../../Constants/Constants';
 import { ModalUserEdit } from '../../Modal/ModalUserEdit';
 import { ModalUserServers } from '../../Modal/ModalUserServers';
 import { ErrorAbsolute } from '../../Error/ErrorAbsolute';
@@ -17,7 +17,7 @@ export const UserItem = ({ id, name, role, email, company, handleDeleteUser }) =
         handleSetError('');
         handleSetIsLoading(true);
         try {
-            let f = await fetch(`${MAIN_URL}/users`, {
+            let f = await fetch(`${localStorage.getItem('cacheServerUrl')}/users`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${TOKEN_ACCESS}`,

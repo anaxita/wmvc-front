@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Redirect } from 'react-router';
 import { Error } from "../Error/Errors"
 import { handleFetch } from '../Fetch/store';
@@ -6,16 +6,18 @@ import { SpinnerBtn } from "../Spinner/SpinnerBtn"
 import jwt from 'jsonwebtoken';
 import './style.css'
 
-
 export const Auth = () => {
     const [state, setState] = useState({
         data: {
             name: '',
-            password: ''
+            password: '',
+            server: ''
         },
         isLoading: false,
         error: '',
     })
+
+    const serverInput = useRef(null)
 
     const [isRedirect, setRedirect] = useState(false)
     const onChange = (e) => {
@@ -25,6 +27,7 @@ export const Auth = () => {
     }
 
     const signIn = async () => {
+        localStorage.setItem('cacheServerUrl', state.data.server)
         setState({ ...state, isLoading: true })
         const { data, err } = await handleFetch('POST', '/signin', state.data)
         setState({ ...state, isLoading: false })
@@ -40,6 +43,16 @@ export const Auth = () => {
             setState({ ...state, error: err })
         }
     }
+    useEffect(() => {
+        if(localStorage.getItem('cacheServerUrl') !== undefined && localStorage.getItem('cacheServerUrl') !== null) {
+            serverInput.current.defaultValue = localStorage.getItem('cacheServerUrl');
+            setState((prevState) => {
+                let newState = { ...prevState }
+                newState.data.server = localStorage.getItem('cacheServerUrl');
+                return newState
+            })
+        }
+    }, [])
 
     if (isRedirect) {
         return <Redirect to="/servers" />
@@ -52,10 +65,12 @@ export const Auth = () => {
                     </div>
                     <div className="modal-body">
                         <form>
+                            <label htmlFor="inputLogin" >Server</label>
+                            <input ref={serverInput} type="text" id="inputServer" autoComplete="off" name="server" onChange={onChange}  required />
                             <label htmlFor="inputLogin" className="">Login</label>
-                            <input type="text" className="" id="inputLogin" autoComplete="off" name="email" onChange={onChange} />
+                            <input type="text" id="inputLogin" autoComplete="off" name="email" onChange={onChange} required />
                             <label htmlFor="inputPassword" className="">Password</label>
-                            <input type="password" className="" id="inputPassword" autoComplete="off" name="password" onChange={onChange} />
+                            <input type="password" id="inputPassword" autoComplete="off" name="password" onChange={onChange} required />
                         </form>
                     </div>
                     <div className="modal-footer">

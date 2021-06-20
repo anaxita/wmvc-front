@@ -1,4 +1,3 @@
-import { MAIN_URL } from '../../Constants/Constants';
 import { handleGlobalRedirect } from '../../store';
 
 
@@ -19,7 +18,7 @@ const handleRefreshToken = async (method, uri, body ='') => {
             })
         }
 
-        const f = await fetchWithTimeout(`${MAIN_URL}/refresh`, opt)
+        const f = await fetchWithTimeout(`${localStorage.getItem('cacheServerUrl')}/refresh`, opt)
         
         const resp = await f.json();
         
@@ -60,9 +59,9 @@ export const handleFetch = async (method, uri, body = '') => {
             opt.body = JSON.stringify(body)
         }
 
-        const f = await fetchWithTimeout(`${MAIN_URL}${uri}`, opt)
+        const f = await fetchWithTimeout(`${localStorage.getItem('cacheServerUrl')}${uri}`, opt)
 
-        // const f = await fetch(`${MAIN_URL}${uri}`, opt)
+        // const f = await fetch(`${localStorage.getItem('cacheServerUrl')}${uri}`, opt)
         if(f.status === 401) {
             return await handleRefreshToken(method, uri, body);
         }
@@ -88,6 +87,8 @@ export const handleFetch = async (method, uri, body = '') => {
         result.data = []
         if(e.message === 'The user aborted a request.') {
             result.err = `Ошибка : Сервер не отвечает`
+        } else if(e.message.includes('Unexpected token')) {
+            result.err = `Ошибка : Сервер не найден`
         } else {
             result.err = `Ошибка : ${e.message}`
         }
@@ -118,7 +119,7 @@ export const handleRepeatFetch = async (method, uri, body = '') => {
 
 
 
-        const f = await fetchWithTimeout(`${MAIN_URL}${uri}`, opt)
+        const f = await fetchWithTimeout(`${localStorage.getItem('cacheServerUrl')}${uri}`, opt)
         const resp = await f.json()
 
         switch (resp.status) {
