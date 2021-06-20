@@ -7,10 +7,11 @@ import { Auth } from './components/Auth/Auth';
 import { ServerServices } from './components/Servers/Details/Services/ServerServices';
 import { ServerProcesses } from './components/Servers/Details/Processes/ServerProcesses';
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
-import { faUserEdit, faServer, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faUserEdit, faServer, faTimes, faPlayCircle, faSyncAlt, faSignOutAlt, faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { Sidebar } from './components/Sidebar/Sidebar'
 
-library.add(faUserEdit, faServer, faTimes)
+library.add(faUserEdit, faServer, faTimes, faPlayCircle, faSyncAlt, faSignOutAlt, faChevronDown, faChevronRight)
+// chevron-down
 dom.watch()
 export const App = () => {
     return (

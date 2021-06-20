@@ -19,7 +19,7 @@ const handleRefreshToken = async (method, uri, body ='') => {
             })
         }
 
-        const f = await fetch(`${MAIN_URL}/refresh`, opt)
+        const f = await fetchWithTimeout(`${MAIN_URL}/refresh`, opt)
         
         const resp = await f.json();
         
@@ -38,6 +38,7 @@ const handleRefreshToken = async (method, uri, body ='') => {
         handleGlobalRedirect(true)
         return result
     }
+
 }
 
 export const handleFetch = async (method, uri, body = '') => {
@@ -59,7 +60,9 @@ export const handleFetch = async (method, uri, body = '') => {
             opt.body = JSON.stringify(body)
         }
 
-        const f = await fetch(`${MAIN_URL}${uri}`, opt)
+        const f = await fetchWithTimeout(`${MAIN_URL}${uri}`, opt)
+
+        // const f = await fetch(`${MAIN_URL}${uri}`, opt)
         if(f.status === 401) {
             return await handleRefreshToken(method, uri, body);
         }
@@ -83,7 +86,11 @@ export const handleFetch = async (method, uri, body = '') => {
         
         
         result.data = []
-        result.err = `Ошибка : ${e.message}`
+        if(e.message === 'The user aborted a request.') {
+            result.err = `Ошибка : Сервер не отвечает`
+        } else {
+            result.err = `Ошибка : ${e.message}`
+        }
     }
 
     return result
@@ -109,7 +116,9 @@ export const handleRepeatFetch = async (method, uri, body = '') => {
             opt.body = JSON.stringify(body)
         }
 
-        const f = await fetch(`${MAIN_URL}${uri}`, opt)
+
+
+        const f = await fetchWithTimeout(`${MAIN_URL}${uri}`, opt)
         const resp = await f.json()
 
         switch (resp.status) {
@@ -128,10 +137,24 @@ export const handleRepeatFetch = async (method, uri, body = '') => {
         }
     } catch (e) {
         result.data = []
-        result.err = `Ошибка : ${e.message}`
+        if(e.message === 'The user aborted a request.') {
+            result.err = `Ошибка : Сервер не отвечает`
+        } else {
+            result.err = `Ошибка : ${e.message}`
+        }
     }
-
     return result
 }
 
-
+// Прерывание запроса на бекенд
+async function fetchWithTimeout(resource, options) {
+    const { timeout = 15000 } = options;
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    const response = await fetch(resource, {
+      ...options,
+      signal: controller.signal  
+    });
+    clearTimeout(id);
+    return response;
+}

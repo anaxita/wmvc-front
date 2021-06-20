@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from "react"
-import { MAIN_URL, TOKEN_ACCESS } from "../../Constants/Constants"
+import { getSearch, MAIN_URL, TOKEN_ACCESS } from "../../Constants/Constants"
 import { Error } from "../Error/Errors"
 import { SpinnerBtn } from "../Spinner/SpinnerBtn"
 import { UserServers } from "../Users/UserServers/UserServers"
+import './style.css'
 
 export const ModalUserServers = ({ setModalShow, userID}) => {
 
@@ -27,6 +28,8 @@ export const ModalUserServers = ({ setModalShow, userID}) => {
     ])
     const [isLoading, setLoading] = useState(false)
     const [error, setError] = useState('')
+    const [isSearch, setSearch] = useState(false);
+    const [serversSearch, setServersSearch] = useState([]);
 
 
     useEffect(() => {
@@ -105,22 +108,51 @@ export const ModalUserServers = ({ setModalShow, userID}) => {
         }
     }
     
-    const serversList = servers.map((el) => {
-        return (
-            <UserServers id={el.id} name={el.name} isActive={el.is_added} changeAddedStatus={changeAddedStatus}/>
-        )
-    })
+    // const serversList = servers.map((el) => {
+    //     return (
+    //         <UserServers id={el.id} name={el.name} isActive={el.is_added} changeAddedStatus={changeAddedStatus}/>
+    //     )
+    // })
+
+    const onSearch = (e) => {
+        let value = e.target.value;
+        if(value) {
+            setSearch(true);
+            setServersSearch(getSearch(servers, value));
+        } else {
+            setSearch(false);
+        }
+    }
+
+
+    let serversList = []
+    if(!isSearch) {
+        serversList = servers.map((el) => {
+            return (
+                <UserServers id={el.id} name={el.name} isActive={el.is_added} changeAddedStatus={changeAddedStatus}/>
+            )
+        })
+    } else {    
+        serversList = serversSearch.map((el, index) => {
+            return (
+                <UserServers id={el.id} name={el.name} isActive={el.is_added} changeAddedStatus={changeAddedStatus}/>
+            )
+        })
+    }
+
+
 
     return (
                 <div className="modal">
                     <div className="modal-content">
-
                     <div className="modal-header text-gold">
                         Доступ к серверам
                     </div>
                     <div className="modal-body">
-                        <input type="search" name="" id="" className="form-control form-control-sm mb-2 bg-light"  placeholder="Search server ..."/>
-                        {serversList}
+                        <input onChange={onSearch} type="search" name="" id="" className="form-control form-control-sm mb-2 bg-light"  placeholder="Search server ..."/>
+                        <div className="serversList_scroll">
+                            {serversList}
+                        </div>
                     </div>
                     <div className="modal-footer">
                                 {error ? <Error err={error} /> : null}

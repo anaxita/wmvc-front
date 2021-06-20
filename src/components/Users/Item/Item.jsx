@@ -7,8 +7,6 @@ import { ErrorAbsolute } from '../../Error/ErrorAbsolute';
 import { SpinnerItem } from '../../Spinner/SpinnerItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
-
 export const UserItem = ({ id, name, role, email, company, handleDeleteUser }) => {
     const [error, handleSetError] = useState('');
     const [isLoading, handleSetIsLoading] = useState(false);

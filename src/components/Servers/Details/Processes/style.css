@@ -1,7 +1,15 @@
 .prc-usr {
     grid-area: prc-usr;
 }
-
+.prc-usr div {
+    display: flex;
+    margin-right: 4px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+.prc-usr div div {
+    color: var(--bg-gold);
+}
 .prc-state {
     grid-area: prc-state;
 }

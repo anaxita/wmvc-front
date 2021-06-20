@@ -1,14 +1,17 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const ProcessItem = ({processes}) => {
         return (
             <div className="process-item" key={processes.name}>
-                <div className="">{processes.name}</div>
-                <div className=""></div>
-                <div className="">{processes.cpu}</div>
-                <div className="">{processes.ram}</div>
+                <div>{processes.name}</div>
+                <div></div>
+                <div>{processes.cpu}</div>
+                <div>{processes.ram}</div>
                 <div className="actions-btn">
-                <button type="button" className="bg_close"></button>
+                <button type="button">
+                    <FontAwesomeIcon icon="times" />
+                </button>
                 </div>
             </div>
         )
