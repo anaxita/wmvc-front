@@ -24,6 +24,7 @@ export const getSearch = (itemsList, value) => {
         if (isOk) {
             return item
         }
+        return null
     })
     return newItemsList
 }

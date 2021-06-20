@@ -6,7 +6,7 @@ import { SpinnerBtn } from "../Spinner/SpinnerBtn"
 import { UserServers } from "../Users/UserServers/UserServers"
 import './style.css'
 
-export const ModalUserServers = ({ setModalShow, userID}) => {
+export const ModalUserServers = ({ setModalShow, userID }) => {
 
     const onClickCloseModal = () => {
         setModalShow(false)
@@ -33,7 +33,7 @@ export const ModalUserServers = ({ setModalShow, userID}) => {
 
 
     useEffect(() => {
-        async function FetchData(){
+        async function FetchData() {
             setLoading(true);
 
             try {
@@ -43,9 +43,9 @@ export const ModalUserServers = ({ setModalShow, userID}) => {
                         'Contnet-Type': 'application/json'
                     },
                 })
-                
+
                 let response = await f.json()
-                
+
                 if (response.status === "ok") {
                     setServers(response.message.servers);
                 } else {
@@ -60,7 +60,7 @@ export const ModalUserServers = ({ setModalShow, userID}) => {
             }
         }
         FetchData()
-            
+
     }, [userID])
 
     const changeAddedStatus = (userID) => {
@@ -68,7 +68,7 @@ export const ModalUserServers = ({ setModalShow, userID}) => {
             if (el.id === userID) {
                 el.is_added = !el.is_added
             }
-            
+
             return el
         })
         setServers(newServers)
@@ -87,7 +87,7 @@ export const ModalUserServers = ({ setModalShow, userID}) => {
                     'Authorization': `Bearer ${TOKEN_ACCESS}`,
                     'Contnet-Type': 'application/json'
                 },
-                body: JSON.stringify({user_id: userID, servers: serversToSend})
+                body: JSON.stringify({ user_id: userID, servers: serversToSend })
             })
             let response = await f.json()
 
@@ -107,16 +107,10 @@ export const ModalUserServers = ({ setModalShow, userID}) => {
             }, 10000)
         }
     }
-    
-    // const serversList = servers.map((el) => {
-    //     return (
-    //         <UserServers id={el.id} name={el.name} isActive={el.is_added} changeAddedStatus={changeAddedStatus}/>
-    //     )
-    // })
 
     const onSearch = (e) => {
         let value = e.target.value;
-        if(value) {
+        if (value) {
             setSearch(true);
             setServersSearch(getSearch(servers, value));
         } else {
@@ -124,43 +118,39 @@ export const ModalUserServers = ({ setModalShow, userID}) => {
         }
     }
 
-
     let serversList = []
-    if(!isSearch) {
+    if (!isSearch) {
         serversList = servers.map((el) => {
             return (
-                <UserServers id={el.id} name={el.name} isActive={el.is_added} changeAddedStatus={changeAddedStatus}/>
+                <UserServers id={el.id} name={el.name} isActive={el.is_added} changeAddedStatus={changeAddedStatus} />
             )
         })
-    } else {    
-        serversList = serversSearch.map((el, index) => {
+    } else {
+        serversList = serversSearch.map((el) => {
             return (
-                <UserServers id={el.id} name={el.name} isActive={el.is_added} changeAddedStatus={changeAddedStatus}/>
+                <UserServers id={el.id} name={el.name} isActive={el.is_added} changeAddedStatus={changeAddedStatus} />
             )
         })
     }
-
-
-
     return (
-                <div className="modal">
-                    <div className="modal-content">
-                    <div className="modal-header text-gold">
-                        Доступ к серверам
-                    </div>
-                    <div className="modal-body">
-                        <input onChange={onSearch} type="search" name="" id="" className="form-control form-control-sm mb-2 bg-light"  placeholder="Search server ..."/>
-                        <div className="serversList_scroll">
-                            {serversList}
-                        </div>
-                    </div>
-                    <div className="modal-footer">
-                                {error ? <Error err={error} /> : null}
-                        <button type="button" className="btn btn-secondary" onClick={onClickCloseModal}>Отмена</button>
-                        {isLoading ? <button type="button" className="btn btn-primary" disabled><SpinnerBtn /> Создать</button> :
-                            <button type="button" className="btn btn-primary" onClick={onClickSetServers}>Создать</button>}
-                    </div>
-                            </div>
+        <div className="modal">
+            <div className="modal-content">
+                <div className="modal-header text-gold">
+                    Доступ к серверам
                 </div>
+                <div className="modal-body">
+                    <input onChange={onSearch} type="search" name="" id="" className="form-control form-control-sm mb-2 bg-light" placeholder="Search server ..." />
+                    <div className="serversList_scroll">
+                        {serversList}
+                    </div>
+                </div>
+                <div className="modal-footer">
+                    {error ? <Error err={error} /> : null}
+                    <button type="button" className="btn btn-secondary" onClick={onClickCloseModal}>Отмена</button>
+                    {isLoading ? <button type="button" className="btn btn-primary" disabled><SpinnerBtn /> Создать</button> :
+                        <button type="button" className="btn btn-primary" onClick={onClickSetServers}>Создать</button>}
+                </div>
+            </div>
+        </div>
     )
 }
