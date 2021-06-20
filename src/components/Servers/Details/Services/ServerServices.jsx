@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css'
 
 export const ServerServices = (props) => {
@@ -41,52 +42,8 @@ export const ServerServices = (props) => {
                             <div className="sc-i-state">Running</div>
                             <div className="sc-i-user">FSDTGWEGFWEFWEF</div>
                             <div className="sc-i-actions actions-btn">
-                                <button>Включить/выключить</button>
-                                <button>Перезагрузить</button>
-                            </div>
-                        </div>
-                        <div className="sc-i">
-                            <div className="sc-i-name">Anydesk</div>
-                            <div className="sc-i-display-name">Энидеск</div>
-                            <div className="sc-i-state">Running</div>
-                            <div className="sc-i-user">SYSTEM</div>
-                            <div className="sc-i-actions actions-btn">
-                                <button></button>
-                                <button></button>
-                                <button></button>
-                            </div>
-                        </div>
-                        <div className="sc-i">
-                            <div className="sc-i-name">Anydesk</div>
-                            <div className="sc-i-display-name">Энидеск</div>
-                            <div className="sc-i-state">Running</div>
-                            <div className="sc-i-user">SYSTEM</div>
-                            <div className="sc-i-actions actions-btn">
-                                <button></button>
-                                <button></button>
-                                <button></button>
-                            </div>
-                        </div>
-                        <div className="sc-i">
-                            <div className="sc-i-name">Anydesk</div>
-                            <div className="sc-i-display-name">Энидеск</div>
-                            <div className="sc-i-state">Running</div>
-                            <div className="sc-i-user">SYSTEM</div>
-                            <div className="sc-i-actions actions-btn">
-                                <button></button>
-                                <button></button>
-                                <button></button>
-                            </div>
-                        </div>
-                        <div className="sc-i">
-                            <div className="sc-i-name">Anydesk</div>
-                            <div className="sc-i-display-name">Энидеск</div>
-                            <div className="sc-i-state">Running</div>
-                            <div className="sc-i-user">SYSTEM</div>
-                            <div className="sc-i-actions actions-btn">
-                                <button></button>
-                                <button></button>
-                                <button></button>
+                                <button><FontAwesomeIcon icon="play-circle" /></button>
+                                <button><FontAwesomeIcon icon="sync-alt" /></button>
                             </div>
                         </div>
                     </div>

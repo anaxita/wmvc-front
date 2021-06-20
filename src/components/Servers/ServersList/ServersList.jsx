@@ -64,7 +64,7 @@ export const ServersList = () => {
         <div className="main">
             <div className="header">
                 <div className="header-btn">
-                    <button type="button" className="btn" onClick={() => { }}>New Server</button>
+                    <button disabled="disabled" type="button" className="btn" onClick={() => { }}>New Server</button>
                 </div>
                 <div className="header-h">
                     SERVERS
