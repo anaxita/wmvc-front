@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useState } from "react"
-import { MAIN_URL, TOKEN_ACCESS } from "../../Constants/Constants"
+import { TOKEN_ACCESS } from "../../Constants/Constants"
 import { Error } from "../Error/Errors"
 import { SpinnerBtn } from "../Spinner/SpinnerBtn"
 import { handleEditUser } from '../Users/store';
@@ -45,7 +45,7 @@ export const ModalUserEdit = ({ setModalShow, user }) => {
         setLoading(true);
 
         try {
-            let f = await fetch(`${MAIN_URL}/users`, {
+            let f = await fetch(`${localStorage.getItem('cacheServerUrl')}/users`, {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${TOKEN_ACCESS}`,

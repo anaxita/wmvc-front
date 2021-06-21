@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from "react"
-import { getSearch, MAIN_URL, TOKEN_ACCESS } from "../../Constants/Constants"
+import { getSearch, TOKEN_ACCESS } from "../../Constants/Constants"
 import { Error } from "../Error/Errors"
 import { SpinnerBtn } from "../Spinner/SpinnerBtn"
 import { UserServers } from "../Users/UserServers/UserServers"
@@ -37,7 +37,7 @@ export const ModalUserServers = ({ setModalShow, userID }) => {
             setLoading(true);
 
             try {
-                let f = await fetch(`${MAIN_URL}/users/${userID}/servers`, {
+                let f = await fetch(`${localStorage.getItem('cacheServerUrl')}/users/${userID}/servers`, {
                     headers: {
                         'Authorization': `Bearer ${TOKEN_ACCESS}`,
                         'Contnet-Type': 'application/json'
@@ -81,7 +81,7 @@ export const ModalUserServers = ({ setModalShow, userID }) => {
         const serversToSend = servers.filter(el => el.is_added)
 
         try {
-            let f = await fetch(`${MAIN_URL}/users/servers`, {
+            let f = await fetch(`${localStorage.getItem('cacheServerUrl')}/users/servers`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${TOKEN_ACCESS}`,
