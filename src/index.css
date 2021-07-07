@@ -44,7 +44,7 @@ button:hover{
 /* MAIN */
 .main {
   display: grid;
-  grid-template-rows: 1fr 17fr;
+  grid-template-rows: 1fr 15fr;
   background-color: var(--bg-dark);
   height: 100%;
   overflow: hidden;
@@ -259,6 +259,10 @@ input:focus{
   outline:none;
   border-color: rgb(54, 120, 220);
 }
+
+input:disabled::placeholder {
+  color: #d2d5db !important;
+}
 input:read-only {
   /* color: #d2d5db; */
   background: var(--bg-secondary)
@@ -285,6 +289,7 @@ select{
   display: inline-block;
   width: 16px;
   height: 16px;
+  margin-right: 8px;
 }
 .spinner:after {
   padding: 0;

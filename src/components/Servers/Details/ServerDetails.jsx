@@ -4,35 +4,49 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Error } from '../../Error/Errors';
 import { handleFetch } from '../../Fetch/store';
+import { Spinner } from '../../Spinner/Spinner';
 import './style.css'
 
 export const ServerDetails = (props) => {
     const [vm, setVm] = useState({})
     const [vmErr, setVmErr] = useState("")
+    const [isVmLoading, setVmLoading] = useState(false)
+
+
     const [disks, setDisks] = useState([])
     const [disksErr, setDisksErr] = useState("")
+    const [isDisksLoading, setDisksLoading] = useState(false)
 
     useEffect(async () => {
+        setVmLoading(true)
+
         const info = await handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}`)
+        setVmLoading(false)
         if (info.err) {
             setVmErr(info.err)
         } else {
             setVm(info.data)
         }
 
+    }, [])
+
+    useEffect(async () => {
+        setDisksLoading(true)
+
         const disksInfo = await handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}/disks`)
+        setDisksLoading(false)
+
         if (disksInfo.err) {
             setDisksErr(disksInfo.err)
         } else {
             setDisks(disksInfo.data)
         }
-
-        console.log(disksInfo)
     }, [])
 
+    
     const disksList = disks.map((d) => {
         return (
-            <li className="disks-item">
+            <li className="disks-item" key={d.disk_letter}>
                 <div className="disks-item-header">
                     Локальный диск {d.disk_letter}:
                 </div>
@@ -63,13 +77,13 @@ export const ServerDetails = (props) => {
                     {props.match.params.name}
                 </div>
                 <div className="header-input">
-                    <input type="search" className="w-100"
-                        placeholder="Search server ..." />
+                    {/* <input type="search" className="w-100"
+                        placeholder="Search..."  disabled/> */}
                 </div>
             </div>
             <div className="content params">
                 {
-                    vmErr ? <Error err={vmErr} /> : (
+                    isVmLoading ? <Spinner text="Load VM info..." /> : (vmErr ? <Error err={vmErr} /> : (
                         <div>
                             <div className="params-item border-secondary">
                                 HV:  <span className="text-gold">{vm.hv}</span>
@@ -100,58 +114,16 @@ export const ServerDetails = (props) => {
                             </div>
                         </div>
                     )
+                    )
                 }
 
                 <div className="disks border-secondary">
                     {
-                        disksErr ? <Error err={disksErr} /> : (
+                        isDisksLoading ? <Spinner text="Load disks info..." /> : (disksErr ? <Error err={disksErr} /> : (
                             <ul>
                                 {disksList}
-                                {/* <li className="disks-item">
-                            <div className="disks-item-header">
-                                Локальный диск C:
-                            </div>
-                            <div className="disks-item-body">
-                                <input readOnly type="range" min="0" max="100" value="75" id="disk-c" />
-                            </div>
-                            <div className="disks-item-footer">
-                                25 ГБ свободно из 100 ГБ
-                            </div>
-                        </li>
-                        <li className="disks-item">
-                            <div className="disks-item-header">
-                                Локальный диск C:
-                            </div>
-                            <div className="disks-item-body">
-                                <input readOnly type="range" min="0" max="100" value="75" id="disk-c" />
-                            </div>
-                            <div className="disks-item-footer">
-                                25 ГБ свободно из 100 ГБ
-                            </div>
-                        </li>
-                        <li className="disks-item">
-                            <div className="disks-item-header">
-                                Локальный диск C:
-                            </div>
-                            <div className="disks-item-body">
-                                <input readOnly type="range" min="0" max="100" value="75" id="disk-c" />
-                            </div>
-                            <div className="disks-item-footer">
-                                25 ГБ свободно из 100 ГБ
-                            </div>
-                        </li>
-                        <li className="disks-item">
-                            <div className="disks-item-header">
-                                Локальный диск C:
-                            </div>
-                            <div className="disks-item-body">
-                                <input readOnly type="range" min="0" max="100" value="75" id="disk-c" />
-                            </div>
-                            <div className="disks-item-footer">
-                                25 ГБ свободно из 100 ГБ
-                            </div>
-                        </li> */}
                             </ul>
+                        )
                         )
                     }
                 </div>

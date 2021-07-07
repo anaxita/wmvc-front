@@ -1,11 +1,10 @@
 import React from 'react';
 
-export const Spinner = ({text}) => {
+export const Spinner = ({ text }) => {
     return (
-            <div>
-                {text}
-                <div className="spinner" role="status">
-            </div>
+        <div>
+            <span className="spinner" role="status"></span>
+            {text}
         </div>
     )
 }

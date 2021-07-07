@@ -1,7 +1,7 @@
 .params {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    padding: 0 !important;
+    /* padding: 0 !important; */
 }
 
 .params-item {
@@ -13,6 +13,7 @@
 
 .disks {
     border-left: 1px solid;
+    padding-left: 8px;
 }
 
 .disks ul {
@@ -68,9 +69,17 @@
     .params{
         grid-template-columns: auto !important;
         overflow-x: hidden;
+        padding: 0;
+    }
+
+
+    .disks {
+        border: none;
+        padding: 0;
     }
 
     .disks ul {
         display: block;
     }
+    
 }
