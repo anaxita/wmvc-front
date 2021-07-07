@@ -3,6 +3,7 @@ import React from 'react';
 import { useState } from "react"
 import { TOKEN_ACCESS } from "../../Constants/Constants"
 import { Error } from "../Error/Errors"
+import { handleFetch } from '../Fetch/store';
 import { SpinnerBtn } from "../Spinner/SpinnerBtn"
 import { handleEditUser } from '../Users/store';
 
@@ -44,35 +45,20 @@ export const ModalUserEdit = ({ setModalShow, user }) => {
         setError('');
         setLoading(true);
 
-        try {
-            let f = await fetch(`${localStorage.getItem('cacheServerUrl')}/users`, {
-                method: 'PATCH',
-                headers: {
-                    'Authorization': `Bearer ${TOKEN_ACCESS}`,
-                    'Contnet-Type': 'application/json'
-                },
-                body: JSON.stringify(state)
-            })
-            let response = await f.json()
+        const { data, err } = await handleFetch('PATCH', '/users', state)
+        setLoading(false)
 
-            if (response.status === "ok") {
-                let newState = { ...state }
-                newState.password = ''
-               handleEditUser(newState)
-                setModalShow(false)
-            } else {
-                setError(response.message.err);
-            }
+        if (err) {
+            setError(err);
+        } else {
+            let newState = { ...state }
+            newState.password = ''
+            handleEditUser(newState)
+            setModalShow(false)
         }
-        catch (e) {
-            setError('Ошибка соединения с сервером  ');
-        }
-        finally {
-            setLoading(false)
-            setTimeout(() => {
-                setError('');
-            }, 10000)
-        }
+        setTimeout(() => {
+            setError('');
+        }, 10000)
     }
 
     return (

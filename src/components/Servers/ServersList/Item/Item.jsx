@@ -33,15 +33,17 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
                     body.command = 'stop_power'
                 }
                 break;
+
+            case ('stop_power_force'):
+                body.command = 'stop_power_force'
+                break;
+
             case ('network'):
                 if (networkState === 'Off') {
                     body.command = 'start_network'
                 } else {
                     body.command = 'stop_network'
                 }
-                break;
-            case ('stop_power_force'):
-                    body.command = 'stop_power_force'
                 break;
             default:
                 body.command = ''
@@ -50,7 +52,7 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
         if(!err) {
             switch (e.target.name) {
                 case ('power'):
-                    if (state === 'Off') {
+                    if (powerState === 'Off') {
                         handleSetState('Running')
                         sound = sound_server_started;
                     } else {
@@ -58,8 +60,9 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
                         sound = sound_server_stopped;
                     }
                     break;
+
                 case ('network'):
-                    if (network === 'Off') {
+                    if (networkState === 'Off') {
                         handleSetNetwork('Running')
                         sound = sound_network_started
                     } else {
@@ -67,10 +70,12 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
                         sound = sound_network_stopped
                     }
                     break;
+
                 case ('stop_power_force'):
                         handleSetState('Off')
                         sound = sound_server_stopped
                     break;
+
                 default:
                     handleSetState(powerState);
                     handleSetNetwork(networkState);
@@ -97,7 +102,7 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             <div className="srv-hv">{hv}</div>
             <div className="srv-state">{(powerState === 'Running') ? 'Включен' : 'Выключен'}</div>
             <div className="srv-status">{(status === 'Работает нормально' ) ? '' : status}</div>
-            <div className="srv-network">{networkState === "Off" ? 'выкл' : 'ок'}</div>
+            <div className="srv-network">{networkState === "Off" ? 'Выкл' : 'OK'}</div>
             <div className="srv-cpu">{`${cpu_load}%`}</div>
             <div className="srv-actions actions-btn">
                     <button className="bg_play"  type="button" name="power" onClick={handleControl}></button>

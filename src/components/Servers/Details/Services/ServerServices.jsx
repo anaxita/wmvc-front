@@ -1,9 +1,45 @@
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css'
+import { handleFetch } from '../../../Fetch/store';
 
 export const ServerServices = (props) => {
+    const [services, setServices] = useState([])
+    const [servicesErr, setServicesErr] = useState("")
+    const [isServicesLoading, setServicesLoading] = useState(false)
+
+    useEffect(async () => {
+        setServicesLoading(true)
+
+        const info = await handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}/services`)
+        setServicesLoading(false)
+        if (info.err) {
+            setServicesErr(info.err)
+        } else {
+            setServices(info.data)
+        }
+
+    }, [])
+
+    const servicesList = services.map((s) => {
+        return (
+            <div className="sc-i" key={s.name}>
+                <div className="sc-i-name">{s.name}</div>
+                <div className="sc-i-display-name">{s.display_name}</div>
+                <div className="sc-i-state">{s.status}</div>
+                <div className="sc-i-user">{s.user}</div>
+                <div className="sc-i-actions actions-btn">
+                    <button><FontAwesomeIcon icon="play-circle" /></button>
+                    <button><FontAwesomeIcon icon="sync-alt" /></button>
+                </div>
+            </div>
+        )
+    })
+
     return (
         <div className="main">
             <div className="header header-servers-details">
@@ -19,7 +55,7 @@ export const ServerServices = (props) => {
                     </Link>
                 </div>
                 <div className="header-h">
-                {props.match.params.name}
+                    {props.match.params.name}
                 </div>
                 <div className="header-input">
                     <input type="search" className="w-100"
@@ -36,16 +72,7 @@ export const ServerServices = (props) => {
                         <div className="sc-i-actions">Actions</div>
                     </div>
                     <div className="sc-items">
-                        <div className="sc-i">
-                            <div className="sc-i-name">Anydesk</div>
-                            <div className="sc-i-display-name">Энидеск</div>
-                            <div className="sc-i-state">Running</div>
-                            <div className="sc-i-user">FSDTGWEGFWEFWEF</div>
-                            <div className="sc-i-actions actions-btn">
-                                <button><FontAwesomeIcon icon="play-circle" /></button>
-                                <button><FontAwesomeIcon icon="sync-alt" /></button>
-                            </div>
-                        </div>
+                        {servicesList}
                     </div>
                 </div>
             </div>

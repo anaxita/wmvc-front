@@ -27,7 +27,7 @@ export const Auth = () => {
     }
 
     const signIn = async () => {
-        localStorage.setItem('cacheServerUrl', `https://${state.data.server}`)
+        localStorage.setItem('cacheServerUrl', state.data.server)
         setState({ ...state, isLoading: true })
         const { data, err } = await handleFetch('POST', '/signin', state.data)
         setState({ ...state, isLoading: false })

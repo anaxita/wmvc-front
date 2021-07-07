@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from "react"
 import { getSearch, TOKEN_ACCESS } from "../../Constants/Constants"
 import { Error } from "../Error/Errors"
+import { handleFetch } from '../Fetch/store';
 import { SpinnerBtn } from "../Spinner/SpinnerBtn"
 import { UserServers } from "../Users/UserServers/UserServers"
 import './style.css'
@@ -12,59 +13,31 @@ export const ModalUserServers = ({ setModalShow, userID }) => {
         setModalShow(false)
     }
 
-    const [servers, setServers] = useState([
-        // {
-        //     id: "fgh-5-h-dfghrgh--45th--",
-        //     name: "SRV_PF",
-        //     hv: "DCSRVHV12",
-        //     state: "",
-        //     network: "",
-        //     company: "Промформат",
-        //     description: "Такая-то компания и вообще молодцы",
-        //     ip: "172.12.3.0",
-        //     out_addr: "dc.kmsys.ru:5322",
-        //     is_added: true
-        //   },
-    ])
+    const [servers, setServers] = useState([])
     const [isLoading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const [isSearch, setSearch] = useState(false);
     const [serversSearch, setServersSearch] = useState([]);
 
 
-    useEffect(() => {
-        async function FetchData() {
-            setLoading(true);
+    useEffect(async () => {
+        setLoading(true);
 
-            try {
-                let f = await fetch(`${localStorage.getItem('cacheServerUrl')}/users/${userID}/servers`, {
-                    headers: {
-                        'Authorization': `Bearer ${TOKEN_ACCESS}`,
-                        'Contnet-Type': 'application/json'
-                    },
-                })
-
-                let response = await f.json()
-
-                if (response.status === "ok") {
-                    setServers(response.message.servers);
-                } else {
-                    setError(response.message.err);
-                }
-            }
-            catch (e) {
-                setError('Ошибка соединения с сервером  ');
-            }
-            finally {
-                setLoading(false);
-            }
+        const { data, err } = await handleFetch('GET', `/users/${userID}/servers`)
+        setLoading(false)
+        if (err) {
+            setError(err);
+        } else {
+            setServers(data.servers);
         }
-        FetchData()
 
+        setTimeout(() => {
+            setError('');
+        }, 10000)
     }, [userID])
 
     const changeAddedStatus = (userID) => {
-        const newServers = servers.map(el => {
+        const newServers = servers.filter(el => {
             if (el.id === userID) {
                 el.is_added = !el.is_added
             }
@@ -80,32 +53,17 @@ export const ModalUserServers = ({ setModalShow, userID }) => {
 
         const serversToSend = servers.filter(el => el.is_added)
 
-        try {
-            let f = await fetch(`${localStorage.getItem('cacheServerUrl')}/users/servers`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${TOKEN_ACCESS}`,
-                    'Contnet-Type': 'application/json'
-                },
-                body: JSON.stringify({ user_id: userID, servers: serversToSend })
-            })
-            let response = await f.json()
+        const { data, err } = await handleFetch('POST', '/users/servers', { user_id: userID, servers: serversToSend })
+        setLoading(false)
+        if (err) {
+            setError(err);
+        } else {
+            setModalShow(false)
+        }
 
-            if (response.status === "ok") {
-                setModalShow(false)
-            } else {
-                setError(response.message.err);
-            }
-        }
-        catch (e) {
-            setError('Ошибка соединения с сервером  ');
-        }
-        finally {
-            setLoading(false)
-            setTimeout(() => {
-                setError('');
-            }, 10000)
-        }
+        setTimeout(() => {
+            setError('');
+        }, 10000)
     }
 
     const onSearch = (e) => {
@@ -122,13 +80,13 @@ export const ModalUserServers = ({ setModalShow, userID }) => {
     if (!isSearch) {
         serversList = servers.map((el) => {
             return (
-                <UserServers id={el.id} name={el.name} isActive={el.is_added} changeAddedStatus={changeAddedStatus} />
+                <UserServers key={el.id} id={el.id} name={el.name} isActive={el.is_added} changeAddedStatus={changeAddedStatus} />
             )
         })
     } else {
         serversList = serversSearch.map((el) => {
             return (
-                <UserServers id={el.id} name={el.name} isActive={el.is_added} changeAddedStatus={changeAddedStatus} />
+                <UserServers key={el.id} id={el.id} name={el.name} isActive={el.is_added} changeAddedStatus={changeAddedStatus} />
             )
         })
     }

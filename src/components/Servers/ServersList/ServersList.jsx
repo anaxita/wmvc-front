@@ -30,30 +30,17 @@ export const ServersList = () => {
         }
     }
 
-
-    // let serversItems = []
-    // if (servers.length > 1) {
-    //     serversItems = servers.map((el) => {
-    //         return (
-    //             <ServerItem key={el.id} id={el.id} name={el.name} hv={el.hv} state={el.state} network={el.network} status={el.status} cpu_load={el.cpu_load}/>
-    //         )
-    //     })
-    // } else {
-    //     serversItems = 'No servers'
-    // }
-
-
     let serversItems = []
     if(!isSearch) {
         serversItems = servers.map((el) => {
             return (
-                <ServerItem key={el.id} id={el.id} name={el.name} hv={el.hv} state={el.state} network={el.network} status={el.status} cpu_load={el.cpu_load}/>
+                <ServerItem key={`${el.id}${el.name}`} id={el.id} name={el.name} hv={el.hv} state={el.state} network={el.network} status={el.status} cpu_load={el.cpu_load}/>
             )
         })
     } else {    
         serversItems = serverSearch.map((el) => {
             return (
-                <ServerItem key={el.id} id={el.id} name={el.name} hv={el.hv} state={el.state} network={el.network} status={el.status} cpu_load={el.cpu_load}/>
+                <ServerItem key={`${el.id}${el.name}`} id={el.id} name={el.name} hv={el.hv} state={el.state} network={el.network} status={el.status} cpu_load={el.cpu_load}/>
             )
         })
     }
