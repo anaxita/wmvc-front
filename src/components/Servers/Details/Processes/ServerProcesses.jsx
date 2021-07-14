@@ -5,7 +5,7 @@ import { ProcessUserItem } from './ProcessUserItem/ProcessUserItem';
 import './style.css'
 
 export const ServerProcesses = (props) => {
-    const [users] = useState(
+    const [users, setUsers] = useState(
         [
             {
                 user: 'u01',
@@ -57,6 +57,22 @@ export const ServerProcesses = (props) => {
             },
         ])
 
+        // const [processes, setprocesses] = useState({})
+        // const [processesErr, setprocessesErr] = useState("")
+        // const [isprocessesLoading, setProcessesLoading] = useState(false)
+    
+        // useEffect(async () => {
+        //     setVmLoading(true)
+    
+        //     const info = await handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}`)
+        //     setVmLoading(false)
+        //     if (info.err) {
+        //         setVmErr(info.err)
+        //     } else {
+        //         setVm(info.data)
+        //     }
+    
+        // }, [])
     const usersList = users.map(el => {
         return <ProcessUserItem u={el} />
     })

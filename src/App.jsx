@@ -16,10 +16,11 @@ dom.watch()
 export const App = () => {
     return (
         <div className="grid">
-                {localStorage.getItem('cacheUserInfo') ? <Sidebar /> : null}
+                {/* {isCacheExists? <Sidebar /> : null} */}
+                <Sidebar />
                 <Switch>
                     <Route exact path='/' component={Auth} />
-                    <Route path='/logout' component={Auth} />
+                    <Route path='/signin' component={Auth} />
                     <Route path='/servers/:hv/:name/info' component={ServerDetails} />
                     <Route path='/servers/:hv/:name/services' component={ServerServices} />
                     <Route path='/servers/:hv/:name/processes' component={ServerProcesses} />

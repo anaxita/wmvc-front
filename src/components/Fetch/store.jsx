@@ -18,7 +18,7 @@ const handleRefreshToken = async (method, uri, body ='') => {
             })
         }
 
-        const f = await fetchWithTimeout(`https://${localStorage.getItem('cacheServerUrl')}/refresh`, opt)
+        const f = await fetch(`https://${localStorage.getItem('cacheServerUrl')}/refresh`, opt)
         
         const resp = await f.json();
         
@@ -59,12 +59,13 @@ export const handleFetch = async (method, uri, body = '') => {
             opt.body = JSON.stringify(body)
         }
 
-        const f = await fetchWithTimeout(`https://${localStorage.getItem('cacheServerUrl')}${uri}`, opt)
+        const f = await fetch(`https://${localStorage.getItem('cacheServerUrl')}${uri}`, opt)
 
         // const f = await fetch(`${localStorage.getItem('cacheServerUrl')}${uri}`, opt)
-        if(f.status === 401) {
+        if (f.status === 401) {
             return await handleRefreshToken(method, uri, body);
         }
+        
         const resp = await f.json()
 
         switch (resp.status) {
@@ -119,7 +120,7 @@ export const handleRepeatFetch = async (method, uri, body = '') => {
 
 
 
-        const f = await fetchWithTimeout(`https://${localStorage.getItem('cacheServerUrl')}${uri}`, opt)
+        const f = await fetch(`https://${localStorage.getItem('cacheServerUrl')}${uri}`, opt)
         const resp = await f.json()
 
         switch (resp.status) {
@@ -147,15 +148,15 @@ export const handleRepeatFetch = async (method, uri, body = '') => {
     return result
 }
 
-// Прерывание запроса на бекенд
-async function fetchWithTimeout(resource, options) {
-    const { timeout = 120000 } = options;
-    const controller = new AbortController();
-    const id = setTimeout(() => controller.abort(), timeout);
-    const response = await fetch(resource, {
-      ...options,
-      signal: controller.signal  
-    });
-    clearTimeout(id);
-    return response;
-}
+// Прерывание запроса на бекенд по истечению времени
+// async function fetchWithTimeout(resource, options) {
+//     const { timeout = 120000 } = options;
+//     const controller = new AbortController();
+//     const id = setTimeout(() => controller.abort(), timeout);
+//     const response = await fetch(resource, {
+//       ...options,
+//       signal: controller.signal  
+//     });
+//     clearTimeout(id);
+//     return response;
+// }

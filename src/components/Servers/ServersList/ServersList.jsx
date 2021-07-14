@@ -54,7 +54,7 @@ export const ServersList = () => {
                     <button disabled="disabled" type="button" className="btn" onClick={() => { }}>New Server</button>
                 </div>
                 <div className="header-h">
-                    SERVERS
+                    SERVERS({servers.length})
                 </div>
                 <div className="header-input">
                     <input type="search" className="w-100" maxLength="255" onChange={onSearch}

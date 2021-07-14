@@ -8,31 +8,37 @@ import { getUserInfo } from '../../Constants/Constants';
 
 
 export const Sidebar = () => {   
-   const { email, role } = getUserInfo()
+   const userInfo = getUserInfo()
    const clearCacheToken = () => {
       localStorage.removeItem('cacheToken')
       localStorage.removeItem('cacheRefreshToken')
       localStorage.removeItem('cacheUserInfo')
    }
    const {isRedirect} = useGlobalRedirect()
-   if(isRedirect) {
-      return <Redirect to="/" />
+
+   if(userInfo === null || userInfo === undefined) {
+      return <Redirect to="/signin" />
    }
+
+   if(isRedirect) {
+      return <Redirect to="/servers" />
+   }
+
    return (
       <nav className="menu">
          <ul>
-            <li className="menu_email">{email}</li>
+            <li className="menu_email">{userInfo.email}</li>
             <li>
             <NavLink to="/servers">SERVERS</NavLink>
             </li>
-            {role ? 
+            {userInfo.role ? 
                <li>
                <NavLink to="/users">USERS</NavLink>
                </li>
             : null
             }
             <li>
-            <NavLink onClick={clearCacheToken} to="/logout">LOGOUT</NavLink>
+            <NavLink onClick={clearCacheToken} to="/signin">LOGOUT</NavLink>
             </li>
          </ul>
       </nav>

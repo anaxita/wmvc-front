@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from "react"
-import { getSearch, TOKEN_ACCESS } from "../../Constants/Constants"
+import { getSearch } from "../../Constants/Constants"
 import { Error } from "../Error/Errors"
 import { handleFetch } from '../Fetch/store';
 import { SpinnerBtn } from "../Spinner/SpinnerBtn"
@@ -34,7 +34,7 @@ export const ModalUserServers = ({ setModalShow, userID }) => {
         setTimeout(() => {
             setError('');
         }, 10000)
-    }, [userID])
+    }, [])
 
     const changeAddedStatus = (userID) => {
         const newServers = servers.filter(el => {

@@ -4,8 +4,10 @@ import { useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './style.css'
 import { handleFetch } from '../../../Fetch/store';
+import { Spinner } from '../../../Spinner/Spinner';
+import { Error } from '../../../Error/Errors';
+import './style.css'
 
 export const ServerServices = (props) => {
     const [services, setServices] = useState([])
@@ -71,9 +73,7 @@ export const ServerServices = (props) => {
                         <div className="sc-i-user">User</div>
                         <div className="sc-i-actions">Actions</div>
                     </div>
-                    <div className="sc-items">
-                        {servicesList}
-                    </div>
+                    {servicesErr ? <Error text={servicesErr}/> : (isServicesLoading ? <Spinner text="Loading services..."/> : <div className="sc-items">{servicesList}</div>)}
                 </div>
             </div>
         </div>

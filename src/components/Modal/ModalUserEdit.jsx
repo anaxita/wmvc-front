@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useState } from "react"
-import { TOKEN_ACCESS } from "../../Constants/Constants"
 import { Error } from "../Error/Errors"
 import { handleFetch } from '../Fetch/store';
 import { SpinnerBtn } from "../Spinner/SpinnerBtn"
@@ -45,7 +44,7 @@ export const ModalUserEdit = ({ setModalShow, user }) => {
         setError('');
         setLoading(true);
 
-        const { data, err } = await handleFetch('PATCH', '/users', state)
+        const { err } = await handleFetch('PATCH', '/users', state)
         setLoading(false)
 
         if (err) {
@@ -75,7 +74,7 @@ export const ModalUserEdit = ({ setModalShow, user }) => {
 
                         <label htmlFor="inputRole" className="col-sm-2 col-form-label">Role</label>
 
-                        <select className="form-select" name="role" id="role" onChange={onChangeRole} value={user.role}>
+                        <select className="form-select" name="role" id="role" onChange={onChangeRole} defaultValue={state.role}>
                             <option value="0">User</option>
                             <option value="1">Administrator</option>
                         </select>
