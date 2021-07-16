@@ -16,8 +16,8 @@ export const ProcessUserItem = ({ u }) => {
     return (
         <div className="processes-list" key={u.user}>
         <div className="prc-usr collapse-processes">
-           <div>
-                <div onClick={showProcesses} name={u.user}>
+           <div onClick={showProcesses}>
+                <div  name={u.user}>
                         {isShowProcesses ?<FontAwesomeIcon icon="chevron-down" /> : 
                             <FontAwesomeIcon icon="chevron-right" />
                         }
