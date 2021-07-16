@@ -352,23 +352,20 @@ select{
   width: 100%;
   margin-bottom: 8px;
 }
-
 .modal-body input[type="checkbox"] {
   width: auto;
 }
-
 .modal-body label{
   display: block;
   width: 100%;
   padding: 8px;
 }
-
 .modal-footer {
   width: 100%;
   margin-bottom: 8px;
   display: flex;
+  align-items: center;
 }
-
 .modal-footer button {
   margin-right: 8px;
   display: flex;
@@ -377,7 +374,6 @@ select{
 .modal-footer button .spinner {
   margin-right: 8px;
 }
-
 .err {
   margin: 0 8px;
 }
@@ -393,7 +389,6 @@ select{
     background-color: #00000094;
     border-radius: 5px;
 }
-
 @media (max-width: 768px) {
   html body {
   font-size: 14px;
@@ -410,7 +405,6 @@ select{
   .menu ul li{
     display: inline-block;
   }
-
   .main {
   grid-template-rows: 1fr 8fr !important;
   }
@@ -423,7 +417,6 @@ select{
   .header-input {
     margin-top: 8px;
   }
-
   .actions-btn button {
     max-width: 24px;
     max-height:  24px;
@@ -433,4 +426,17 @@ select{
 .btn{
   padding: 4px 8px;
 }
+}
+
+@media (max-width: 576px) {
+  .modal-footer {
+    flex-wrap: wrap;
+  }
+  .modal-footer button {
+    margin-bottom: 15px;
+  }
+  .err {
+    width: 100%;
+    text-align: center;
+  }
 }

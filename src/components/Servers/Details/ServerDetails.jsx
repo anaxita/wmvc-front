@@ -19,7 +19,6 @@ export const ServerDetails = (props) => {
 
     useEffect(async () => {
         setVmLoading(true)
-
         const info = await handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}`)
         setVmLoading(false)
         if (info.err) {
@@ -27,7 +26,6 @@ export const ServerDetails = (props) => {
         } else {
             setVm(info.data)
         }
-
     }, [])
 
     useEffect(async () => {
