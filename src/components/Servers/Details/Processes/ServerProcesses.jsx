@@ -1,79 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react/cjs/react.development';
+import { useState, useEffect } from 'react';
 import { ProcessUserItem } from './ProcessUserItem/ProcessUserItem';
+import { handleFetch } from '../../../Fetch/store';
 import './style.css'
 
 export const ServerProcesses = (props) => {
-    const [users, setUsers] = useState(
-        [
-            {
-                user: 'u01',
-                state: 'Откл',
-                cpu: '25%',
-                ram: 2560,
-                isShowProcesses: false,
-                processes: [
-                    {
-                        name: 'chrome.exe',
-                        cpu: '7%',
-                        ram: 56,
-                    },
-                    {
-                        name: 'anydesk.exe',
-                        cpu: '2%',
-                        ram: 165,
-                    },
-                    {
-                        name: '1cv8c.exe',
-                        cpu: '16%',
-                        ram: 2295,
-                    },
-                ],
-            },
-            {
-                user: 'u02',
-                state: '',
-                cpu: '25%',
-                ram: 2560,
-                isShowProcesses: false,
-                processes: [
-                    {
-                        name: 'chrome.exe',
-                        cpu: '7%',
-                        ram: 56,
-                    },
-                    {
-                        name: 'anydesk.exe',
-                        cpu: '2%',
-                        ram: 165,
-                    },
-                    {
-                        name: '1cv8c.exe',
-                        cpu: '16%',
-                        ram: 2295,
-                    },
-                ],
-            },
-        ])
+    
+        const [processes, setprocesses] = useState([])
+        const [processesErr, setprocessesErr] = useState("")
+        const [isprocessesLoading, setProcessesLoading] = useState(false)
 
-        // const [processes, setprocesses] = useState({})
-        // const [processesErr, setprocessesErr] = useState("")
-        // const [isprocessesLoading, setProcessesLoading] = useState(false)
-    
-        // useEffect(async () => {
-        //     setVmLoading(true)
-    
-        //     const info = await handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}`)
-        //     setVmLoading(false)
-        //     if (info.err) {
-        //         setVmErr(info.err)
-        //     } else {
-        //         setVm(info.data)
-        //     }
-    
-        // }, [])
-    const usersList = users.map(el => {
+        useEffect(() => {
+            async function getProcesses() {
+                setProcessesLoading(true)
+                const info = await handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}/manager`)
+                setProcessesLoading(false)
+                if (info.err) {
+                     setprocessesErr(info.err)
+                } else {
+                    setprocesses(info.data)
+                }
+            }
+            getProcesses();
+        }, [])
+    const usersList = Object.entries(processes).map(el => {
+        
         return <ProcessUserItem u={el} />
     })
 
@@ -109,7 +61,7 @@ export const ServerProcesses = (props) => {
                         <div className="div"></div>
                         <div className="div"></div>
                     </div>
-                    {usersList}
+                    {usersList ? usersList : null}
                 </div>
             </div>
         </div>
