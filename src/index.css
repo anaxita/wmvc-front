@@ -53,9 +53,10 @@ button:hover{
 /* HEADER */
 .header {
   display: grid;
-  grid-template-areas: 'header-btn header-h  header-input';
-  grid-template-columns: 4fr 2fr 4fr;
-  padding: 8px;
+  gap: 8px;
+  grid-template-areas: 'header-h header-input header-btn';
+  grid-template-columns: 1fr 2fr 6fr;
+  padding: 16px 24px;
   background-color: var(--bg-dark);
   border-bottom: 1px solid #6c757d;
   align-items: center;
@@ -63,30 +64,30 @@ button:hover{
 }
 
 .header-h {
+  padding: 0px;
   grid-area: header-h;
-  text-align: center;
+  justify-self: start;
 }
 
 .header-btn {
   grid-area: header-btn;
   padding: 0px;
-}
 
-.header-btn button {
-  margin-right: 8px;
-}
+  justify-self: end;
 
+}
 
 .header-input {
   grid-area: header-input;
   padding: 0px;
+
 }
 
 /* CONTENT */
 .content {
   /* background-color: rgba(186, 58, 171, 0.686); */
   background-color: var(--bg-dark);
-  padding: 8px;
+  padding: 8px 24px;
   height: 100%;
   overflow-y: auto;
 }
@@ -160,9 +161,9 @@ button:hover{
 }
 
 .btn[disabled] {
-  color: #d2d5db !important;
-  background: #6c7589 !important;
-  border: 1px solid #ffffff;
+  color: #7d7f85 !important;
+  /* background: #6c7589 !important; */
+  border: 1px solid #7d7f85;
   cursor: not-allowed;
 }
 
