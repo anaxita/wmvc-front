@@ -36,6 +36,10 @@
     padding: 8px 16px;
     color:  #6c757d;
 }
+.processes-header div {
+    min-width: 20%;
+    width: 20%;
+}
 .processes-list{
     display: grid;
     grid-template-columns: 4fr 4fr 2fr 2fr 1fr;
@@ -52,11 +56,10 @@
 
 .process-item{
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr 1fr 1fr ;
+    grid-template-columns: 4fr 4fr 2fr 2fr 1fr;
     align-items: center;
     justify-content: center;
     margin-bottom: 8px;
-
 }
 
 .process-item:hover {
