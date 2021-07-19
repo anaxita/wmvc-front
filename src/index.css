@@ -172,6 +172,7 @@ button:hover{
 .actions-btn {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 .actions-btn button{
   color: var(--bg-gold);
@@ -427,6 +428,26 @@ select{
 .btn{
   padding: 4px 8px;
 }
+}
+
+@media (max-width: 1072px) {
+  .actions-btn {
+    max-width: 85px;
+    justify-content: space-around;
+  }
+  .actions-btn button {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .actions-btn {
+    max-width: 100%;
+    justify-content: unset;
+  }
+  .actions-btn button {
+    margin-bottom: 0;
+  }
 }
 
 @media (max-width: 576px) {
