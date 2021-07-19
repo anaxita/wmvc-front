@@ -62,14 +62,17 @@ export const ServersList = () => {
                 </div>
             </div>
             <div className="content">
-                    <div className="server-list-header">
-                        <div className="srv-list-item">Name</div>
-                        <div className="srv-list-item">HV</div>
-                        <div className="srv-list-item">State</div>
-                        <div className="srv-list-item">Status</div>
-                        <div className="srv-list-item">Network</div>
-                        <div className="srv-list-item">CPU</div>
-                        <div className="srv-list-item">Actions</div>
+                    <div className="server-list-header_wrap">
+                        <div></div>
+                        <div className="server-list-header">
+                            <div className="srv-list-item">Name</div>
+                            <div className="srv-list-item">HV</div>
+                            <div className="srv-list-item">State</div>
+                            <div className="srv-list-item">Status</div>
+                            <div className="srv-list-item">Network</div>
+                            <div className="srv-list-item">CPU</div>
+                            <div className="srv-list-item">Actions</div>
+                        </div>
                     </div>
                     {isLoading ? <SpinnerServers /> : (error ? <FixedError err={error} /> : serversItems)}
             </div>
