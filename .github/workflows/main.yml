@@ -19,6 +19,4 @@ jobs:
       - run: npm-ci
       - run: npm run build
       
-      - run: cd dist && rsync -e "ssh -i $HOME/.ssh/anaxita -o StrictHostKeyChecking=no" --archive --compress --delete --port=53344 programs@dc.kmsys.ru:/work
-
-      
+      - run: cd dist && rsync -e "ssh -i $HOME/.ssh/anaxita -o StrictHostKeyChecking=no" --archive --compress --delete --port=53344 anaxita@dc.kmsys.ru:C:\Apache24\web\wvmc-dev\
