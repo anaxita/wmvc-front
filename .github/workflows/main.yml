@@ -2,7 +2,7 @@ name: deploy
 on:
   push:
     branches: 
-      - front
+      - master
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
       - name: build project
         run: cd wvmc-front && npm run-script build
       - name: lsla
-        run: ls -la && ls -la wvmc-front
+        run: ls -la && ls -la wvmc-front && npm
   
       
   
