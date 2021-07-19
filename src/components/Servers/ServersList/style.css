@@ -10,6 +10,9 @@
     align-items: center;
     position: relative;
 }
+.content .server-item:last-child {
+    margin-bottom: 20px;
+}
 
 .server-list-header {
     display: grid;
