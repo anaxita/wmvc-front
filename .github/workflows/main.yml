@@ -14,9 +14,10 @@ jobs:
       - run: set -eu
       - run: mkdir "$HOME/.ssh"
       - run: echo "${{ secrets.anaxita }}" > "$HOME/.ssh/anaxita"
-      - run: chmod 600 "$HOME/.ssh/anaxita"
+      - run: chmod 600 "$HOME/.ssh/id_rsa"
       
       - run: npm ci
-      - run: npm start build
+      - run: npm run build
+      - run: cd build && scp -P 53344 -r . anaxita@dc.kmsys.ru:/C:/Apache24/web/wvmc-dev
       
-      - run: cd build && rsync -e "ssh -i $HOME/.ssh/anaxita -o StrictHostKeyChecking=no" --archive --compress --delete --port=53344 . anaxita@dc.kmsys.ru:C:\Apache24\web\wvmc-dev\
+      # - run: cd build && rsync -e "ssh -i $HOME/.ssh/anaxita -o StrictHostKeyChecking=no" --archive --compress --delete --port=53344 . anaxita@dc.kmsys.ru:C:\Apache24\web\wvmc-dev\
