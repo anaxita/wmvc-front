@@ -3,6 +3,9 @@
     grid-template-columns: 1fr 2fr;
     /* padding: 0 !important; */
 }
+.content.params {
+    padding-top: 8px;
+}
 
 .params-item {
     padding: 8px;

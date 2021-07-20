@@ -62,7 +62,7 @@ export const ServersList = () => {
                 </div>
             </div>
             <div className="content">
-                    <div className="server-list-header_wrap">
+                    <div className="title_wrap">
                         <div></div>
                         <div className="server-list-header">
                             <div className="srv-list-item">Name</div>

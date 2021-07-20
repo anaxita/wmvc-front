@@ -53,13 +53,16 @@ export const ServerProcesses = (props) => {
             </div>
             <div className="content">
                 <div className="processes">
-                    <div className="processes-header">
-                        <div className="">Users</div>
-                        <div className="">State</div>
-                        <div className="">78%</div>
-                        <div className="">75452(98%)</div>
-                        <div className="div"></div>
-                        <div className="div"></div>
+                    <div className="title_wrap">
+                        <div></div>
+                        <div className="processes-header">
+                            <div className="">Users</div>
+                            <div className="">State</div>
+                            <div className="">78%</div>
+                            <div className="">75452(98%)</div>
+                            <div className="div"></div>
+                            <div className="div"></div>
+                        </div>
                     </div>
                     {usersList ? usersList : null}
                 </div>

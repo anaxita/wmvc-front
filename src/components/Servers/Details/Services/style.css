@@ -6,7 +6,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr 1fr 2fr 1fr;
     border-radius: 5px;
-    padding: 8px 16px 16px 16px;
+    padding: 16px;
     color:  #6c757d;
 }
 .sc-i {

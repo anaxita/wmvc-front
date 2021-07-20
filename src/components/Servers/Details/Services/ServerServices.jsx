@@ -66,12 +66,15 @@ export const ServerServices = (props) => {
             </div>
             <div className="content">
                 <div className="sc-i-list">
-                    <div className="sc-items-header">
-                        <div className="sc-i-name">Name</div>
-                        <div className="sc-i-display-name">Display name</div>
-                        <div className="sc-i-state">State</div>
-                        <div className="sc-i-user">User</div>
-                        <div className="sc-i-actions">Actions</div>
+                    <div className="title_wrap">
+                        <div></div>
+                        <div className="sc-items-header">
+                            <div className="sc-i-name">Name</div>
+                            <div className="sc-i-display-name">Display name</div>
+                            <div className="sc-i-state">State</div>
+                            <div className="sc-i-user">User</div>
+                            <div className="sc-i-actions">Actions</div>
+                        </div>
                     </div>
                     {servicesErr ? <Error text={servicesErr}/> : (isServicesLoading ? <Spinner text="Loading services..."/> : <div className="sc-items">{servicesList}</div>)}
                 </div>
