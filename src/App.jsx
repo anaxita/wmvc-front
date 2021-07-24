@@ -7,17 +7,14 @@ import { Auth } from './components/Auth/Auth';
 import { ServerServices } from './components/Servers/Details/Services/ServerServices';
 import { ServerProcesses } from './components/Servers/Details/Processes/ServerProcesses';
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
-import { faUserEdit, faServer, faTimes, faPlayCircle, faSyncAlt, faSignOutAlt, faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { Sidebar } from './components/Sidebar/Sidebar'
+import { faUserEdit, faServer, faTimes, faPlayCircle, faSyncAlt, faSignOutAlt, faChevronDown, faChevronRight, faPowerOff } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUserEdit, faServer, faTimes, faPlayCircle, faSyncAlt, faSignOutAlt, faChevronDown, faChevronRight)
+library.add(faUserEdit, faServer, faTimes, faPlayCircle, faSyncAlt, faSignOutAlt, faChevronDown, faChevronRight, faPowerOff)
 // chevron-down
 dom.watch()
 export const App = () => {
     return (
         <div className="grid">
-                {/* {isCacheExists? <Sidebar /> : null} */}
-                <Sidebar />
                 <Switch>
                     <Route exact path='/' component={Auth} />
                     <Route path='/signin' component={Auth} />

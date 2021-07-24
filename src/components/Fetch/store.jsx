@@ -139,11 +139,7 @@ export const handleRepeatFetch = async (method, uri, body = '') => {
         }
     } catch (e) {
         result.data = []
-        if(e.message === 'The user aborted a request.') {
-            result.err = `Ошибка : Сервер не отвечает`
-        } else {
-            result.err = `Ошибка : ${e.message}`
-        }
+        result.err = `Ошибка : ${e.message}`
     }
     return result
 }

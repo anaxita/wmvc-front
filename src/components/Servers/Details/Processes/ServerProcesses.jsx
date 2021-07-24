@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { ProcessUserItem } from './ProcessUserItem/ProcessUserItem';
 import { handleFetch } from '../../../Fetch/store';
 import './style.css'
+import { Sidebar } from '../../../Sidebar/Sidebar';
 
 export const ServerProcesses = (props) => {
     
@@ -30,43 +31,46 @@ export const ServerProcesses = (props) => {
     })
 
     return (
-        <div className="main">
-            <div className="header header-servers-details">
-                <div className="header-btn">
-                    <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/info`} className="btn">
-                        Инфо
-                    </Link>
-                    <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/services`} className="btn">
-                        Службы
-                    </Link>
-                    <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/processes`} className="btn bg-gold text-dark">
-                        Процессы
-                    </Link>
-                </div>
-                <div className="header-h">
-                    {props.match.params.name}
-                </div>
-                <div className="header-input">
-                    <input type="search" className="w-100"
-                        placeholder="Search server ..." />
-                </div>
-            </div>
-            <div className="content">
-                <div className="processes">
-                    <div className="title_wrap">
-                        <div></div>
-                        <div className="processes-header">
-                            <div className="">Users</div>
-                            <div className="">State</div>
-                            <div className="">78%</div>
-                            <div className="">75452(98%)</div>
-                            <div className="div"></div>
-                            <div className="div"></div>
-                        </div>
+        <>
+            <Sidebar />
+            <div className="main">
+                <div className="header header-servers-details">
+                    <div className="header-btn">
+                        <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/info`} className="btn">
+                            Инфо
+                        </Link>
+                        <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/services`} className="btn">
+                            Службы
+                        </Link>
+                        <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/processes`} className="btn bg-gold text-dark">
+                            Процессы
+                        </Link>
                     </div>
-                    {usersList ? usersList : null}
+                    <div className="header-h">
+                        {props.match.params.name}
+                    </div>
+                    <div className="header-input">
+                        <input type="search" className="w-100"
+                            placeholder="Search server ..." />
+                    </div>
+                </div>
+                <div className="content">
+                    <div className="processes">
+                        <div className="title_wrap">
+                            <div></div>
+                            <div className="processes-header">
+                                <div className="">Users</div>
+                                <div className="">State</div>
+                                <div className="">78%</div>
+                                <div className="">75452(98%)</div>
+                                <div className="div"></div>
+                                <div className="div"></div>
+                            </div>
+                        </div>
+                        {usersList ? usersList : null}
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

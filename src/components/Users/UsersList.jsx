@@ -6,6 +6,7 @@ import { Error } from '../Error/Errors';
 import { useServersStore, handleModalShow, handleDeleteUser, handleGetUsers, handleSortUsers } from './store';
 import './style.css'
 import { getSearch } from '../../Constants/Constants';
+import { Sidebar } from '../Sidebar/Sidebar';
 
 export const UsersList = () => {
 
@@ -49,36 +50,39 @@ export const UsersList = () => {
 
     // html
     return (
-        <div className="main">
-            <div className="header">
-                <div className="header-btn">
-                    <button type="button" className="btn" onClick={() => handleModalShow(true)}>New User</button>
-                </div>
-                <div className="header-h">
-                    USERS
-                </div>
-                <div className="header-input">
-                    <input type="search" className="w-100" maxLength="255" onChange={onSearch}
-                        placeholder="Search user ..." />
-                </div>
-            </div>
-            <div className="content">
-                <div className="user-list ">
-                    {isModalShow ? <ModalAddUser /> : null}
-                    <div className="title_wrap">
-                        <div></div>
-                        <div className="user-list-header">
-                            <div className="usr-list-item"><button name="name" onClick={sortUsers}>Name</button></div>
-                            <div className="usr-list-item"><button name="email" onClick={sortUsers}>Login</button></div>
-                            <div className="usr-list-item"><button name="company" onClick={sortUsers}>Company</button></div>
-                            <div className="usr-list-item"><button name="role" onClick={sortUsers}>Role</button></div>
-                            <div className="usr-list-item">Created</div>
-                            <div className="usr-list-item" onClick={handleSortUsers}>Actions</div>
-                        </div>
+        <>
+            <Sidebar />
+            <div className="main">
+                <div className="header">
+                    <div className="header-btn">
+                        <button type="button" className="btn" onClick={() => handleModalShow(true)}>New User</button>
                     </div>
-                    {isLoading ? <Spinner text={'Loading users...'} /> : (error ? <Error err={error} /> : usersItems)}
+                    <div className="header-h">
+                        USERS
+                    </div>
+                    <div className="header-input">
+                        <input type="search" className="w-100" maxLength="255" onChange={onSearch}
+                            placeholder="Search user ..." />
+                    </div>
+                </div>
+                <div className="content">
+                    <div className="user-list ">
+                        {isModalShow ? <ModalAddUser /> : null}
+                        <div className="title_wrap">
+                            <div></div>
+                            <div className="user-list-header">
+                                <div className="usr-list-item"><button name="name" onClick={sortUsers}>Name</button></div>
+                                <div className="usr-list-item"><button name="email" onClick={sortUsers}>Login</button></div>
+                                <div className="usr-list-item"><button name="company" onClick={sortUsers}>Company</button></div>
+                                <div className="usr-list-item"><button name="role" onClick={sortUsers}>Role</button></div>
+                                <div className="usr-list-item">Created</div>
+                                <div className="usr-list-item" onClick={handleSortUsers}>Actions</div>
+                            </div>
+                        </div>
+                        {isLoading ? <Spinner text={'Loading users...'} /> : (error ? <Error err={error} /> : usersItems)}
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

@@ -91,8 +91,13 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
         audio.play();
         handleSetIsLoading(false);
     }
-    
-    const { role } = getUserInfo();
+    const role = () => {
+        if(getUserInfo()) {
+            return getUserInfo().role;    
+        } else {
+            return 0;
+        }
+    }
 
     return (
         <div className="server-item" id={"server-" + id}>

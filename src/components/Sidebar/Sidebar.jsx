@@ -13,6 +13,8 @@ export const Sidebar = () => {
       localStorage.removeItem('cacheToken')
       localStorage.removeItem('cacheRefreshToken')
       localStorage.removeItem('cacheUserInfo')
+      window.location.reload()
+      return <Redirect to="/signin" />
    }
    const {isRedirect} = useGlobalRedirect()
 
@@ -21,7 +23,7 @@ export const Sidebar = () => {
    }
 
    if(isRedirect) {
-      return <Redirect to="/servers" />
+      <Redirect to="/servers" />
    }
 
    return (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getSearch } from '../../../Constants/Constants';
 import { FixedError } from '../../Error/FixedError';
+import { Sidebar } from '../../Sidebar/Sidebar';
 import { SpinnerServers } from '../../Spinner/SpinnerServers';
 import { handleGetServers, useServersStore } from '../store';
 
@@ -48,34 +49,37 @@ export const ServersList = () => {
 
     // html
     return (
-        <div className="main">
-            <div className="header">
-                <div className="header-btn">
-                    <button disabled="disabled" type="button" className="btn" onClick={() => { }}>New Server</button>
-                </div>
-                <div className="header-h">
-                    SERVERS({servers.length})
-                </div>
-                <div className="header-input">
-                    <input type="search" className="w-100" maxLength="255" onChange={onSearch}
-                        placeholder="Search server ..." />
-                </div>
-            </div>
-            <div className="content">
-                    <div className="title_wrap">
-                        <div></div>
-                        <div className="server-list-header">
-                            <div className="srv-list-item">Name</div>
-                            <div className="srv-list-item">HV</div>
-                            <div className="srv-list-item">State</div>
-                            <div className="srv-list-item">Status</div>
-                            <div className="srv-list-item">Network</div>
-                            <div className="srv-list-item">CPU</div>
-                            <div className="srv-list-item">Actions</div>
-                        </div>
+        <>
+            <Sidebar />
+            <div className="main">
+                <div className="header">
+                    <div className="header-btn">
+                        <button disabled="disabled" type="button" className="btn" onClick={() => { }}>New Server</button>
                     </div>
-                    {isLoading ? <SpinnerServers /> : (error ? <FixedError err={error} /> : serversItems)}
+                    <div className="header-h">
+                        SERVERS({servers.length})
+                    </div>
+                    <div className="header-input">
+                        <input type="search" className="w-100" maxLength="255" onChange={onSearch}
+                            placeholder="Search server ..." />
+                    </div>
+                </div>
+                <div className="content">
+                        <div className="title_wrap">
+                            <div></div>
+                            <div className="server-list-header">
+                                <div className="srv-list-item">Name</div>
+                                <div className="srv-list-item">HV</div>
+                                <div className="srv-list-item">State</div>
+                                <div className="srv-list-item">Status</div>
+                                <div className="srv-list-item">Network</div>
+                                <div className="srv-list-item">CPU</div>
+                                <div className="srv-list-item">Actions</div>
+                            </div>
+                        </div>
+                        {isLoading ? <SpinnerServers /> : (error ? <FixedError err={error} /> : serversItems)}
+                </div>
             </div>
-        </div>
+        </>
     )
 }
