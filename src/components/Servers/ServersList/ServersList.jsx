@@ -17,8 +17,7 @@ export const ServersList = () => {
         if (servers.length < 1) {
             handleGetServers()
         }
-        // handleGetServers()
-    }, [])
+    }, [servers.length])
 
 
 
