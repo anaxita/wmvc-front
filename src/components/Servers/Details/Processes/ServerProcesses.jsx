@@ -13,18 +13,17 @@ export const ServerProcesses = (props) => {
         const [isprocessesLoading, setProcessesLoading] = useState(false)
 
         useEffect(() => {
-            async function getProcesses() {
                 setProcessesLoading(true)
-                const info = await handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}/manager`)
-                setProcessesLoading(false)
-                if (info.err) {
-                     setprocessesErr(info.err)
-                } else {
-                    setprocesses(info.data)
-                }
-            }
-            getProcesses();
-        }, [])
+                handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}/manager`).then(({data, err}) => {
+
+                    setProcessesLoading(false)
+                    if (err) {
+                        setprocessesErr(err)
+                    } else {
+                        setprocesses(data)
+                    }
+                })
+        }, [props.match.params.hv, props.match.params.name])
     const usersList = Object.entries(processes).map(el => {
         
         return <ProcessUserItem u={el} />

@@ -1,11 +1,12 @@
 import { handleGlobalRedirect } from '../../store';
 
 
-const handleRefreshToken = async (method, uri, body ='') => {
+const handleRefreshToken = async (method, uri, body = '') => {
     let result = {
         data: [],
         err: 'Рефреш токен не действителен',
     }
+
     try {
         let opt = {
             method: 'POST',
@@ -19,13 +20,13 @@ const handleRefreshToken = async (method, uri, body ='') => {
         }
 
         const f = await fetch(`https://${localStorage.getItem('cacheServerUrl')}/refresh`, opt)
-        
+
         const resp = await f.json();
-        
-        if(resp.status === 'ok') {
+
+        if (resp.status === 'ok') {
             localStorage.setItem('cacheToken', resp.message.access_token)
             localStorage.setItem('cacheRefreshToken', resp.message.refresh_token)
-            return await handleRepeatFetch(method, uri, body);
+            return await handleFetch(method, uri, body);
         }
         localStorage.removeItem('cacheToken');
         localStorage.removeItem('cacheRefreshToken');
@@ -40,13 +41,13 @@ const handleRefreshToken = async (method, uri, body ='') => {
 
 }
 
-export const handleFetch = async (method, uri, body = '') => {
-    let result = {
-        data: [],
-        err: '',
-    }
+export const handleFetch = (method, uri, body = '') => {
+    const rezultPromise = new Promise(async (resove) => {
+        let result = {
+            data: [],
+            err: '',
+        }
 
-    try {
         let opt = {
             method: method,
             headers: {
@@ -59,100 +60,37 @@ export const handleFetch = async (method, uri, body = '') => {
             opt.body = JSON.stringify(body)
         }
 
-        const f = await fetch(`https://${localStorage.getItem('cacheServerUrl')}${uri}`, opt)
-
-        // const f = await fetch(`${localStorage.getItem('cacheServerUrl')}${uri}`, opt)
-        if (f.status === 401) {
-            return await handleRefreshToken(method, uri, body);
-        }
-        
-        const resp = await f.json()
-
-        switch (resp.status) {
-            case 'ok':
-                result.data = resp.message
-                result.err = ''
-                break
-            case 'err':
+        await fetch(`https://${localStorage.getItem('cacheServerUrl')}${uri}`, opt)
+            .then((r) => r.status === 401 ? handleRefreshToken(method, uri, body) : r.json())
+            .then((r) => {
+                switch (r.status) {
+                    case 'ok':
+                        result.data = r.message
+                        result.err = ''
+                        break
+                    case 'err':
+                        result.data = []
+                        result.err = r.message.err
+                        break
+                    default:
+                        result.data = []
+                        result.err = `Неизвестный ответ сервера ${r.message}`
+                        break
+                }
+            })
+            .catch((e) => {
                 result.data = []
-                result.err = resp.message.err
-                break
-            default:
-                result.data = []
-                result.err = `Неизвестный ответ сервера ${resp.message}`
-                break
-        }
-    } catch (e) {
-        
-        
-        result.data = []
-        if(e.message === 'The user aborted a request.') {
-            result.err = `Ошибка : Сервер не отвечает`
-        } else if(e.message.includes('Unexpected token')) {
-            result.err = `Ошибка : Сервер не найден`
-        } else {
-            result.err = `Ошибка : ${e.message}`
-        }
-    }
+                if (e.message === 'The user aborted a request.') {
+                    result.err = `Ошибка : Сервер не отвечает`
+                } else if (e.message.includes('Unexpected token')) {
+                    result.err = `Ошибка : Сервер не найден`
+                } else {
+                    result.err = `Ошибка : ${e.message}`
+                }
+            })
 
-    return result
+        resove(result)
+    })
+
+    return rezultPromise
 }
-
-export const handleRepeatFetch = async (method, uri, body = '') => {
-    
-    let result = {
-        data: [],
-        err: '',
-    }
-
-    try {
-        let opt = {
-            method: method,
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('cacheToken')}`,
-                'Contnet-Type': 'application/json'
-            },
-        }
-
-        if (body !== '') {
-            opt.body = JSON.stringify(body)
-        }
-
-
-
-        const f = await fetch(`https://${localStorage.getItem('cacheServerUrl')}${uri}`, opt)
-        const resp = await f.json()
-
-        switch (resp.status) {
-            case 'ok':
-                result.data = resp.message
-                result.err = ''
-                break
-            case 'err':
-                result.data = []
-                result.err = resp.message.err
-                break
-            default:
-                result.data = []
-                result.err = `Неизвестный ответ сервера ${resp.message}`
-                break
-        }
-    } catch (e) {
-        result.data = []
-        result.err = `Ошибка : ${e.message}`
-    }
-    return result
-}
-
-// Прерывание запроса на бекенд по истечению времени
-// async function fetchWithTimeout(resource, options) {
-//     const { timeout = 120000 } = options;
-//     const controller = new AbortController();
-//     const id = setTimeout(() => controller.abort(), timeout);
-//     const response = await fetch(resource, {
-//       ...options,
-//       signal: controller.signal  
-//     });
-//     clearTimeout(id);
-//     return response;
-// }

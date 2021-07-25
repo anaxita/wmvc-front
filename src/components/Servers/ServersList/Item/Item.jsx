@@ -18,7 +18,7 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
     const [error, handleSetError] = useState('')
     const [isLoading, handleSetIsLoading] = useState(false)
 
-    const handleControl = async(e) => {
+    const handleControl = (e) => {
         handleSetIsLoading(true);
         let body = {
             server_id: id,
@@ -48,48 +48,51 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             default:
                 body.command = ''
         }
-        const {err} = await handleFetch('post', '/servers/control' , body);
-        if(!err) {
-            switch (e.target.name) {
-                case ('power'):
-                    if (powerState === 'Off') {
-                        handleSetState('Running')
-                        sound = sound_server_started;
-                    } else {
-                        handleSetState('Off')
-                        sound = sound_server_stopped;
-                    }
-                    break;
 
-                case ('network'):
-                    if (networkState === 'Off') {
-                        handleSetNetwork('Running')
-                        sound = sound_network_started
-                    } else {
-                        handleSetNetwork('Off')
-                        sound = sound_network_stopped
-                    }
-                    break;
+        handleFetch('post', '/servers/control' , body).then(({ err}) => {
 
-                case ('stop_power_force'):
-                        handleSetState('Off')
-                        sound = sound_server_stopped
-                    break;
-
-                default:
-                    handleSetState(powerState);
-                    handleSetNetwork(networkState);
-            }
-        } else {
-            handleSetError(err);
-            setTimeout(() => {
-                handleSetError('');
-            }, 3000)
-            sound = sound_server_timeout
-        }
-        var audio = new Audio(sound);
-        audio.play();
-        handleSetIsLoading(false);
+            if(!err) {
+                switch (e.target.name) {
+                    case ('power'):
+                        if (powerState === 'Off') {
+                            handleSetState('Running')
+                            sound = sound_server_started;
+                        } else {
+                            handleSetState('Off')
+                            sound = sound_server_stopped;
+                        }
+                        break;
+                        
+                        case ('network'):
+                            if (networkState === 'Off') {
+                                handleSetNetwork('Running')
+                                sound = sound_network_started
+                            } else {
+                                handleSetNetwork('Off')
+                                sound = sound_network_stopped
+                            }
+                            break;
+                            
+                            case ('stop_power_force'):
+                                handleSetState('Off')
+                                sound = sound_server_stopped
+                                break;
+                                
+                                default:
+                                    handleSetState(powerState);
+                                    handleSetNetwork(networkState);
+                                }
+                            } else {
+                                handleSetError(err);
+                                setTimeout(() => {
+                                    handleSetError('');
+                                }, 3000)
+                                sound = sound_server_timeout
+                            }
+                            var audio = new Audio(sound);
+                            audio.play();
+                            handleSetIsLoading(false);
+                        })
     }
     const role = () => {
         if(getUserInfo()) {

@@ -15,16 +15,18 @@ export const ServerServices = (props) => {
     const [servicesErr, setServicesErr] = useState("")
     const [isServicesLoading, setServicesLoading] = useState(false)
 
-    useEffect(async () => {
+    useEffect( () => {
         setServicesLoading(true)
-        const info = await handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}/services`)
-        setServicesLoading(false)
-        if (info.err) {
-            setServicesErr(info.err)
-        } else {
-            setServices(info.data)
-        }
-    }, [])
+    handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}/services`).then(({data, err}) => {
+
+            setServicesLoading(false)
+            if (err) {
+                setServicesErr(err)
+            } else {
+                setServices(data)
+            }
+        })
+    }, [props.match.params.hv, props.match.params.name])
 
     
 
