@@ -61,7 +61,8 @@ export const handleFetch = (method, uri, body = '') => {
         }
 
         await fetch(`https://${localStorage.getItem('cacheServerUrl')}${uri}`, opt)
-            .then((r) => r.status === 401 ? handleRefreshToken(method, uri, body) : r.json())
+            // .then((response) => response.status === 401 ? handleRefreshToken(method, uri, body) : response.json())
+            .then((response) => response.json())
             .then((r) => {
                 switch (r.status) {
                     case 'ok':

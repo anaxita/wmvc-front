@@ -22,19 +22,19 @@ export const ModalUserServers = ({ setModalShow, userID }) => {
 
     useEffect(() => {
         setLoading(true);
-        handleFetch('GET', `/users/${userID}/servers`).then(({ data, err }) => {
+        handleFetch('GET', `/users/${userID}/servers`)
+            .then(({ data, err }) => {
+                setLoading(false)
+                if (err) {
+                    setError(err);
+                } else {
+                    setServers(data.servers);
+                }
 
-            setLoading(false)
-            if (err) {
-                setError(err);
-            } else {
-                setServers(data.servers);
-            }
-
-            setTimeout(() => {
-                setError('');
-            }, 10000)
-        })
+                setTimeout(() => {
+                    setError('');
+                }, 10000)
+            })
     }, [userID])
 
     const changeAddedStatus = (userID) => {

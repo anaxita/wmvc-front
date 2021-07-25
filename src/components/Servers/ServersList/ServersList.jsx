@@ -11,12 +11,15 @@ export const ServersList = () => {
 
     const [isSearch, setSearch] = useState(false);
     const [serverSearch, setServerSearch] = useState([]);
+    const { servers, isLoading, error } = useServersStore()
 
     useEffect(() => {
+        // if (servers.length < 1) {
+        //     handleGetServers()
+        // }
         handleGetServers()
     }, [])
 
-    const { servers, isLoading, error } = useServersStore()
 
 
 
