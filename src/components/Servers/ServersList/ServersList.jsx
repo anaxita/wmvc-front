@@ -14,10 +14,10 @@ export const ServersList = () => {
     const { servers, isLoading, error } = useServersStore()
 
     useEffect(() => {
-        // if (servers.length < 1) {
-        //     handleGetServers()
-        // }
-        handleGetServers()
+        if (servers.length < 1) {
+            handleGetServers()
+        }
+        // handleGetServers()
     }, [])
 
 
