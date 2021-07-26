@@ -48,9 +48,15 @@
 
 .btn-back {
     display: inline-block;
-    margin: 16px 0;
+    text-align: center;
 }
-
+.main .header-servers-details {
+    grid-template-areas: 'header-back header-h header-input header-btn';
+    grid-template-columns: 1fr 1fr 2fr 6fr;
+}
+.header-servers-details .header-h {
+    margin: 0 16px;
+}
 
 @media (max-width: 768px) {
     .disks-item input {

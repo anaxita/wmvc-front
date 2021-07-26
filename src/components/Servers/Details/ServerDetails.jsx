@@ -66,6 +66,12 @@ export const ServerDetails = (props) => {
             <Sidebar />
             <div className="main">
                 <div className="header header-servers-details">
+                    <Link to={`/servers/`} className="btn btn-back">
+                        Назад
+                    </Link>
+                    <div className="header-h">
+                        {props.match.params.name}
+                    </div>
                     <div className="header-btn">
                         <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/info`} className="btn bg-gold text-dark">
                             Инфо
@@ -77,9 +83,6 @@ export const ServerDetails = (props) => {
                             Процессы
                         </Link>
                     </div>
-                    <div className="header-h">
-                        {props.match.params.name}
-                    </div>
                     <div className="header-input">
                         {/* <input type="search" className="w-100"
                             placeholder="Search..."  disabled/> */}
@@ -87,9 +90,6 @@ export const ServerDetails = (props) => {
                 </div>
                 <div className="content params">
                     <div>
-                        <Link to={`/servers/`} className="btn btn-back">
-                            Назад
-                        </Link>
                         {
                             isVmLoading ? <Spinner text="Load VM info..." /> : (vmErr ? <Error err={vmErr} /> : (
                                 <div>

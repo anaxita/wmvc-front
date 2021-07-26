@@ -34,6 +34,9 @@ export const ServerProcesses = (props) => {
             <Sidebar />
             <div className="main">
                 <div className="header header-servers-details">
+                    <Link to={`/servers/`} className="btn btn-back">
+                        Назад
+                    </Link>
                     <div className="header-btn">
                         <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/info`} className="btn">
                             Инфо
