@@ -94,31 +94,31 @@ export const ServerDetails = (props) => {
                             isVmLoading ? <Spinner text="Load VM info..." /> : (vmErr ? <Error err={vmErr} /> : (
                                 <div>
                                     <div className="params-item border-secondary">
-                                        HV:  <span className="text-gold">{vm.hv}</span>
+                                        HV:  <span >{vm.hv}</span>
                                     </div>
                                     <div className="params-item border-secondary">
-                                        COMPANY: <span className="text-gold">{vm.company}</span>
+                                        COMPANY: <span >{vm.company}</span>
                                     </div>
                                     <div className="params-item border-secondary">
-                                        OUT_ADDRESS: <span className="text-gold">{vm.out_addr}</span>
+                                        OUT_ADDRESS: <span >{vm.out_addr}</span>
                                     </div>
                                     <div className="params-item border-secondary">
-                                        IP: <span className="text-gold">{vm.ip}</span>
+                                        IP: <span >{vm.ip}</span>
                                     </div>
                                     <div className="params-item border-secondary">
-                                        CPU_CORES: <span className="text-gold">{vm.cpu_cores}</span>
+                                        CPU_CORES: <span >{vm.cpu_cores}</span>
                                     </div>
                                     <div className="params-item border-secondary">
-                                        CPU_WEIGHT: <span className="text-gold">{vm.weight}</span>
+                                        CPU_WEIGHT: <span >{vm.weight}</span>
                                     </div>
                                     <div className="params-item border-secondary">
-                                        RAM: <span className="text-gold">{vm.memory} GB</span>
+                                        RAM: <span >{vm.memory} GB</span>
                                     </div>
                                     <div className="params-item border-secondary">
-                                        NETWORK: <span className="text-gold">{vm.network}</span>
+                                        NETWORK: <span >{vm.network}</span>
                                     </div>
                                     <div className="params-item border-secondary">
-                                        DESCRIPTION: <span className="text-gold">{vm.description}</span>
+                                        DESCRIPTION: <span >{vm.description}</span>
                                     </div>
                                 </div>
                             )
