@@ -108,8 +108,8 @@ export const ModalUserServers = ({ setModalShow, userID }) => {
                 <div className="modal-footer">
                     {error ? <Error err={error} /> : null}
                     <button type="button" className="btn btn-secondary" onClick={onClickCloseModal}>Отмена</button>
-                    {isLoading ? <button type="button" className="btn btn-primary" disabled><SpinnerBtn /> Создать</button> :
-                        <button type="button" className="btn btn-primary" onClick={onClickSetServers}>Создать</button>}
+                    {isLoading ? <button type="button" className="btn btn-primary" disabled><SpinnerBtn /> Сохранить</button> :
+                        <button type="button" className="btn btn-primary" onClick={onClickSetServers}>Сохранить</button>}
                 </div>
             </div>
         </div>
