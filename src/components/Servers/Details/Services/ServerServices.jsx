@@ -24,7 +24,7 @@ export const ServerServices = (props) => {
         } else {
             setServices(info.data)
         }
-    }, [])
+    }, [props.match.params.hv, props.match.params.name])
 
     
 
