@@ -1,4 +1,5 @@
 .serversList_scroll {
     max-height: 300px;
     overflow-y: auto;
+    margin: 16px 0;
 }

@@ -345,14 +345,14 @@ select{
   background-color: var(--bg-dark);
   border: 1px solid var(--bg-secondary);
   border-radius: 5px;
-  padding:8px;
+  padding:16px;
 }
 
 .modal-header {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   font-size: 20px;
 }
 
@@ -365,9 +365,13 @@ select{
 .modal-body select, .modal-body input {
   width: 100%;
   margin-bottom: 8px;
+  margin-right: 8px;
 }
 .modal-body input[type="checkbox"] {
   width: auto;
+}
+#inputPassword {
+  margin-bottom: 16px;
 }
 .modal-body label{
   display: block;
