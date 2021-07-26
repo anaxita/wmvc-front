@@ -353,6 +353,7 @@ select{
   display: flex;
   justify-content: center;
   margin-bottom: 8px;
+  font-size: 20px;
 }
 
 .modal-body {
@@ -402,7 +403,9 @@ select{
     background-color: #00000094;
     border-radius: 5px;
 }
-
+.my-disabled-input {
+  cursor: not-allowed;
+}
 @media (max-width: 768px) {
   .title_wrap {
     display: none;

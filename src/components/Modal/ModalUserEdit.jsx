@@ -72,7 +72,7 @@ export const ModalUserEdit = ({ setModalShow, user }) => {
                     <form>
                         <label htmlFor="inputLogin" className="col-sm-2 col-form-label">Login</label>
 
-                        <input type="text" className="form-control" id="inputLogin my-disabled-input" autoComplete="off" value={state.email} readOnly />
+                        <input type="text" className="form-control my-disabled-input" id="inputLogin" autoComplete="off" value={state.email} readOnly />
 
                         <label htmlFor="inputRole" className="col-sm-2 col-form-label">Role</label>
 
