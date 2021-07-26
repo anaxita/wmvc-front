@@ -5,7 +5,7 @@
     background-color: #6c757d;
     margin-bottom: 8px;
     border-radius: 5px;
-    padding: 8px 8px 8px 16px;
+    padding: 8px 16px;
     align-items: center;
     position: relative;
 }
@@ -14,7 +14,7 @@
     display: grid;
     grid-template-columns: 2fr 2fr 3fr 2fr 1fr 2fr;
     background-color: #343a40;
-    padding: 16px 28px 16px 16px;
+    padding: 16px;
     color: var(--bg-secondary);
 }
 

@@ -11,19 +11,21 @@ export const ServersList = () => {
 
     const [isSearch, setSearch] = useState(false);
     const [serverSearch, setServerSearch] = useState([]);
+    const { servers, isLoading, error } = useServersStore()
 
     useEffect(() => {
-        handleGetServers()
-    }, [])
+        if (servers.length < 1) {
+            handleGetServers()
+        }
+    }, [servers.length])
 
-    const { servers, isLoading, error } = useServersStore()
 
 
 
 
     const onSearch = (e) => {
         let value = e.target.value;
-        if(value) {
+        if (value) {
             setSearch(true);
             setServerSearch(getSearch(servers, value));
         } else {
@@ -32,20 +34,20 @@ export const ServersList = () => {
     }
 
     let serversItems = []
-    if(!isSearch) {
+    if (!isSearch) {
         serversItems = servers.map((el) => {
             return (
-                <ServerItem key={`${el.id}${el.name}`} id={el.id} name={el.name} hv={el.hv} state={el.state} network={el.network} status={el.status} cpu_load={el.cpu_load}/>
+                <ServerItem key={`${el.id}${el.name}`} id={el.id} name={el.name} hv={el.hv} state={el.state} network={el.network} status={el.status} cpu_load={el.cpu_load} />
             )
         })
-    } else {    
+    } else {
         serversItems = serverSearch.map((el) => {
             return (
-                <ServerItem key={`${el.id}${el.name}`} id={el.id} name={el.name} hv={el.hv} state={el.state} network={el.network} status={el.status} cpu_load={el.cpu_load}/>
+                <ServerItem key={`${el.id}${el.name}`} id={el.id} name={el.name} hv={el.hv} state={el.state} network={el.network} status={el.status} cpu_load={el.cpu_load} />
             )
         })
     }
-    
+
 
     // html
     return (
@@ -65,19 +67,16 @@ export const ServersList = () => {
                     </div>
                 </div>
                 <div className="content">
-                        <div className="title_wrap">
-                            <div></div>
-                            <div className="server-list-header">
-                                <div className="srv-list-item">Name</div>
-                                <div className="srv-list-item">HV</div>
-                                <div className="srv-list-item">State</div>
-                                <div className="srv-list-item">Status</div>
-                                <div className="srv-list-item">Network</div>
-                                <div className="srv-list-item">CPU</div>
-                                <div className="srv-list-item">Actions</div>
-                            </div>
-                        </div>
-                        {isLoading ? <SpinnerServers /> : (error ? <FixedError err={error} /> : serversItems)}
+                    <div className="server-list-header">
+                        <div className="srv-list-item">Name</div>
+                        <div className="srv-list-item">HV</div>
+                        <div className="srv-list-item">State</div>
+                        <div className="srv-list-item">Status</div>
+                        <div className="srv-list-item">Network</div>
+                        <div className="srv-list-item">CPU</div>
+                        <div className="srv-list-item">Actions</div>
+                    </div>
+                    {isLoading ? <SpinnerServers /> : (error ? <FixedError err={error} /> : serversItems)}
                 </div>
             </div>
         </>

@@ -40,24 +40,26 @@ export const ModalUserEdit = ({ setModalShow, user }) => {
         setState(newState)
     }
 
-    const onClickEditUser = async () => {
+    const onClickEditUser =  () => {
         setError('');
         setLoading(true);
 
-        const { err } = await handleFetch('PATCH', '/users', state)
-        setLoading(false)
+        handleFetch('PATCH', '/users', state).then(({err}) => {
 
-        if (err) {
-            setError(err);
-        } else {
-            let newState = { ...state }
-            newState.password = ''
-            handleEditUser(newState)
-            setModalShow(false)
-        }
-        setTimeout(() => {
-            setError('');
-        }, 10000)
+            setLoading(false)
+            
+            if (err) {
+                setError(err);
+            } else {
+                let newState = { ...state }
+                newState.password = ''
+                handleEditUser(newState)
+                setModalShow(false)
+            }
+            setTimeout(() => {
+                setError('');
+            }, 10000)
+        })
     }
 
     return (

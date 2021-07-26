@@ -8,51 +8,60 @@ const Item = ({service, params}) => {
     const [isServicesLoading, setServicesLoading] = useState(false)
     const [status, setStatus] = useState(service.status)
     const [error, setError] = useState('')
-    const stopService = async () => {
+    const stopService =  () => {
         setServicesLoading(true)
         let body = {
             service_name: service.name,
             command: 'stop'
         }
-        const { err } = await handleFetch("POST", `/servers/${params.hv}/${params.name}/services`, body)
-        if (err) {
-            setError(err)
-            setTimeout(() => setError(''), 2500);
-        } else {
-            setStatus('Stopped')
-        }
-        setServicesLoading(false)
+
+        handleFetch("POST", `/servers/${params.hv}/${params.name}/services`, body).then(({err}) => {
+            if (err) {
+                setError(err)
+                setTimeout(() => setError(''), 2500);
+            } else {
+                setStatus('Stopped')
+            }
+            setServicesLoading(false)
+        })
     }
-    const startService = async () => {
+    const startService =  () => {
         setServicesLoading(true)
         let body = {
             service_name: service.name,
             command: 'start'
         }
-        const { err } = await handleFetch("POST", `/servers/${params.hv}/${params.name}/services`, body)
-        if (err) {
-            setError(err)
-            setTimeout(() => setError(''), 2500);
-        } else {
-            setStatus('Running')
-        }
-        setServicesLoading(false)
+        handleFetch("POST", `/servers/${params.hv}/${params.name}/services`, body).then(({ err}) => {
+
+            if (err) {
+                setError(err)
+                setTimeout(() => setError(''), 2500);
+            } else {
+                setStatus('Running')
+            }
+            setServicesLoading(false)
+        })
     }
-    const restartService = async () => {
+    
+    const restartService =  () => {
         setServicesLoading(true)
         let body = {
             service_name: service.name,
             command: 'restart'
         }
-        const { err } = await handleFetch("POST", `/servers/${params.hv}/${params.name}/services`, body)
-        if (err) {
-            setError(err)
-            setTimeout(() => setError(''), 2500);
-        } else {
-            setStatus('Running')
-        }
-        setServicesLoading(false)
+
+        handleFetch("POST", `/servers/${params.hv}/${params.name}/services`, body).then(({data, err}) => {
+
+            if (err) {
+                setError(err)
+                setTimeout(() => setError(''), 2500);
+            } else {
+                setStatus('Running')
+            }
+            setServicesLoading(false)
+        })
     }
+
     return (
         <div className="sc-i" key={service.name}>
             {isServicesLoading ? <SpinnerItem /> : null}

@@ -3,11 +3,14 @@
 }
 
 .sc-items-header {
+    position: sticky;
+    top: -8px;
+    z-index: 1;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr 2fr 1fr;
-    border-radius: 5px;
     padding: 16px;
     color:  #6c757d;
+    background-color: var(--bg-dark);
 }
 .sc-i {
     display: grid;
@@ -19,6 +22,7 @@
     padding: 8px 16px;
     position: relative;
 }
+
 
 
 @media (max-width:768px) {

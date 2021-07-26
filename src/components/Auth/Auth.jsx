@@ -20,35 +20,45 @@ export const Auth = () => {
     const serverInput = useRef(null)
 
     const [isRedirect, setRedirect] = useState(false)
+
     const onChange = (e) => {
         const newState = { ...state }
         newState.data[e.target.name] = e.target.value
+
         setState(newState)
     }
 
-    const signIn = async () => {
+    const signIn = () => {
         localStorage.setItem('cacheServerUrl', state.data.server)
+        
         setState({ ...state, isLoading: true })
-        const { data, err } = await handleFetch('POST', '/signin', state.data)
-        setState({ ...state, isLoading: false })
-        if (!err) {
-            localStorage.setItem('cacheToken', data.access_token)
-            localStorage.setItem('cacheRefreshToken', data.refresh_token)
-            let tokenPayload = jwt.decode(data.access_token);
-            let jsonPayload = JSON.stringify(tokenPayload.User)
-            localStorage.setItem('cacheUserInfo', jsonPayload)
 
-            setRedirect(true);
-        } else {
-            setState({ ...state, error: err })
-        }
+        handleFetch('POST', '/signin', state.data).then(({data, err}) => {
+
+            if (err) {
+                setState({ ...state, error: err })
+            } else {
+                localStorage.setItem('cacheToken', data.access_token)
+                localStorage.setItem('cacheRefreshToken', data.refresh_token)
+                let tokenPayload = jwt.decode(data.access_token);
+                let jsonPayload = JSON.stringify(tokenPayload.User)
+                localStorage.setItem('cacheUserInfo', jsonPayload)
+                
+                setRedirect(true);
+            }
+            
+            setState({ ...state, isLoading: false })
+        })
     }
+
     useEffect(() => {
-        if(localStorage.getItem('cacheServerUrl') !== undefined && localStorage.getItem('cacheServerUrl') !== null) {
+        if (localStorage.getItem('cacheServerUrl') !== undefined && localStorage.getItem('cacheServerUrl') !== null) {
             serverInput.current.defaultValue = localStorage.getItem('cacheServerUrl');
+
             setState((prevState) => {
                 let newState = { ...prevState }
                 newState.data.server = localStorage.getItem('cacheServerUrl');
+
                 return newState
             })
         }
@@ -66,7 +76,7 @@ export const Auth = () => {
                     <div className="modal-body">
                         <form>
                             <label htmlFor="inputLogin" >Server</label>
-                            <input ref={serverInput} type="text" id="inputServer" autoComplete="off" name="server" onChange={onChange}  required />
+                            <input ref={serverInput} type="text" id="inputServer" autoComplete="off" name="server" onChange={onChange} required />
                             <label htmlFor="inputLogin" className="">Login</label>
                             <input type="text" id="inputLogin" autoComplete="off" name="email" onChange={onChange} required />
                             <label htmlFor="inputPassword" className="">Password</label>
@@ -76,7 +86,7 @@ export const Auth = () => {
                     <div className="modal-footer">
                         {state.isLoading ? <button type="button" className="btn" disabled><SpinnerBtn /> Войти</button> :
                             <button type="button" className="btn" onClick={signIn}>Войти</button>}
-                            {state.error ? <Error err={state.error} /> : null}
+                        {state.error ? <Error err={state.error} /> : null}
                     </div>
                 </div>
             </div >

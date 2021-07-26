@@ -18,29 +18,32 @@ export const ServerDetails = (props) => {
     const [disksErr, setDisksErr] = useState("")
     const [isDisksLoading, setDisksLoading] = useState(false)
 
-    useEffect(async () => {
+    useEffect( () => {
         setVmLoading(true)
-        const info = await handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}`)
-        setVmLoading(false)
-        if (info.err) {
-            setVmErr(info.err)
-        } else {
-            setVm(info.data)
-        }
-    }, [])
+        handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}`).then(({data, err}) => {
 
-    useEffect(async () => {
+            setVmLoading(false)
+            if (err) {
+                setVmErr(err)
+            } else {
+                setVm(data)
+            }
+        })
+        }, [props.match.params.hv, props.match.params.name])
+
+    useEffect( () => {
         setDisksLoading(true)
 
-        const disksInfo = await handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}/disks`)
-        setDisksLoading(false)
-
-        if (disksInfo.err) {
-            setDisksErr(disksInfo.err)
-        } else {
-            setDisks(disksInfo.data)
-        }
-    }, [])
+        handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}/disks`).then(({data, err}) => {
+            setDisksLoading(false)
+            
+            if (err) {
+                setDisksErr(err)
+            } else {
+                setDisks(data)
+            }
+        })
+    }, [props.match.params.hv, props.match.params.name])
 
     
     const disksList = disks.map((d) => {

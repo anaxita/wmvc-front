@@ -20,21 +20,22 @@ export const ModalUserServers = ({ setModalShow, userID }) => {
     const [serversSearch, setServersSearch] = useState([]);
 
 
-    useEffect(async () => {
+    useEffect(() => {
         setLoading(true);
+        handleFetch('GET', `/users/${userID}/servers`)
+            .then(({ data, err }) => {
+                setLoading(false)
+                if (err) {
+                    setError(err);
+                } else {
+                    setServers(data.servers);
+                }
 
-        const { data, err } = await handleFetch('GET', `/users/${userID}/servers`)
-        setLoading(false)
-        if (err) {
-            setError(err);
-        } else {
-            setServers(data.servers);
-        }
-
-        setTimeout(() => {
-            setError('');
-        }, 10000)
-    }, [])
+                setTimeout(() => {
+                    setError('');
+                }, 10000)
+            })
+    }, [userID])
 
     const changeAddedStatus = (userID) => {
         const newServers = servers.filter(el => {
@@ -47,24 +48,26 @@ export const ModalUserServers = ({ setModalShow, userID }) => {
         setServers(newServers)
     }
 
-    const onClickSetServers = async () => {
+    const onClickSetServers = () => {
         setError('');
         setLoading(true);
 
         const serversToSend = servers.filter(el => el.is_added)
 
-        const { data, err } = await handleFetch('POST', '/users/servers', { user_id: userID, servers: serversToSend })
-        setLoading(false)
-        if (err) {
-            setError(err);
-        } else {
-            setModalShow(false)
+        handleFetch('POST', '/users/servers', { user_id: userID, servers: serversToSend }).then(({data, err}) => {
+            
+            setLoading(false)
+            if (err) {
+                setError(err);
+            } else {
+                setModalShow(false)
+            }
+            
+            setTimeout(() => {
+                setError('');
+            }, 10000)
+        })
         }
-
-        setTimeout(() => {
-            setError('');
-        }, 10000)
-    }
 
     const onSearch = (e) => {
         let value = e.target.value;

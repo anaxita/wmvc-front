@@ -88,20 +88,21 @@ button:hover{
   /* background-color: rgba(186, 58, 171, 0.686); */
   background-color: var(--bg-dark);
   padding: 8px 24px;
-  padding-top: 59px;
+  /* padding-top: 59px; */
   height: 100%;
+  position: relative;
   overflow-y: auto;
   /* ie 10+ */
-  -ms-overflow-style: none; 
+  /* -ms-overflow-style: none;  */
   /* фф */
-  overflow: -moz-scrollbars-none; 
+  /* overflow: -moz-scrollbars-none;  */
   /* хром, сафари */
-  scrollbar-width: none
+  /* scrollbar-width: none */
 }
-.content::-webkit-scrollbar {
+/* .content::-webkit-scrollbar {
   width: 0;
   height: 0;
-}
+} */
 
 /* Цвета */
 .bg-secondary {
@@ -401,17 +402,6 @@ select{
     justify-content: center;
     background-color: #00000094;
     border-radius: 5px;
-}
-
-.title_wrap {
-  position: fixed;
-  left: 0;
-  z-index: 1;
-  margin-top: -59px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 9fr;
-  grid-gap: 25px;
 }
 
 @media (max-width: 768px) {

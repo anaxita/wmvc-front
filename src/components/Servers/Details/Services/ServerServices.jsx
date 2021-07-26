@@ -15,15 +15,17 @@ export const ServerServices = (props) => {
     const [servicesErr, setServicesErr] = useState("")
     const [isServicesLoading, setServicesLoading] = useState(false)
 
-    useEffect(async () => {
+    useEffect( () => {
         setServicesLoading(true)
-        const info = await handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}/services`)
-        setServicesLoading(false)
-        if (info.err) {
-            setServicesErr(info.err)
-        } else {
-            setServices(info.data)
-        }
+    handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}/services`).then(({data, err}) => {
+
+            setServicesLoading(false)
+            if (err) {
+                setServicesErr(err)
+            } else {
+                setServices(data)
+            }
+        })
     }, [props.match.params.hv, props.match.params.name])
 
     
@@ -62,9 +64,6 @@ export const ServerServices = (props) => {
                     </div>
                 </div>
                 <div className="content">
-                    <div className="sc-i-list">
-                        <div className="title_wrap">
-                            <div></div>
                             <div className="sc-items-header">
                                 <div className="sc-i-name">Name</div>
                                 <div className="sc-i-display-name">Display name</div>
@@ -72,9 +71,9 @@ export const ServerServices = (props) => {
                                 <div className="sc-i-user">User</div>
                                 <div className="sc-i-actions">Actions</div>
                             </div>
-                        </div>
+                            <div className="sc-items">
                         {servicesErr ? <Error text={servicesErr}/> : (isServicesLoading ? <Spinner text="Loading services..."/> : <div className="sc-items">{servicesList}</div>)}
-                    </div>
+                            </div>
                 </div>
             </div>
         </>

@@ -19,20 +19,21 @@ const $modalStore = createStore({
     error: '',
 })
 
-export const handleAddUser = createEffect(async () => {
+export const handleAddUser = createEffect( () => {
     let curState = $modalStore.getState()
-    const {data, err} = await handleFetch('POST', '/users', curState);
-    if(!err) {
-        handleModalShow(false)
-        handleAddNewUser({
-            ...curState,
-            id: data.id,
-        });
-        return data.id;
-    } else {
-        handleSetError(err);
-        return '';
-    }
+    handleFetch('POST', '/users', curState).then(({data, err}) => {
+        if(!err) {
+            handleModalShow(false)
+            handleAddNewUser({
+                ...curState,
+                id: data.id,
+            });
+            return data.id;
+        } else {
+            handleSetError(err);
+            return '';
+        }
+    })
 })
 
 

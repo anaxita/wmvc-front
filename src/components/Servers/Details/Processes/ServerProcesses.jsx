@@ -13,18 +13,17 @@ export const ServerProcesses = (props) => {
         const [isprocessesLoading, setProcessesLoading] = useState(false)
 
         useEffect(() => {
-            async function getProcesses() {
                 setProcessesLoading(true)
-                const info = await handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}/manager`)
-                setProcessesLoading(false)
-                if (info.err) {
-                     setprocessesErr(info.err)
-                } else {
-                    setprocesses(info.data)
-                }
-            }
-            getProcesses();
-        }, [])
+                handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}/manager`).then(({data, err}) => {
+
+                    setProcessesLoading(false)
+                    if (err) {
+                        setprocessesErr(err)
+                    } else {
+                        setprocesses(data)
+                    }
+                })
+        }, [props.match.params.hv, props.match.params.name])
     const usersList = Object.entries(processes).map(el => {
         
         return <ProcessUserItem u={el} />
@@ -56,8 +55,6 @@ export const ServerProcesses = (props) => {
                 </div>
                 <div className="content">
                     <div className="processes">
-                        <div className="title_wrap">
-                            <div></div>
                             <div className="processes-header">
                                 <div className="">Users</div>
                                 <div className="">State</div>
@@ -66,7 +63,6 @@ export const ServerProcesses = (props) => {
                                 <div className="div"></div>
                                 <div className="div"></div>
                             </div>
-                        </div>
                         {usersList ? usersList : null}
                     </div>
                 </div>
