@@ -42,6 +42,11 @@
     font-size: 12px;
 }
 
+.btn-back {
+    display: inline-block;
+    margin: 16px 0;
+}
+
 
 @media (max-width: 768px) {
     .disks-item input {

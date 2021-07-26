@@ -72,9 +72,8 @@ button:hover{
 .header-btn {
   grid-area: header-btn;
   padding: 0px;
-
   justify-self: end;
-
+  display: flex;
 }
 
 .header-input {
