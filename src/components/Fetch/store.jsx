@@ -26,7 +26,7 @@ const handleRefreshToken = async (method, uri, body = '') => {
         if (resp.status === 'ok') {
             localStorage.setItem('cacheToken', resp.message.access_token)
             localStorage.setItem('cacheRefreshToken', resp.message.refresh_token)
-            return await handleFetch(method, uri, body);
+            return await handleFetch(method, uri, body)
         }
         localStorage.removeItem('cacheToken');
         localStorage.removeItem('cacheRefreshToken');
@@ -61,8 +61,8 @@ export const handleFetch = (method, uri, body = '') => {
         }
 
         await fetch(`https://${localStorage.getItem('cacheServerUrl')}${uri}`, opt)
-            // .then((response) => response.status === 401 ? handleRefreshToken(method, uri, body) : response.json())
-            .then((response) => response.json())
+            .then((response) => response.status === 401 ? handleRefreshToken(method, uri, body) : response.json())
+            // .then((response) => response.json())
             .then((r) => {
                 switch (r.status) {
                     case 'ok':
