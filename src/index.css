@@ -148,7 +148,8 @@ button:hover{
 /* Кнопки */
 .btn {
   appearance: none;
-  padding: 8px 16px;
+  /* padding: 8px 16px; */
+  padding: 4px 8px;
   border: 1px solid var(--bg-gold);
   border-radius: 5px;
   background: var(--bg-dark);
@@ -263,7 +264,8 @@ button:hover{
 
 input[type="text"], input[type="search"], input[type="password"]{
   appearance: none;
-  padding: 8px 16px;
+  /* padding: 8px 16px; */
+  padding: 4px 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-family: inherit;
