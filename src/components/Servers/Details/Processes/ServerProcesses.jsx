@@ -6,6 +6,8 @@ import { handleFetch } from '../../../Fetch/store';
 import './style.css'
 import { Sidebar } from '../../../Sidebar/Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Error } from '../../../Error/Errors';
+import { SpinnerItem } from '../../../Spinner/SpinnerItem';
 
 export const ServerProcesses = (props) => {
     
@@ -68,6 +70,8 @@ export const ServerProcesses = (props) => {
                                 <div className="div"></div>
                             </div>
                         {usersList ? usersList : null}
+                        {processesErr ? <Error err={processesErr} /> : null}
+                        {isprocessesLoading ? <SpinnerItem /> : null}
                     </div>
                 </div>
             </div>
