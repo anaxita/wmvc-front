@@ -440,6 +440,9 @@ select{
     grid-template-areas: 'header-btn header-h'
     'header-input header-input';
     grid-template-columns: 1fr;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .header-input {
