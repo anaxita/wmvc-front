@@ -58,9 +58,9 @@ export const ServersList = () => {
                     <div className="header-btn">
                         <button disabled="disabled" type="button" className="btn" onClick={() => { }}>New Server</button>
                     </div>
-                    <div className="header-h">
+                    {/* <div className="header-h">
                         SERVERS({servers.length})
-                    </div>
+                    </div> */}
                     <div className="header-input">
                         <input type="search" className="w-100" maxLength="255" onChange={onSearch}
                             placeholder="Search server ..." />
