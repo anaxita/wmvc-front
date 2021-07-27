@@ -5,6 +5,7 @@ import { ProcessUserItem } from './ProcessUserItem/ProcessUserItem';
 import { handleFetch } from '../../../Fetch/store';
 import './style.css'
 import { Sidebar } from '../../../Sidebar/Sidebar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const ServerProcesses = (props) => {
     
@@ -35,7 +36,7 @@ export const ServerProcesses = (props) => {
             <div className="main">
                 <div className="header header-servers-details">
                     <Link to={`/servers/`} className="btn btn-back">
-                        Назад
+                        <FontAwesomeIcon icon="arrow-left" />
                     </Link>
                     <div className="header-btn">
                         <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/info`} className="btn">

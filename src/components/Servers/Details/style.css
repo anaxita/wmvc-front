@@ -49,10 +49,11 @@
 .btn-back {
     display: inline-block;
     text-align: center;
+    width: min-content;
 }
 .main .header-servers-details {
     grid-template-areas: 'header-back header-h header-input header-btn';
-    grid-template-columns: 1fr 1fr 2fr 6fr;
+    grid-template-columns: 0.3fr 1fr 2fr 6fr;
 }
 .header-servers-details .header-h {
     margin: 0 16px;

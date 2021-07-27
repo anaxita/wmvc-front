@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -67,7 +68,7 @@ export const ServerDetails = (props) => {
             <div className="main">
                 <div className="header header-servers-details">
                     <Link to={`/servers/`} className="btn btn-back">
-                        Назад
+                        <FontAwesomeIcon icon="arrow-left" />
                     </Link>
                     <div className="header-h">
                         {props.match.params.name}

@@ -9,6 +9,7 @@ import { Error } from '../../../Error/Errors';
 import './style.css'
 import { Sidebar } from '../../../Sidebar/Sidebar';
 import Item from './Item/item';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const ServerServices = (props) => {
     const [services, setServices] = useState([])
@@ -45,7 +46,7 @@ export const ServerServices = (props) => {
             <div className="main">
                 <div className="header header-servers-details">
                     <Link to={`/servers/`} className="btn btn-back">
-                        Назад
+                        <FontAwesomeIcon icon="arrow-left" />
                     </Link>
                     <div className="header-btn">
                         <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/info`} className="btn">
