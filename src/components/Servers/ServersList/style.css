@@ -9,6 +9,7 @@
     padding: 8px;
     align-items: center;
     position: relative;
+    font-size: 14px;
 }
 /* .content .server-item:nth-child(2) {
     margin-top: 51px;

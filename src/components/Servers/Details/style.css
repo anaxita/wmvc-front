@@ -16,6 +16,7 @@
 
 .params-item span {
     color: var(--bg-secondary);
+    font-size: 14px;
 }
 
 .disks {
@@ -58,7 +59,6 @@
 .header-servers-details .header-h {
     margin: 0 16px;
 }
-
 @media (max-width: 768px) {
     .disks-item input {
         min-width: auto;

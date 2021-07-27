@@ -8,8 +8,8 @@
     padding: 8px 16px;
     align-items: center;
     position: relative;
+    font-size: 14px;
 }
-
 .user-list-header {
     display: grid;
     grid-template-columns: 2fr 2fr 3fr 2fr 2fr 1.2fr;

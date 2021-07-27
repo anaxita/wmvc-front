@@ -1,33 +1,30 @@
 /* Сайдбар */
 nav ul li {
-list-style-type: none;
-padding: 8px;
+    list-style-type: none;
+    padding: 8px;
+    font-size: 16px;
 }
 nav ul {
-padding: 8px;
+    padding: 8px;
 }
-
 nav {
     background-color: var(--bg-dark);
     border-right: 1px solid #6c757d;
     z-index: 2;
 }
-
 a{
-color: rgba(255, 166, 0, 0.467);
-text-decoration: none;
+    color: rgba(255, 166, 0, 0.467);
+    text-decoration: none;
 }
-
 a:hover {
-color: var(--bg-gold);
+    color: var(--bg-gold);
 }
-
 .active {
     color: rgb(255, 204, 0);
     text-decoration: underline;
 }
 
 .menu_email {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--bg-secondary-light);
 }

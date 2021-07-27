@@ -67,6 +67,7 @@ button:hover{
   padding: 0px;
   grid-area: header-h;
   justify-self: start;
+  font-size: 16px;
 }
 
 .header-btn {
@@ -155,6 +156,7 @@ button:hover{
   font-family: inherit;
   font-size: inherit;
   transition: 0.3s;
+  font-size: 13px;
 }
 
 .btn:hover {
@@ -353,7 +355,7 @@ select{
   display: flex;
   justify-content: center;
   margin-bottom: 16px;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .modal-body {
