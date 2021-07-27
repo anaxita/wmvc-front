@@ -14,8 +14,8 @@ export const Auth = () => {
             server: ''
         },
         isLoading: false,
-        error: '',
     })
+    const [error, setError] = useState('')
 
     const serverInput = useRef(null)
 
@@ -27,16 +27,13 @@ export const Auth = () => {
 
         setState(newState)
     }
-
     const signIn = () => {
-        localStorage.setItem('cacheServerUrl', state.data.server)
-        
+        localStorage.setItem('cacheServerUrl', state.data.server)        
         setState({ ...state, isLoading: true })
-
         handleFetch('POST', '/signin', state.data).then(({data, err}) => {
 
             if (err) {
-                setState({ ...state, error: err })
+                setError(err)
             } else {
                 localStorage.setItem('cacheToken', data.access_token)
                 localStorage.setItem('cacheRefreshToken', data.refresh_token)
@@ -46,7 +43,6 @@ export const Auth = () => {
                 
                 setRedirect(true);
             }
-            
             setState({ ...state, isLoading: false })
         })
     }
@@ -86,7 +82,7 @@ export const Auth = () => {
                     <div className="modal-footer">
                         {state.isLoading ? <button type="button" className="btn" disabled><SpinnerBtn /> Войти</button> :
                             <button type="button" className="btn" onClick={signIn}>Войти</button>}
-                        {state.error ? <Error err={state.error} /> : null}
+                        {error ? <Error err={error} /> : null}
                     </div>
                 </div>
             </div >

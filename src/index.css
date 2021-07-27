@@ -415,6 +415,9 @@ select{
   cursor: not-allowed;
 }
 @media (max-width: 768px) {
+  .header-h {
+    display: none;
+  }
   .title_wrap {
     display: none;
   }
