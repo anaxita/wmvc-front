@@ -456,9 +456,7 @@ select{
     max-height:  24px;
     margin-right: 16px;
   }
-  .btn{
-    padding: 4px 8px;
-  }
+
 }
 
 @media (max-width: 1072px) {

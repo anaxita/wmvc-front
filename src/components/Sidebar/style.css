@@ -42,12 +42,21 @@ a:hover {
 }
 
 @media (max-width: 768px) {
+    .menu {
+        grid-template-rows: auto;
+    }
     .menu ul {
         margin: 0;
         border-bottom: 1px solid var(--bg-secondary);
         text-align: center;
+        padding: 8px;
       }
       .menu ul li{
         display: inline-block;
+        margin: 0 0 0 16px;
+      }
+
+      .user-info {
+          display: none;
       }
 }
