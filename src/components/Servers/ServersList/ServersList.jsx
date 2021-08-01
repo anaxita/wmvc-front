@@ -59,7 +59,6 @@ export const ServersList = () => {
                         <input type="search" maxLength="255" onChange={onSearch}
                             placeholder="Search server ..." />
                     </div>
-                    <div className=""></div>
                 </div>
                 <div className="content">
                     <div className="server-list-header">

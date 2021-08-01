@@ -1,6 +1,6 @@
 .servers-header {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 0 8px;
     align-items: center ;
     padding: 0 24px;
@@ -135,6 +135,12 @@
 }
 
 @media (max-width: 768px) {
+    .servers-header__search input {
+        width: 100%;
+    }
+    .servers-header {
+        padding: 8px 16px;
+    }
     .srv-state_name {
         display: inline-block;
         margin: 0 5px 0 0;
