@@ -60,6 +60,15 @@
     margin: 0 16px;
 }
 @media (max-width: 768px) {
+    .main .header-servers-details {
+        /* grid-template-areas: 'header-back header-h header-btn header-input' !important; */
+        /* grid-template-columns:1fr !important; */
+        flex-wrap: wrap;
+        padding: 0 16px !important;
+    }
+    .header-servers-details  .header-input {
+        width: 100%;
+    }
     .disks-item input {
         min-width: auto;
         width: 100%;
