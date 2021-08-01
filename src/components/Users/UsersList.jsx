@@ -7,6 +7,7 @@ import { useServersStore, handleModalShow, handleDeleteUser, handleGetUsers, han
 import './style.css'
 import { getSearch } from '../../Constants/Constants';
 import { Sidebar } from '../Sidebar/Sidebar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const UsersList = () => {
 
@@ -55,7 +56,7 @@ export const UsersList = () => {
             <div className="main">
                 <div className="header">
                     <div className="header-btn">
-                        <button type="button" className="btn" onClick={() => handleModalShow(true)}>New User</button>
+                        <button type="button" className="btn" onClick={() => handleModalShow(true)}><FontAwesomeIcon icon="user-plus" /></button>
                     </div>
                     <div className="header-input">
                         <input type="search" className="w-100" maxLength="255" onChange={onSearch}

@@ -59,9 +59,9 @@ button:hover{
 /* HEADER */
 .header {
   display: grid;
-  gap: 8px;
-  grid-template-areas: 'header-input header-h  header-btn';
-  grid-template-columns: 1fr 2fr 6fr;
+  gap: 16px;
+  grid-template-areas: 'header-input header-btn';
+  grid-template-columns: 1fr 2fr;
   padding: 0 24px;
   background-color: var(--bg-dark);
   border-bottom: 1px solid #6c757d;
@@ -69,12 +69,6 @@ button:hover{
   justify-content: center;
 }
 
-.header-h {
-  padding: 0px;
-  grid-area: header-h;
-  justify-self: start;
-  font-size: 16px;
-}
 
 .header-btn {
   grid-area: header-btn;
@@ -193,7 +187,7 @@ button:hover{
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 16px;
 }
 .actions-btn button{
   color: var(--bg-gold);
@@ -356,7 +350,7 @@ select{
   background-color: var(--bg-dark);
   border: 1px solid var(--bg-secondary);
   border-radius: 5px;
-  padding:16px;
+  padding:16px 16px 0 16px;
 }
 
 .modal-header {
@@ -422,15 +416,10 @@ select{
   cursor: not-allowed;
 }
 @media (max-width: 768px) {
-  .header-h {
-    display: none;
-  }
   .title_wrap {
     display: none;
   }
-  html body {
-  font-size: 14px;
-  }
+
   .grid {
     grid-template-rows: 1fr 15fr;
     grid-template-columns: auto;
@@ -439,24 +428,17 @@ select{
   .main {
   grid-template-rows: 1fr 8fr !important;
   }
+
   .header {
-    grid-template-areas: 'header-btn header-h'
-    'header-input header-input';
-    grid-template-columns: 1fr;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  grid-template-columns: 1fr auto;
     padding: 8px 16px;
+    justify-content: space-between;
   }
 
   .header-input {
     margin: 0;
   }
-  .actions-btn button {
-    max-width: 24px;
-    max-height:  24px;
-    margin-right: 16px;
-  }
+
 
 }
 
