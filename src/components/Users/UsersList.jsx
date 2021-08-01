@@ -57,9 +57,6 @@ export const UsersList = () => {
                     <div className="header-btn">
                         <button type="button" className="btn" onClick={() => handleModalShow(true)}>New User</button>
                     </div>
-                    <div className="header-h">
-                        USERS
-                    </div>
                     <div className="header-input">
                         <input type="search" className="w-100" maxLength="255" onChange={onSearch}
                             placeholder="Search user ..." />
