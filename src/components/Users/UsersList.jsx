@@ -57,9 +57,6 @@ export const UsersList = () => {
                     <div className="header-btn">
                         <button type="button" className="btn" onClick={() => handleModalShow(true)}>New User</button>
                     </div>
-                    <div className="header-h">
-                        USERS
-                    </div>
                     <div className="header-input">
                         <input type="search" className="w-100" maxLength="255" onChange={onSearch}
                             placeholder="Search user ..." />
@@ -71,7 +68,7 @@ export const UsersList = () => {
                             <div className="user-list-header">
                                 <div className="usr-list-item"><button name="name" onClick={sortUsers}>Name</button></div>
                                 <div className="usr-list-item"><button name="email" onClick={sortUsers}>Login</button></div>
-                                <div className="usr-list-item"><button name="company" onClick={sortUsers}>Company</button></div>
+                                {/* <div className="usr-list-item"><button name="company" onClick={sortUsers}>Company</button></div> */}
                                 <div className="usr-list-item"><button name="role" onClick={sortUsers}>Role</button></div>
                                 <div className="usr-list-item">Created</div>
                                 <div className="usr-list-item" onClick={handleSortUsers}>Actions</div>
