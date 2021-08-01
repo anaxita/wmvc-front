@@ -62,7 +62,7 @@ button:hover{
   gap: 8px;
   grid-template-areas: 'header-input header-h  header-btn';
   grid-template-columns: 1fr 2fr 6fr;
-  padding: 8px 24px;
+  padding: 0 24px;
   background-color: var(--bg-dark);
   border-bottom: 1px solid #6c757d;
   align-items: center;
