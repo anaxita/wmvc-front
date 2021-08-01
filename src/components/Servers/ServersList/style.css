@@ -71,7 +71,13 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: var(--bg-gold) ;
+    background-color: #4ef04e;
+}
+.state-off {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgb(250, 243, 243);
 }
 .srv-state_name {
     display: none;
@@ -131,6 +137,7 @@
 @media (max-width: 768px) {
     .srv-state_name {
         display: inline-block;
+        margin: 0 5px 0 0;
     }
     .server-list-header {
         display: none;
@@ -158,6 +165,7 @@
     .srv-network, .srv-state {
         display: flex;
         align-items: center;
+        justify-content: space-between;
     }
     .state-on {
         margin-left: 5px;
