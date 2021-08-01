@@ -109,9 +109,9 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             {error ? <ErrorAbsolute err={error}/> : null}
             <div className="srv-name">{name}</div>
             <div className="srv-hv">{hv}</div>
-            <div className="srv-state">{(powerState === 'Running') ? <div className="state-on"></div> : null}</div>
+            <div className="srv-state"><span className={"srv-state_name"}>Состояние:</span> {(powerState === 'Running') ? <div className="state-on"></div> : null}</div>
             <div className="srv-status">{(status === 'Работает нормально' ) ? '' : status}</div>
-            <div className="srv-network">{networkState === "Running" ? null : <div className="state-on"></div>}</div>
+            <div className="srv-network"><span className={"srv-state_name"}>Сеть:</span> {networkState === "Running" ? null : <div className="state-on"></div>}</div>
             <div className="srv-cpu">{`${cpu_load}%`}</div>
             <div className="actions-btn">
                     <button  type="button" name="power" onClick={handleControl}><FontAwesomeIcon icon="play-circle" /></button>

@@ -477,7 +477,7 @@ select{
     justify-content: unset;
   }
   .actions-btn button {
-    margin-bottom: 0;
+    margin: 0;
   }
   .content {
     padding-top: 8px;

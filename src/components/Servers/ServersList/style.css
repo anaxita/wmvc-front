@@ -73,6 +73,9 @@
     border-radius: 50%;
     background-color: var(--bg-gold) ;
 }
+.srv-state_name {
+    display: none;
+}
 
 .spinner-item-shadow {
     position: absolute;
@@ -126,6 +129,9 @@
 }
 
 @media (max-width: 768px) {
+    .srv-state_name {
+        display: inline-block;
+    }
     .server-list-header {
         display: none;
     }
@@ -135,9 +141,9 @@
     .srv-status {
         display: none;
     }
-    .srv-network {
+    /* .srv-network {
         display: none;   
-    }
+    } */
     .srv-cpu {
         display: none; 
     }
@@ -145,8 +151,15 @@
         margin-top: 8px;
     }
     .server-item{
-        grid-template-areas: 'srv-name srv-state'
-        'srv-actions srv-actions';
-        grid-template-columns: 1fr;
+        grid-template-areas: 'srv-name  srv-state'
+                            'actions-btn srv-network';
+        grid-template-columns: 5fr 2fr;
+    }
+    .srv-network, .srv-state {
+        display: flex;
+        align-items: center;
+    }
+    .state-on {
+        margin-left: 5px;
     }
 }
