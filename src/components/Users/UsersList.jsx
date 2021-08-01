@@ -71,7 +71,7 @@ export const UsersList = () => {
                             <div className="user-list-header">
                                 <div className="usr-list-item"><button name="name" onClick={sortUsers}>Name</button></div>
                                 <div className="usr-list-item"><button name="email" onClick={sortUsers}>Login</button></div>
-                                <div className="usr-list-item"><button name="company" onClick={sortUsers}>Company</button></div>
+                                {/* <div className="usr-list-item"><button name="company" onClick={sortUsers}>Company</button></div> */}
                                 <div className="usr-list-item"><button name="role" onClick={sortUsers}>Role</button></div>
                                 <div className="usr-list-item">Created</div>
                                 <div className="usr-list-item" onClick={handleSortUsers}>Actions</div>

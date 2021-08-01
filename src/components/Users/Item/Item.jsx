@@ -37,7 +37,7 @@ export const UserItem = ({ id, name, role, email, company, handleDeleteUser }) =
             {isModalEditUserServers ? <ModalUserServers setModalShow={setModalEditUserServersShow} userID={id} /> : null}
             <div className="usr-name">{name}</div>
             <div className="usr-login">{email}</div>
-            <div className="usr-company">{company}</div>
+            {/* <div className="usr-company">{company}</div> */}
             <div className="usr-role">{role ? <span>Administrator</span> : <span>User</span>}</div>
             <div className="usr-created">25-05-2022 </div>
             <div className="usr-actions actions-btn">
