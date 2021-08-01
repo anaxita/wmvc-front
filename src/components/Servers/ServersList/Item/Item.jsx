@@ -10,6 +10,7 @@ import sound_server_started from '../../../../sounds/server-started.mp3';
 import sound_network_started from '../../../../sounds/network-started.mp3';
 import sound_network_stopped from '../../../../sounds/network-stopped.mp3';
 import { getUserInfo } from '../../../../Constants/Constants';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) => {
 
@@ -108,21 +109,20 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             {error ? <ErrorAbsolute err={error}/> : null}
             <div className="srv-name">{name}</div>
             <div className="srv-hv">{hv}</div>
-            <div className="srv-state">{(powerState === 'Running') ? 'Включен' : 'Выключен'}</div>
+            <div className="srv-state">{(powerState === 'Running') ? <div className="state-on"></div> : null}</div>
             <div className="srv-status">{(status === 'Работает нормально' ) ? '' : status}</div>
-            <div className="srv-network">{networkState === "Off" ? 'Выкл' : 'OK'}</div>
+            <div className="srv-network">{networkState === "Running" ? null : <div className="state-on"></div>}</div>
             <div className="srv-cpu">{`${cpu_load}%`}</div>
-            <div className="srv-actions actions-btn">
-                    <button className="bg_play"  type="button" name="power" onClick={handleControl}></button>
-                    <button className="bg_network"  type="button" name="network" onClick={handleControl}></button>
-                    <button className="bg_powerOff" type="button" name="stop_power_force" onClick={handleControl}></button>
+            <div className="actions-btn">
+                    <button  type="button" name="power" onClick={handleControl}><FontAwesomeIcon icon="play-circle" /></button>
+                   <button  type="button" name="network" onClick={handleControl}><FontAwesomeIcon icon="server" /></button>
+                    <button type="button" name="stop_power_force" onClick={handleControl}><FontAwesomeIcon icon="power-off" /></button>
                     
                     {role ? <Link to={`/servers/${hv}/${name}/info`}>
-                        <button className="bg_gear" type="button"></button>
+                        <button type="button"><FontAwesomeIcon icon="power-off" /></button>
                     </Link>:
                         null
-                    }
-                    
+                    }       
             </div>
         </div>
     )

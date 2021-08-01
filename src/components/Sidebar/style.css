@@ -1,30 +1,53 @@
-/* Сайдбар */
+.menu {
+    display: grid;
+    gap: 16px;
+    grid-template-rows: 1fr 10fr;
+}
+
+.user-info {
+    display: grid;
+    border-bottom: 1px solid #6c757d;
+}
 nav ul li {
     list-style-type: none;
-    padding: 8px;
+    margin-bottom: 16px;
     font-size: 16px;
 }
 nav ul {
-    padding: 8px;
+    padding: 16px;
 }
+
 nav {
     background-color: var(--bg-dark);
     border-right: 1px solid #6c757d;
-    z-index: 2;
 }
-a{
+
+a {
     color: rgba(255, 166, 0, 0.467);
     text-decoration: none;
 }
 a:hover {
     color: var(--bg-gold);
 }
+
 .active {
     color: rgb(255, 204, 0);
     text-decoration: underline;
 }
 
 .menu_email {
-    font-size: 16px;
+    align-self: center;
+    padding: 0 16px;
     color: var(--bg-secondary-light);
+}
+
+@media (max-width: 768px) {
+    .menu ul {
+        margin: 0;
+        border-bottom: 1px solid var(--bg-secondary);
+        text-align: center;
+      }
+      .menu ul li{
+        display: inline-block;
+      }
 }

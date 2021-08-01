@@ -11,25 +11,25 @@ import { SpinnerItem } from '../../../Spinner/SpinnerItem';
 
 export const ServerProcesses = (props) => {
     
-        const [processes, setprocesses] = useState([])
-        const [processesErr, setprocessesErr] = useState("")
-        const [isprocessesLoading, setProcessesLoading] = useState(false)
+        const [sessions, setSessions] = useState([])
+        const [sessionsErr, setSessionsErr] = useState("")
+        const [issessionsLoading, setSessionsLoading] = useState(false)
 
         useEffect(() => {
-                setProcessesLoading(true)
+                setSessionsLoading(true)
                 handleFetch("GET", `/servers/${props.match.params.hv}/${props.match.params.name}/manager`).then(({data, err}) => {
 
-                    setProcessesLoading(false)
+                    setSessionsLoading(false)
                     if (err) {
-                        setprocessesErr(err)
+                        setSessionsErr(err)
                     } else {
-                        setprocesses(data)
+                        setSessions(data)
                     }
                 })
         }, [props.match.params.hv, props.match.params.name])
-    const usersList = Object.entries(processes).map(el => {
         
-        return <ProcessUserItem u={el} />
+    const usersList = sessions.map((el, index) => {
+        return <ProcessUserItem key={index} u={el} params={props.match.params} />
     })
 
     return (
@@ -70,8 +70,8 @@ export const ServerProcesses = (props) => {
                                 <div className="div"></div>
                             </div>
                         {usersList ? usersList : null}
-                        {processesErr ? <Error err={processesErr} /> : null}
-                        {isprocessesLoading ? <SpinnerItem /> : null}
+                        {sessionsErr ? <Error err={sessionsErr} /> : null}
+                        {issessionsLoading ? <SpinnerItem /> : null}
                     </div>
                 </div>
             </div>

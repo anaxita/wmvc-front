@@ -54,23 +54,18 @@ export const ServersList = () => {
         <>
             <Sidebar />
             <div className="main">
-                <div className="header">
-                    <div className="header-btn">
-                        <button disabled="disabled" type="button" className="btn" onClick={() => { }}>New Server</button>
-                    </div>
-                    <div className="header-h">
-                        SERVERS({servers.length})
-                    </div>
-                    <div className="header-input">
-                        <input type="search" className="w-100" maxLength="255" onChange={onSearch}
+                <div className="servers-header">
+                    <div className="servers-header__search">
+                        <input type="search" maxLength="255" onChange={onSearch}
                             placeholder="Search server ..." />
                     </div>
+                    <div className=""></div>
                 </div>
                 <div className="content">
                     <div className="server-list-header">
                         <div className="srv-list-item">Name</div>
-                        <div className="srv-list-item">HV</div>
                         <div className="srv-list-item">State</div>
+                        <div className="srv-list-item">HV</div>
                         <div className="srv-list-item">Status</div>
                         <div className="srv-list-item">Network</div>
                         <div className="srv-list-item">CPU</div>

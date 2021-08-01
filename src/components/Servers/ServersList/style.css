@@ -1,8 +1,18 @@
+.servers-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 8px;
+    align-items: center ;
+    padding: 0 24px;
+    border-bottom: 1px solid #6c757d;
+  }
+
+
 .server-item {
     display: grid;
     gap: 8px;
-    grid-template-areas: "srv-name srv-hv srv-state srv-status srv-network srv-cpu srv-actions";
-    grid-template-columns: 3fr 3fr 2fr 2fr 2fr 3fr 2.5fr;
+    grid-template-areas: "srv-name srv-state srv-hv srv-status srv-network srv-cpu srv-actions";
+    grid-template-columns: 4fr 2fr 3fr 2fr 2fr 2fr 2fr;
     background-color: #6c757d;
     margin-bottom: 8px;
     border-radius: 5px;
@@ -11,9 +21,7 @@
     position: relative;
     font-size: 14px;
 }
-/* .content .server-item:nth-child(2) {
-    margin-top: 51px;
-} */
+
 .content .server-item:last-child {
     margin-bottom: 20px;
 }
@@ -24,7 +32,7 @@
     z-index: 1;
     display: grid;
     gap: 8px;
-    grid-template-columns: 3fr 3fr 2fr 2fr 2fr 3fr 2.5fr;
+    grid-template-columns: 4fr 2fr 3fr 2fr 2fr 2fr 2fr;
     align-items: center;
     background-color: #343a40;
     padding: 16px 8px 16px 8px;
@@ -58,6 +66,14 @@
 .srv-actions {
     grid-area: srv-actions;
 }
+
+.state-on {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--bg-gold) ;
+}
+
 .spinner-item-shadow {
     position: absolute;
     top: 0;
