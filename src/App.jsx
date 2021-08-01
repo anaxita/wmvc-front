@@ -7,9 +7,8 @@ import { Auth } from './components/Auth/Auth';
 import { ServerServices } from './components/Servers/Details/Services/ServerServices';
 import { ServerProcesses } from './components/Servers/Details/Processes/ServerProcesses';
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
-import { faUserEdit, faServer, faTimes, faPlayCircle, faSyncAlt, faSignOutAlt, faChevronDown, faChevronRight, faPowerOff, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-
-library.add(faUserEdit, faServer, faTimes, faPlayCircle, faSyncAlt, faSignOutAlt, faChevronDown, faChevronRight, faPowerOff, faArrowLeft)
+import { faUserEdit, faServer, faTimes, faPlayCircle, faSyncAlt, faSignOutAlt, faChevronDown, faChevronRight, faPowerOff, faArrowLeft, faNetworkWired, faCog } from '@fortawesome/free-solid-svg-icons'
+library.add(faUserEdit, faServer, faTimes, faPlayCircle, faSyncAlt, faSignOutAlt, faChevronDown, faChevronRight, faPowerOff, faArrowLeft, faNetworkWired, faCog)
 // chevron-down
 dom.watch()
 export const App = () => {

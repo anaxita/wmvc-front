@@ -115,11 +115,11 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             <div className="srv-cpu">{`${cpu_load}%`}</div>
             <div className="actions-btn">
                     <button  type="button" name="power" onClick={handleControl}><FontAwesomeIcon icon="play-circle" /></button>
-                   <button  type="button" name="network" onClick={handleControl}><FontAwesomeIcon icon="server" /></button>
+                   <button  type="button" name="network" onClick={handleControl}><FontAwesomeIcon icon="network-wired" /></button>
                     <button type="button" name="stop_power_force" onClick={handleControl}><FontAwesomeIcon icon="power-off" /></button>
                     
                     {role ? <Link to={`/servers/${hv}/${name}/info`}>
-                        <button type="button"><FontAwesomeIcon icon="power-off" /></button>
+                        <button type="button"><FontAwesomeIcon icon="cog" /></button>
                     </Link>:
                         null
                     }       
