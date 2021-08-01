@@ -12,6 +12,11 @@
     color:  #6c757d;
     background-color: var(--bg-dark);
 }
+
+.sc-items {
+    max-height: 80vh;
+    overflow: auto;
+}
 .sc-i {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr 2fr 1fr;

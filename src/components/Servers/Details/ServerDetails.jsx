@@ -66,14 +66,14 @@ export const ServerDetails = (props) => {
         <>
             <Sidebar />
             <div className="main">
-                <div className="header header-servers-details">
+                <div className="header-details">
                     <Link to={`/servers/`} className="btn btn-back">
                         <FontAwesomeIcon icon="arrow-left" />
                     </Link>
-                    <div className="header-h">
+                    <div className="header-details__h">
                         {props.match.params.name}
                     </div>
-                    <div className="header-btn">
+                    <div className="header-details__links">
                         <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/info`} className="btn bg-gold text-dark">
                             Инфо
                         </Link>
@@ -84,13 +84,12 @@ export const ServerDetails = (props) => {
                             Процессы
                         </Link>
                     </div>
-                    <div className="header-input">
-                        {/* <input type="search" className="w-100"
-                            placeholder="Search..."  disabled/> */}
+                    <div className="header-details__search m-d-none">
+                        <input type="search" className="w-100"
+                            placeholder="Search..."  disabled/>
                     </div>
                 </div>
                 <div className="content params">
-                    <div>
                         {
                             isVmLoading ? <Spinner text="Load VM info..." /> : (vmErr ? <Error err={vmErr} /> : (
                                 <div>
@@ -121,11 +120,10 @@ export const ServerDetails = (props) => {
                                     <div className="params-item border-secondary">
                                         DESCRIPTION: <span >{vm.description}</span>
                                     </div>
-                                </div>
+                    </div>
                             )
                             )
                         }
-                    </div>
 
                     <div className="disks border-secondary">
                         {

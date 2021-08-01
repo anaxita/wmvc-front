@@ -36,27 +36,27 @@ export const ServerProcesses = (props) => {
         <>
             <Sidebar />
             <div className="main">
-                <div className="header header-servers-details">
+            <div className="header-details">
                     <Link to={`/servers/`} className="btn btn-back">
                         <FontAwesomeIcon icon="arrow-left" />
                     </Link>
-                    <div className="header-btn">
+                    <div className="header-details__h">
+                        {props.match.params.name}
+                    </div>
+                    <div className="header-details__links">
                         <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/info`} className="btn">
                             Инфо
                         </Link>
-                        <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/services`} className="btn">
+                        <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/services`} className="btn ">
                             Службы
                         </Link>
                         <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/processes`} className="btn bg-gold text-dark">
                             Процессы
                         </Link>
                     </div>
-                    <div className="header-h">
-                        {props.match.params.name}
-                    </div>
-                    <div className="header-input">
+                    <div className="header-details__search">
                         <input type="search" className="w-100"
-                            placeholder="Search server ..." />
+                            placeholder="Search..." />
                     </div>
                 </div>
                 <div className="content">

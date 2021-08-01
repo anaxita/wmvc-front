@@ -83,6 +83,12 @@
 }
 
 @media (max-width: 768px) {
+    .header-details {
+        grid-template-areas: "back server"
+                            "links links"
+                            "search search";
+    }
+    
     .processes-header{
         grid-template-columns: 4fr 2fr 2fr 4fr 1fr 1fr !important;
         padding: 4px 8px !important;
