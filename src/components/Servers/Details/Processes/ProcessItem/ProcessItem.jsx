@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { handleFetch } from '../../../../Fetch/store';
-import { useState } from 'react/cjs/react.development';
+import { useState } from 'react';
 import { ErrorAbsolute } from '../../../../Error/ErrorAbsolute';
 
 export const ProcessItem = ({ params, processes }) => {
