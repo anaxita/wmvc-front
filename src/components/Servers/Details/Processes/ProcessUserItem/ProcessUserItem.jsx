@@ -10,7 +10,7 @@ export const ProcessUserItem = ({ u, params }) => {
         return <ProcessItem key={index} processes={el} params={params} />
     })
 
-    const [isShowProcesses, setShowProcesses] = useState(false)
+    const [isShowProcesses, setShowProcesses] = useState(0)
     const [userErr, setUserErr] = useState('')
     const showProcesses = () => {
         setShowProcesses(!isShowProcesses)
