@@ -58,6 +58,8 @@ export const Auth = () => {
                 return newState
             })
         }
+
+        return null
     }, [])
 
     if (isRedirect) {

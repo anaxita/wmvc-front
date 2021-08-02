@@ -27,6 +27,8 @@ export const ServerServices = (props) => {
                 setServices(data)
             }
         })
+
+        return null
     }, [props.match.params.hv, props.match.params.name])
 
     
@@ -34,6 +36,7 @@ export const ServerServices = (props) => {
     const servicesList = services.map((s) => {
         return (
             <Item 
+                key={s.name}
                 service={s} 
                 params={props.match.params}
             />

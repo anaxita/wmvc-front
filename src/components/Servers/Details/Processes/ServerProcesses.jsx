@@ -26,6 +26,8 @@ export const ServerProcesses = (props) => {
                         setSessions(data)
                     }
                 })
+
+                return null
         }, [props.match.params.hv, props.match.params.name])
         
     const usersList = sessions.map((el, index) => {

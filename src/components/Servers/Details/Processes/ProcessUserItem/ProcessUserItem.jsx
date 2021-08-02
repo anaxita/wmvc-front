@@ -12,11 +12,9 @@ export const ProcessUserItem = ({ u, params }) => {
 
     const [isShowProcesses, setShowProcesses] = useState(false)
     const [userErr, setUserErr] = useState('')
-
     const showProcesses = () => {
         setShowProcesses(!isShowProcesses)
     }
-
 
     const logoffUser = (e) => {
         e.preventDefault()
@@ -30,6 +28,7 @@ export const ProcessUserItem = ({ u, params }) => {
             }
         })
     }
+
     return (
         <div className="processes-list" key={u.user_name}>
             {userErr ? <ErrorAbsolute err={userErr} /> : null}

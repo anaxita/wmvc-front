@@ -31,6 +31,8 @@ export const ServerDetails = (props) => {
                 setVm(data)
             }
         })
+
+        return null
         }, [props.match.params.hv, props.match.params.name])
 
     useEffect( () => {
@@ -45,6 +47,8 @@ export const ServerDetails = (props) => {
                 setDisks(data)
             }
         })
+
+        return null
     }, [props.match.params.hv, props.match.params.name])
 
     
