@@ -10,6 +10,7 @@ import { Spinner } from '../../Spinner/Spinner';
 import './style.css'
 
 export const ServerDetails = (props) => {
+    
     const [vm, setVm] = useState({})
     const [vmErr, setVmErr] = useState("")
     const [isVmLoading, setVmLoading] = useState(false)

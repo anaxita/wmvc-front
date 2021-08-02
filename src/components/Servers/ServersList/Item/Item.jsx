@@ -97,13 +97,7 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             handleSetIsLoading(false);
         })
     }
-    const role = () => {
-        if (getUserInfo()) {
-            return getUserInfo().role;
-        } else {
-            return 0;
-        }
-    }
+    const {role} = getUserInfo()
 
     return (
         <div className="server-item" id={"server-" + id}>
