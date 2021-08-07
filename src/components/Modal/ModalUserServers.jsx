@@ -35,6 +35,7 @@ export const ModalUserServers = ({ setModalShow, userID }) => {
                     setError('');
                 }, 10000)
             })
+        return null
     }, [userID])
 
     const changeAddedStatus = (userID) => {

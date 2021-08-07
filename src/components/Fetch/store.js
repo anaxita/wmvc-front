@@ -42,7 +42,7 @@ const handleRefreshToken = async (method, uri, body = '') => {
 }
 
 export const handleFetch = (method, uri, body = '') => {
-    const rezultPromise = new Promise(async (resove) => {
+    const rezultPromise = new Promise(async (resolve) => {
         let result = {
             data: [],
             err: '',
@@ -90,7 +90,7 @@ export const handleFetch = (method, uri, body = '') => {
                 }
             })
 
-        resove(result)
+        resolve(result)
     })
 
     return rezultPromise

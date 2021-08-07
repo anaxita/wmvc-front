@@ -1,29 +1,37 @@
 import React from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { handleFetch } from '../../../../Fetch/store';
-import { useState } from 'react/cjs/react.development';
 import { ErrorAbsolute } from '../../../../Error/ErrorAbsolute';
+import { SpinnerItem } from '../../../../Spinner/SpinnerItem';
 
-export const ProcessItem = ({ params, processes }) => {
+export const ProcessItem = ({ params, process, removeProcess }) => {
     const [prcErr, serPrcErr] = useState('')
+    const [isLoading, handleSetIsLoading] = useState(false)
 
     const stopProcess = (e) => {
         e.preventDefault()
-
-        handleFetch('POST', `/servers/${params.hv}/${params.name}/manager`, { entity_id: processes.id, command: 'stop' })
+        handleSetIsLoading(true);
+        handleFetch('POST', `/servers/${params.hv}/${params.name}/manager`, { entity_id: process.id, command: 'stop' })
             .then(({ err }) => {
                 if (err) {
                     serPrcErr(err)
+                } else {
+                    removeProcess(process.id)
                 }
+            })
+            .finally(() => {
+                handleSetIsLoading(false);
             })
     }
     return (
-        <div className="process-item" key={processes.name}>
+        <div className="process-item" key={process.name}>
             {prcErr ? <ErrorAbsolute  err={prcErr}/> : null}
-            <div className="process-item__name">{processes.name}</div>
+            {isLoading ? <SpinnerItem /> : null}
+            <div className="process-item__name">{process.name}</div>
             <div></div>
-            <div>{processes.cpu_load}</div>
-            <div>{processes.memory}</div>
+            <div>{process.cpu_load}</div>
+            <div>{process.memory}</div>
             <div className="actions-btn process-item__btn">
                 <button type="button" onClick={stopProcess}>
                     <FontAwesomeIcon icon="times" />

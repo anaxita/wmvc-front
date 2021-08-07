@@ -6,8 +6,14 @@ import {handleFetch} from '../../../../Fetch/store'
 import { ErrorAbsolute } from '../../../../Error/ErrorAbsolute';
 
 export const ProcessUserItem = ({ u, params }) => {
-    const prcList = u.processes.map((el, index) => {
-        return <ProcessItem key={index} processes={el} params={params} />
+    const [processes, setProcesses] = useState(u.processes)
+    const removeProcess = (id) => {
+        setProcesses((state) => {
+            return state.filter((el) => el.id !== id ? el : null)
+        })
+    }
+    const prcList = processes.map((el, index) => {
+        return <ProcessItem key={index} removeProcess={removeProcess} process={el} params={params} />
     })
 
     const [isShowProcesses, setShowProcesses] = useState(false)
