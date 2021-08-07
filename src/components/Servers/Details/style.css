@@ -1,3 +1,39 @@
+.header-details {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 5fr 5fr 1fr;
+    grid-template-areas: "back search server links";
+    gap: 8px;
+    border-bottom: 1px solid #6c757d;
+    padding: 0 24px;
+}
+
+.btn-back {
+    grid-area: back;
+}
+
+.header-details__h{
+    grid-area: server;
+}
+
+.header-details__links {
+    display: flex;
+    gap: 16px;
+    grid-area: links;
+}
+
+.header-details__links .btn {
+    width: 100px;
+    text-align: center;
+}
+
+.header-details__search {
+    grid-area: search;
+}
+
+.header-details__search  input{
+    max-width: 400px;
+}
 .params {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -8,6 +44,8 @@
 }
 
 .params-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     padding: 8px;
     margin: 8px;
     border-bottom: 1px solid;
@@ -15,8 +53,7 @@
 }
 
 .params-item span {
-    color: var(--bg-secondary);
-    font-size: 14px;
+    color: rgb(250, 243, 243);
 }
 
 .disks {
@@ -34,7 +71,7 @@
 .disks-item{
    list-style-type: none;
    padding: 8px;
-   margin: 8px;;
+   margin: 8px;
 }
 
 .disks-item input {
@@ -52,40 +89,23 @@
     text-align: center;
     width: min-content;
 }
-.main .header-servers-details {
-    grid-template-areas: 'header-back header-h header-input header-btn';
-    grid-template-columns: 0.3fr 1fr 2fr 6fr;
-}
-.header-servers-details .header-h {
-    margin: 0 16px;
-}
+
 @media (max-width: 768px) {
-    .main .header-servers-details {
-        flex-wrap: wrap;
-        padding: 0 16px !important;
+    .header-details {
+        grid-template-columns: 1fr 3fr;
+        grid-template-areas: "back server"
+                            "links links";
+        padding: 8px 12px;
     }
-    .header-servers-details  .header-input {
-        width: 100%;
-    }
+
     .disks-item input {
         min-width: auto;
         width: 100%;
     }
-    .header-servers-details{
-            grid-template-areas:
-            'header-h'
-            'header-btn'
-            'header-input' !important;
-            padding: 0 8px 0 8px !important;
-    }
-    .header-input {
-        margin-bottom: 8px;
-    }
-
+    
     .params{
-        grid-template-columns: auto !important;
-        overflow-x: hidden;
-        padding: 0;
+        grid-template-columns: 1fr;
+        align-content: flex-start;
     }
 
 

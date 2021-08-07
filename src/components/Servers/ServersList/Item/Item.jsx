@@ -97,13 +97,7 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             handleSetIsLoading(false);
         })
     }
-    const role = () => {
-        if (getUserInfo()) {
-            return getUserInfo().role;
-        } else {
-            return 0;
-        }
-    }
+    const {role} = getUserInfo()
 
     return (
         <div className="server-item" id={"server-" + id}>
@@ -111,7 +105,7 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             {error ? <ErrorAbsolute err={error} /> : null}
             <div className="srv-name">{name}</div>
             <div className="srv-hv">{hv}</div>
-            <div className="srv-state"><span className={"srv-state_name"}>Состояние</span> {(powerState === 'Running') ? <div className="state-on"></div> : <div className="state-off"></div>}</div>
+            <div className="srv-state"><span className={"srv-state_name"}>Питание</span> {(powerState === 'Running') ? <div className="state-on"></div> : <div className="state-off"></div>}</div>
             <div className="srv-status">{(status === 'Работает нормально') ? '' : status}</div>
             <div className="srv-network"><span className={"srv-state_name"}>Сеть</span> {networkState ? <div className="state-on"></div> : <div className="state-off"></div>}</div>
             <div className="srv-cpu">{`${cpu_load}%`}</div>

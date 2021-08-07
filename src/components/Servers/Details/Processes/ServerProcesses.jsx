@@ -26,6 +26,8 @@ export const ServerProcesses = (props) => {
                         setSessions(data)
                     }
                 })
+
+                return null
         }, [props.match.params.hv, props.match.params.name])
         
     const usersList = sessions.map((el, index) => {
@@ -36,27 +38,27 @@ export const ServerProcesses = (props) => {
         <>
             <Sidebar />
             <div className="main">
-                <div className="header header-servers-details">
+            <div className="header-details">
                     <Link to={`/servers/`} className="btn btn-back">
                         <FontAwesomeIcon icon="arrow-left" />
                     </Link>
-                    <div className="header-btn">
+                    <div className="header-details__h">
+                        {props.match.params.name}
+                    </div>
+                    <div className="header-details__links">
                         <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/info`} className="btn">
                             Инфо
                         </Link>
-                        <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/services`} className="btn">
+                        <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/services`} className="btn ">
                             Службы
                         </Link>
                         <Link to={`/servers/${props.match.params.hv}/${props.match.params.name}/processes`} className="btn bg-gold text-dark">
                             Процессы
                         </Link>
                     </div>
-                    <div className="header-h">
-                        {props.match.params.name}
-                    </div>
-                    <div className="header-input">
+                    <div className="header-details__search">
                         <input type="search" className="w-100"
-                            placeholder="Search server ..." />
+                            placeholder="Search..." />
                     </div>
                 </div>
                 <div className="content">
@@ -64,8 +66,8 @@ export const ServerProcesses = (props) => {
                             <div className="processes-header">
                                 <div className="">Users</div>
                                 <div className="">State</div>
-                                <div className="">78%</div>
-                                <div className="">75452(98%)</div>
+                                <div className="">CPU (75%)</div>
+                                <div className="">RAM (90%)</div>
                                 <div className="div"></div>
                                 <div className="div"></div>
                             </div>
