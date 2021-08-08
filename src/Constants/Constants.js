@@ -8,17 +8,20 @@ export const getUserInfo = () => {
 }
 
 export const getSearch = (itemsList, value) => {
-    let newItemsList = itemsList.filter((item) => {
-        let values = Object.values(item); //Возвращает массив со значениеями объекта ['admin', 'фиксики', 0]
+    return itemsList.filter((item) => {
+        let values = Object.values(item) //Возвращает массив со значениеями объекта ['admin', 'фиксики', 0]
         let isOk = false
 
         values.forEach((v) => {
             if (typeof v === 'string') {
                 let isInclude = v.toLowerCase().trim().includes(value.toLowerCase().trim())
-                if(isInclude) {
-                    isOk = true;
-                    return false;
+
+                if (isInclude) {
+                    isOk = true
+
+                    return
                 }
+
             }
         })
 
@@ -28,5 +31,4 @@ export const getSearch = (itemsList, value) => {
 
         return null
     })
-    return newItemsList
 }
