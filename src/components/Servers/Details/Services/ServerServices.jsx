@@ -10,11 +10,14 @@ import './style.css'
 import { Sidebar } from '../../../Sidebar/Sidebar';
 import Item from './Item/item';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getSearch } from '../../../../Constants/Constants';
 
 export const ServerServices = (props) => {
     const [services, setServices] = useState([])
     const [servicesErr, setServicesErr] = useState("")
     const [isServicesLoading, setServicesLoading] = useState(false)
+    const [isSearch, setSearch] = useState(false);
+    const [servicesSearch, setServicesSearch] = useState([]);
 
     useEffect( () => {
         setServicesLoading(true)
@@ -33,15 +36,40 @@ export const ServerServices = (props) => {
 
     
 
-    const servicesList = services.map((s) => {
-        return (
-            <Item 
-                key={s.name}
-                service={s} 
-                params={props.match.params}
-            />
-        )
-    })
+    const onSearch = (e) => {
+        let value = e.target.value;
+        if (value) {
+            setSearch(true);
+            setServicesSearch(getSearch(services, value));
+        } else {
+            setSearch(false);
+        }
+    }
+
+    let servicesList = []
+
+    if (!isSearch) {
+        servicesList = services.map((s) => {
+            return (
+                <Item 
+                    key={s.name}
+                    service={s} 
+                    params={props.match.params}
+                />
+            )
+        })
+    } else {
+        servicesList = servicesSearch.map((s) => {
+            return (
+                <Item 
+                    key={s.name}
+                    service={s} 
+                    params={props.match.params}
+                />
+            )
+        })
+    }
+
 
     return (
         <>
@@ -67,7 +95,7 @@ export const ServerServices = (props) => {
                     </div>
                     <div className="header-details__search">
                         <input type="search" className="w-100"
-                            placeholder="Search..." />
+                            placeholder="Search..." onChange={onSearch}/>
                     </div>
                 </div>
                 <div className="content">

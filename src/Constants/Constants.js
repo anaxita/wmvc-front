@@ -14,7 +14,7 @@ export const getSearch = (itemsList, value) => {
 
         values.forEach((v) => {
             if (typeof v === 'string') {
-                let isInclude = v.toLowerCase().includes(value.toLowerCase())
+                let isInclude = v.toLowerCase().trim().includes(value.toLowerCase().trim())
                 if(isInclude) {
                     isOk = true;
                     return false;
