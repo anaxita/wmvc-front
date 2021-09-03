@@ -24,26 +24,32 @@ const $usersStore = createStore({
 
 
 export const handleAddUser = createEffect( async (user) => {
-    const {data, err} = await handleFetch('post', '/users', user);
-    if(!err) {
-        user.id = data.id;
-        return user;
-    } else {
-        setError(err);
-        return;
-    }
+    await handleFetch('post', '/users', user).then(({data, err}) => {
+
+        if(err) {
+            setError(err);
+        } else {
+            user.id = data.id;
+        }
+    })
+        
+    return user
 })
 
-export const handleGetUsers = createEffect(async () => {
+export const handleGetUsers = createEffect( async () => {
+    let users = []
     setLoading(true);
-    const {data, err} = await handleFetch('get', '/users');
-    setLoading(false);
-    if(!err) {
-        return data.users;
-    } else {
-        setError(err);
-        return [];
-    }
+    await handleFetch('get', '/users').then(({data, err}) => {
+        setLoading(false);
+        if(err) {
+            setError(err);
+        } else {
+        
+            users = data.users;
+        }
+    })
+
+    return users
 })
 
 export const onSortUsers = (state, field) => {

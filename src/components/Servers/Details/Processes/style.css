@@ -33,7 +33,7 @@
     display: grid;
     grid-template-columns: 4fr 4fr 2fr 2fr 1fr;
     border-radius: 5px;
-    padding: 8px 16px;
+    padding: 16px;
     color:  #6c757d;
 }
 .processes-header div {
@@ -41,34 +41,54 @@
     width: 20%;
 }
 .processes-list{
+    position: relative;
     display: grid;
     grid-template-columns: 4fr 4fr 2fr 2fr 1fr;
     grid-template-areas:
     'prc-usr prc-state prc-cpu prc-ram prc-actions'
     'prc-pl prc-pl prc-pl prc-pl prc-pl';
-
     align-items: center;
     border-radius: 5px;
     background-color: #6c757d;
     margin-bottom: 8px;
     padding: 8px 16px;
+    font-size: 14px;
 }
 
 .process-item{
+    padding: 8px 0;
+    position: relative;
     display: grid;
-    grid-template-columns: 4fr 4fr 2fr 2fr 1fr;
+    grid-template-columns: 6fr 2fr 2fr 2fr 1fr;
     align-items: center;
-    justify-content: center;
     margin-bottom: 8px;
+    word-break: break-all; 
 }
+.process-item:nth-child(even) {
+    background-color: #575f68;
 
+}
 .process-item:hover {
     background-color: #8f9ba7;
     border-radius: 5px;
 }
 
+.process-item__name {
+    padding: 0 0 0 16px;
+}
+
+.process-item__btn button{
+    width: 24px !important;
+    height: 24px !important;
+}
 
 @media (max-width: 768px) {
+    .header-details {
+        grid-template-areas: "back server"
+                            "links links"
+                            "search search";
+    }
+    
     .processes-header{
         grid-template-columns: 4fr 2fr 2fr 4fr 1fr 1fr !important;
         padding: 4px 8px !important;

@@ -9,15 +9,21 @@
   --bg-info: #17a2b8;
 }
 
-html body {
+body {
   margin: 0;
   padding: 0;
-  background-color: #6c757d;
+  background-color: var(--bg-dark);
   color: rgb(250, 243, 243);
   font-family: 'Roboto', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
+  height: 100vh;
+  /* overflow: hidden; */
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+}
 button {
   padding: 0;
   margin: 0;
@@ -30,9 +36,11 @@ button {
   font-size: inherit;
   color: var(--bg-secondary);
 }
+
 button:hover{
   color: var(--bg-secondary-light);
 }
+
 
 /* Основной макет */
 .grid {
@@ -44,51 +52,47 @@ button:hover{
 /* MAIN */
 .main {
   display: grid;
-  grid-template-rows: 1fr 15fr;
+  grid-template-rows: 1fr 10fr;
+  gap: 16px;
   background-color: var(--bg-dark);
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 /* HEADER */
 .header {
   display: grid;
-  grid-template-areas: 'header-btn header-h  header-input';
-  grid-template-columns: 4fr 2fr 4fr;
-  padding: 8px;
+  gap: 16px;
+  grid-template-areas: 'header-input header-btn';
+  grid-template-columns: 1fr 2fr;
+  padding: 0 24px;
   background-color: var(--bg-dark);
   border-bottom: 1px solid #6c757d;
   align-items: center;
   justify-content: center;
 }
 
-.header-h {
-  grid-area: header-h;
-  text-align: center;
-}
 
 .header-btn {
   grid-area: header-btn;
   padding: 0px;
+  justify-self: end;
+  display: flex;
 }
-
-.header-btn button {
-  margin-right: 8px;
-}
-
 
 .header-input {
   grid-area: header-input;
   padding: 0px;
+
 }
 
 /* CONTENT */
 .content {
-  /* background-color: rgba(186, 58, 171, 0.686); */
   background-color: var(--bg-dark);
-  padding: 8px;
-  height: 100%;
-  overflow-y: auto;
+  padding: 0px 24px;
+
+  position: relative;
+
 }
 
 /* Цвета */
@@ -135,6 +139,7 @@ button:hover{
 /* Кнопки */
 .btn {
   appearance: none;
+  /* padding: 8px 16px; */
   padding: 8px 16px;
   border: 1px solid var(--bg-gold);
   border-radius: 5px;
@@ -143,6 +148,7 @@ button:hover{
   font-family: inherit;
   font-size: inherit;
   transition: 0.3s;
+  font-size: 13px;
 }
 
 .btn:hover {
@@ -160,9 +166,9 @@ button:hover{
 }
 
 .btn[disabled] {
-  color: #d2d5db !important;
-  background: #6c7589 !important;
-  border: 1px solid #ffffff;
+  color: #7d7f85 !important;
+  background: var(--bg-dark) !important;
+  border: 1px solid #7d7f85;
   cursor: not-allowed;
 }
 
@@ -171,6 +177,8 @@ button:hover{
 .actions-btn {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 .actions-btn button{
   color: var(--bg-gold);
@@ -179,9 +187,9 @@ button:hover{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 8px;
-  width: 32px;
-  height: 32px;
+  /* margin-right: 8px; */
+  width: 24px;
+  height: 24px;
 }
 
 
@@ -248,7 +256,8 @@ button:hover{
 
 input[type="text"], input[type="search"], input[type="password"]{
   appearance: none;
-  padding: 8px 16px;
+  /* padding: 8px 16px; */
+  padding: 8px 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-family: inherit;
@@ -332,14 +341,15 @@ select{
   background-color: var(--bg-dark);
   border: 1px solid var(--bg-secondary);
   border-radius: 5px;
-  padding:8px;
+  padding:16px 16px 0 16px;
 }
 
 .modal-header {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+  font-size: 16px;
 }
 
 .modal-body {
@@ -351,9 +361,13 @@ select{
 .modal-body select, .modal-body input {
   width: 100%;
   margin-bottom: 8px;
+  margin-right: 8px;
 }
 .modal-body input[type="checkbox"] {
   width: auto;
+}
+#inputPassword {
+  margin-bottom: 16px;
 }
 .modal-body label{
   display: block;
@@ -375,7 +389,7 @@ select{
   margin-right: 8px;
 }
 .err {
-  margin: 0 8px;
+  margin: 0 8px 8px 8px;
 }
 .err-shadow {
   position: absolute;
@@ -389,43 +403,33 @@ select{
     background-color: #00000094;
     border-radius: 5px;
 }
+.my-disabled-input {
+  cursor: not-allowed;
+}
 @media (max-width: 768px) {
-  html body {
-  font-size: 14px;
+  .m-d-none {
+    display: none;
   }
+  
   .grid {
     grid-template-rows: 1fr 15fr;
     grid-template-columns: auto;
   }
-  .menu ul {
-    margin: 0;
-    border-bottom: 1px solid var(--bg-secondary);
-    text-align: center;
-  }
-  .menu ul li{
-    display: inline-block;
-  }
-  .main {
-  grid-template-rows: 1fr 8fr !important;
-  }
+
   .header {
-    grid-template-areas: 'header-btn header-h'
-    'header-input header-input';
-    grid-template-columns: 1fr;
+  grid-template-columns: 1fr auto;
+    padding: 8px 16px;
+    justify-content: space-between;
   }
 
   .header-input {
-    margin-top: 8px;
+    margin: 0;
   }
-  .actions-btn button {
-    max-width: 24px;
-    max-height:  24px;
-    margin-right: 16px;
+ 
+  .content {
+    padding-top: 8px;
+    padding: 8px 12px 8px 12px;
   }
-
-.btn{
-  padding: 4px 8px;
-}
 }
 
 @media (max-width: 576px) {
@@ -440,3 +444,96 @@ select{
     text-align: center;
   }
 }
+
+/* checkbox lke google */
+/* .checkbox-google {
+	display: inline-block;    
+	height: 28px;    
+	line-height: 28px;      
+	margin-right: 10px;       
+	position: relative;
+	vertical-align: middle;
+	font-size: 14px;
+	user-select: none;	
+}
+.checkbox-google .checkbox-google-switch {
+	display: inline-block;	
+	width: 36px;
+	height: 14px;	
+	border-radius: 20px;
+	position: relative;
+	top: 6px;			
+	vertical-align: top;
+	background: #9f9f9f;
+	transition: .2s;
+}
+.checkbox-google .checkbox-google-switch:before {
+	content: '';
+	display: inline-block;	
+	width: 20px;	
+	height: 20px;
+	position: absolute;
+	top: -3px;
+	left: -1px;
+	background: #fff;
+	border-radius: 50%;
+	box-shadow: 0 3px 1px -2px rgba(0,0,0,0.2), 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12);
+	transition: .15s;		
+}
+.checkbox-google input[type=checkbox] {
+	display: block;	
+	width: 0;
+	height: 0;	
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+.checkbox-google input[type=checkbox]:checked + .checkbox-google-switch {
+	background: #76eb76;
+}
+.checkbox-google input[type=checkbox]:checked + .checkbox-google-switch:before {
+	background: #01ff01;
+	transform:translateX(18px);
+}
+ 
+
+.checkbox-google input[type="checkbox"]:not(:disabled) + .checkbox-google-switch {
+	cursor: pointer;
+	border-color: rgba(0, 0, 0, .3);
+}
+ 
+
+.checkbox-google input[type="checkbox"]:not(:disabled):active + .checkbox-google-switch:before, 
+.checkbox-google input[type="checkbox"]:not(:disabled):focus + .checkbox-google-switch:before {
+	animation: checkbox-active-on 0.5s forwards linear;
+}
+@keyframes checkbox-active-on {
+	0% {
+		box-shadow: 0 0 0 0 rgba(212,212,212, 0);
+	}
+	99% {
+		box-shadow: 0 0 0 4px rgba(212,212,212, 0.5);
+	}
+}
+ 
+.checkbox-google input[type="checkbox"]:not(:disabled):checked:active + .checkbox-google-switch:before, 
+.checkbox-google input[type="checkbox"]:not(:disabled):checked:focus + .checkbox-google-switch:before {
+	animation: checkbox-active-off 0.5s forwards linear;
+}
+@keyframes checkbox-active-off {
+	0% {
+		box-shadow: 0 0 0 0 rgba(154,190,247, 0);
+	}
+	99% {
+		box-shadow: 0 0 0 4px rgba(154,190,247, 0.5);
+	}
+}
+ 
+
+.checkbox-google input[type=checkbox]:disabled + .checkbox-google-switch {
+	filter: grayscale(60%);
+	border-color: rgba(0, 0, 0, .1);
+}
+.checkbox-google input[type=checkbox]:disabled + .checkbox-google-switch:before {
+	background: #eee;
+} */

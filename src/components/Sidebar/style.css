@@ -1,24 +1,33 @@
-/* Сайдбар */
+.menu {
+    display: grid;
+    gap: 16px;
+    grid-template-rows: 1fr 10fr;
+}
+
+.user-info {
+    display: grid;
+    border-bottom: 1px solid #6c757d;
+}
 nav ul li {
-list-style-type: none;
-padding: 8px;
+    list-style-type: none;
+    margin-bottom: 16px;
+    font-size: 16px;
 }
 nav ul {
-padding: 8px;
+    padding: 16px;
 }
 
 nav {
-background-color: var(--bg-dark);
-border-right: 1px solid #6c757d;
+    background-color: var(--bg-dark);
+    border-right: 1px solid #6c757d;
 }
 
-a{
-color: rgba(255, 166, 0, 0.467);
-text-decoration: none;
+a {
+    color: rgba(255, 166, 0, 0.467);
+    text-decoration: none;
 }
-
 a:hover {
-color: var(--bg-gold);
+    color: var(--bg-gold);
 }
 
 .active {
@@ -27,6 +36,27 @@ color: var(--bg-gold);
 }
 
 .menu_email {
-    font-size: 14px;
+    align-self: center;
+    padding: 0 16px;
     color: var(--bg-secondary-light);
+}
+
+@media (max-width: 768px) {
+    .menu {
+        grid-template-rows: auto;
+    }
+    .menu ul {
+        margin: 0;
+        border-bottom: 1px solid var(--bg-secondary);
+        text-align: center;
+        padding: 8px;
+      }
+      .menu ul li{
+        display: inline-block;
+        margin: 0 0 0 16px;
+      }
+
+      .user-info {
+          display: none;
+      }
 }

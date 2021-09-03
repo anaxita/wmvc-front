@@ -1,20 +1,20 @@
 .user-item {
     display: grid;
-    grid-template-areas: "usr-name usr-login user-company usr-role usr-created usr-actions";
-    grid-template-columns: 2fr 2fr 3fr 2fr 1fr 2fr;
+    grid-template-areas: "usr-name usr-login usr-role usr-created usr-actions";
+    grid-template-columns: 2fr 2fr 3fr 2fr 1.2fr;
     background-color: #6c757d;
     margin-bottom: 8px;
     border-radius: 5px;
-    padding: 8px 8px 8px 16px;
+    padding: 8px 16px;
     align-items: center;
     position: relative;
+    font-size: 14px;
 }
-
 .user-list-header {
     display: grid;
-    grid-template-columns: 2fr 2fr 3fr 2fr 1fr 2fr;
+    grid-template-columns: 2fr 2fr 3fr 2fr 1.2fr;
     background-color: #343a40;
-    padding: 8px 8px 8px 16px;
+    padding: 16px;
     color: var(--bg-secondary);
 }
 

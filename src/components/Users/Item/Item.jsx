@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from "react"
-import { TOKEN_ACCESS } from '../../../Constants/Constants';
 import { ModalUserEdit } from '../../Modal/ModalUserEdit';
 import { ModalUserServers } from '../../Modal/ModalUserServers';
 import { ErrorAbsolute } from '../../Error/ErrorAbsolute';
@@ -14,52 +13,21 @@ export const UserItem = ({ id, name, role, email, company, handleDeleteUser }) =
     const [isModalShow, setModalEditUserShow] = useState(false)
     const [isModalEditUserServers, setModalEditUserServersShow] = useState(false)
 
-    const onDeleteUser = async (e) => {
+    const onDeleteUser =  (e) => {
         e.preventDefault();
         handleSetError('');
         handleSetIsLoading(true);
 
-
-        const { err } = handleFetch('DELETE', `${localStorage.getItem('cacheServerUrl')}/users`, { id: id })
-        // try {
-        //     const f = await fetch(`${localStorage.getItem('cacheServerUrl')}/users`, {
-        //         method: 'DELETE',
-        //         headers: {
-        //             'Authorization': `Bearer ${TOKEN_ACCESS}`,
-        //             'Contnet-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify({
-        //             id: id
-        //         })
-        //     })
-
-        //     const response = await f.json()
-
-        //     if (response.status === "ok") {
-        //         handleDeleteUser(id)
-        //     } else {
-        //         handleSetError(response.message.err);
-        //     }
-        // }
-        // catch (e) {
-        //     handleSetError('Ошибка соединения с сервером ' + e);
-        // }
-        // finally {
-        //     handleSetIsLoading(false);
-        //     setTimeout(() => {
-        //         handleSetError('');
-        //     }, 3000)
-        // }
-
-        if (err) {
-            handleSetError(err)
-            setTimeout(() => {
-                handleSetError('');
-            }, 3000)
-        } else {
-            handleDeleteUser(id)
-        }
-
+        handleFetch('DELETE', `/users`, { id: id }).then(({err}) => {
+            if (err) {
+                handleSetError(err)
+                setTimeout(() => {
+                    handleSetError('');
+                }, 3000)
+            } else {
+                handleDeleteUser(id)
+            }  
+        })
     }
 
     return (
@@ -69,7 +37,7 @@ export const UserItem = ({ id, name, role, email, company, handleDeleteUser }) =
             {isModalEditUserServers ? <ModalUserServers setModalShow={setModalEditUserServersShow} userID={id} /> : null}
             <div className="usr-name">{name}</div>
             <div className="usr-login">{email}</div>
-            <div className="usr-company">{company}</div>
+            {/* <div className="usr-company">{company}</div> */}
             <div className="usr-role">{role ? <span>Administrator</span> : <span>User</span>}</div>
             <div className="usr-created">25-05-2022 </div>
             <div className="usr-actions actions-btn">

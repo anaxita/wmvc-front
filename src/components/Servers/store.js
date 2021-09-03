@@ -15,39 +15,41 @@ export const handleServerNetworkLoading = createEvent()
 // Get servers
 export const handleGetServers = createEffect(async () => {
     handleServersLoading(true)
-    const { data, err } = await handleFetch('GET', '/servers', '')
+    let result = []
+    
+    await handleFetch('GET', '/servers').then(({ data, err }) => {    
+        if (err) {
+            handleServersError(err)
+        } else {
+            result = data.servers.map(el => {
+                el.isLoading = false
+                el.isNetworkLoading = false
+                el.error = ''
+                
+                return el
+            })
+        }     
+    })
+
     handleServersLoading(false)
-
-    if (!err) {
-        let result = data.servers.map(el => {
-            el.isLoading = false
-            el.isNetworkLoading = false
-            el.error = ''
-
-            return el
-        })
-
-        return result
-    }
-
-    handleServersError(err)
-    return []
+    
+    return result
 })
 
 // Servers store
 const $servers = createStore({
     servers: [
-        {
-            id: '',
-            name: '',
-            hv: '',
-            state: '',
-            status: '',
-            cpu: '',
-            isLoading: false,
-            isNetworkLoading: false,
-            error: ''
-        },
+        // {
+        //     id: '',
+        //     name: '',
+        //     hv: '',
+        //     state: '',
+        //     status: '',
+        //     cpu: '',
+        //     isLoading: false,
+        //     isNetworkLoading: false,
+        //     error: ''
+        // },
     ],
     isLoading: false,
     error: '',

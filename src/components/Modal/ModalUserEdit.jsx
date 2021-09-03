@@ -40,24 +40,26 @@ export const ModalUserEdit = ({ setModalShow, user }) => {
         setState(newState)
     }
 
-    const onClickEditUser = async () => {
+    const onClickEditUser =  () => {
         setError('');
         setLoading(true);
 
-        const { err } = await handleFetch('PATCH', '/users', state)
-        setLoading(false)
+        handleFetch('PATCH', '/users', state).then(({err}) => {
 
-        if (err) {
-            setError(err);
-        } else {
-            let newState = { ...state }
-            newState.password = ''
-            handleEditUser(newState)
-            setModalShow(false)
-        }
-        setTimeout(() => {
-            setError('');
-        }, 10000)
+            setLoading(false)
+            
+            if (err) {
+                setError(err);
+            } else {
+                let newState = { ...state }
+                newState.password = ''
+                handleEditUser(newState)
+                setModalShow(false)
+            }
+            setTimeout(() => {
+                setError('');
+            }, 10000)
+        })
     }
 
     return (
@@ -70,7 +72,7 @@ export const ModalUserEdit = ({ setModalShow, user }) => {
                     <form>
                         <label htmlFor="inputLogin" className="col-sm-2 col-form-label">Login</label>
 
-                        <input type="text" className="form-control" id="inputLogin my-disabled-input" autoComplete="off" value={state.email} readOnly />
+                        <input type="text" className="form-control my-disabled-input" id="inputLogin" autoComplete="off" value={state.email} readOnly />
 
                         <label htmlFor="inputRole" className="col-sm-2 col-form-label">Role</label>
 

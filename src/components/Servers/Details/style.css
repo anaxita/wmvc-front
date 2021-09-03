@@ -1,14 +1,59 @@
+.header-details {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 5fr 5fr 1fr;
+    grid-template-areas: "back search server links";
+    gap: 8px;
+    border-bottom: 1px solid #6c757d;
+    padding: 0 24px;
+}
+
+.btn-back {
+    grid-area: back;
+}
+
+.header-details__h{
+    grid-area: server;
+}
+
+.header-details__links {
+    display: flex;
+    gap: 16px;
+    grid-area: links;
+}
+
+.header-details__links .btn {
+    width: 100px;
+    text-align: center;
+}
+
+.header-details__search {
+    grid-area: search;
+}
+
+.header-details__search  input{
+    max-width: 400px;
+}
 .params {
     display: grid;
     grid-template-columns: 1fr 2fr;
     /* padding: 0 !important; */
 }
+.content.params {
+    padding-top: 8px;
+}
 
 .params-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     padding: 8px;
     margin: 8px;
     border-bottom: 1px solid;
     color: #17a2b8;
+}
+
+.params-item span {
+    color: rgb(250, 243, 243);
 }
 
 .disks {
@@ -26,7 +71,7 @@
 .disks-item{
    list-style-type: none;
    padding: 8px;
-   margin: 8px;;
+   margin: 8px;
 }
 
 .disks-item input {
@@ -39,37 +84,28 @@
     font-size: 12px;
 }
 
+.btn-back {
+    display: inline-block;
+    text-align: center;
+    width: min-content;
+}
 
 @media (max-width: 768px) {
+    .header-details {
+        grid-template-columns: 1fr 3fr;
+        grid-template-areas: "back server"
+                            "links links";
+        padding: 8px 12px;
+    }
+
     .disks-item input {
         min-width: auto;
         width: 100%;
     }
-    .header-servers-details{
-            grid-template-areas:
-            'header-h'
-            'header-btn'
-            'header-input' !important;
-            padding: 0 8px 0 8px !important;
-    }
-
-    .header-h {
-        margin-bottom: 16px;
-        margin-top: 8px;
-    }
-
-    .header-btn{
-        margin-bottom: 8px;
-    }
-
-    .header-input {
-        margin-bottom: 8px;
-    }
-
+    
     .params{
-        grid-template-columns: auto !important;
-        overflow-x: hidden;
-        padding: 0;
+        grid-template-columns: 1fr;
+        align-content: flex-start;
     }
 
 

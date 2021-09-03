@@ -13,6 +13,8 @@ export const Sidebar = () => {
       localStorage.removeItem('cacheToken')
       localStorage.removeItem('cacheRefreshToken')
       localStorage.removeItem('cacheUserInfo')
+      window.location.reload()
+      return <Redirect to="/signin" />
    }
    const {isRedirect} = useGlobalRedirect()
 
@@ -21,13 +23,16 @@ export const Sidebar = () => {
    }
 
    if(isRedirect) {
-      return <Redirect to="/servers" />
+      <Redirect to="/servers" />
    }
 
    return (
       <nav className="menu">
+         <div className="user-info">
+            <div className="menu_email">{userInfo.name}</div>
+            <div className="menu_email">{userInfo.email}</div>
+         </div>
          <ul>
-            <li className="menu_email">{userInfo.email}</li>
             <li>
             <NavLink to="/servers">SERVERS</NavLink>
             </li>
