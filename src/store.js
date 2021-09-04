@@ -1,14 +1,12 @@
-import { createStore, createEvent } from 'effector'
-import { useStore } from 'effector-react'
+import { createStore, createEvent } from 'effector';
+import { useStore } from 'effector-react';
 
-export const handleGlobalRedirect = createEvent()
+export const handleGlobalRedirect = createEvent();
 
 const $servers = createStore({
-    isRedirect: false,
+  isRedirect: false,
 
 })
-    .on(handleGlobalRedirect, (state, isRedirect) => {
-        return {...state, isRedirect}
-    });
+  .on(handleGlobalRedirect, (state, isRedirect) => ({ ...state, isRedirect }));
 
-export const useGlobalRedirect = () => useStore($servers)
+export const useGlobalRedirect = () => useStore($servers);

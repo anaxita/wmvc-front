@@ -66,8 +66,8 @@ export const ServerProcesses = (props) => {
                             <div className="processes-header">
                                 <div className="">Users</div>
                                 <div className="">State</div>
-                                <div className="">CPU (75%)</div>
-                                <div className="">RAM (90%)</div>
+                                <div className="">CPU</div>
+                                <div className="">RAM</div>
                                 <div className="div"></div>
                                 <div className="div"></div>
                             </div>

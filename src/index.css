@@ -52,7 +52,7 @@ button:hover{
 /* MAIN */
 .main {
   display: grid;
-  grid-template-rows: 1fr 10fr;
+  grid-template-rows: 80px 1fr;
   gap: 16px;
   background-color: var(--bg-dark);
   height: 100%;
@@ -433,6 +433,9 @@ select{
 }
 
 @media (max-width: 576px) {
+  .main {
+    grid-template-rows: auto 1fr;
+  }
   .modal-footer {
     flex-wrap: wrap;
   }
