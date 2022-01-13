@@ -10,14 +10,14 @@ jobs:
     strategy:
       matrix:
         node-version: [ 16.13.1 ]
+    env:
+      REACT_APP_API_URL: https://dc:kmsys:ru:53327
     steps:
       - uses: actions/checkout/@v2
-
       - uses: actions/setup-node/@v2
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: export REACT_APP_API_URL=https://dc.kmsys.ru:53345
       - run: set -eu
       - run: mkdir "$HOME/.ssh"
       - run: echo "${{ secrets.anaxita }}" > "$HOME/.ssh/id_rsa"
