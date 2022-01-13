@@ -104,17 +104,17 @@ export const ServerItem = ({ id, name, hv, state, status, network, cpu_load }) =
             {isLoading ? <SpinnerItem /> : null}
             {error ? <ErrorAbsolute err={error} /> : null}
             <div className="srv-name">{name}</div>
-            <div className="srv-hv">{hv}</div>
+            <div className="srv-hv">{getUserInfo()?.role ? hv : ''}</div>
             <div className="srv-state"><span className={"srv-state_name"}>Питание</span> {(powerState === 'Running') ? <div className="state-on"></div> : <div className="state-off"></div>}</div>
             <div className="srv-status">{(status === 'Работает нормально') ? '' : status}</div>
             <div className="srv-network"><span className={"srv-state_name"}>Сеть</span> {networkState ? <div className="state-on"></div> : <div className="state-off"></div>}</div>
             <div className="srv-cpu">{`${cpu_load}%`}</div>
             <div className="actions-btn">
-                <button type="button" name="power" onClick={() => handleControl('power')}>
+                <button type="button" title="Запуск/Завершенеие работы" name="power" onClick={() => handleControl('power')}>
                     <FontAwesomeIcon icon="play-circle" />
                 </button>
-                <button type="button" name="network" onClick={() => handleControl('network')}><FontAwesomeIcon icon="network-wired" /></button>
-                <button type="button" name="stop_power_force" onClick={() => handleControl('stop_power_force')}><FontAwesomeIcon icon="power-off" /></button>
+                <button type="button" title="Управление сетью" name="network" onClick={() => handleControl('network')}><FontAwesomeIcon icon="network-wired" /></button>
+                <button type="button" title="Принудительное отключение" name="stop_power_force" onClick={() => handleControl('stop_power_force')}><FontAwesomeIcon icon="power-off" /></button>
 
                 {role ? <Link to={`/servers/${hv}/${name}/info`}>
                     <button type="button"><FontAwesomeIcon icon="cog" /></button>

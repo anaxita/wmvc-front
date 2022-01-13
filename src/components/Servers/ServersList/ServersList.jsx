@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import React, { useEffect, useState } from 'react';
-import { getSearch } from '../../../Constants/Constants';
+import {getSearch, getUserInfo} from '../../../Constants/Constants';
 import { FixedError } from '../../Error/FixedError';
 import { Sidebar } from '../../Sidebar/Sidebar';
 import { SpinnerServers } from '../../Spinner/SpinnerServers';
@@ -67,7 +67,7 @@ export const ServersList = () => {
           <div className="server-list-header">
             <div className="srv-list-item">Name</div>
             <div className="srv-list-item">State</div>
-            <div className="srv-list-item">HV</div>
+            <div className="srv-list-item">{getUserInfo()?.role ? 'HV' : ''}</div>
             <div className="srv-list-item">Status</div>
             <div className="srv-list-item">Network</div>
             <div className="srv-list-item">CPU</div>
