@@ -11,7 +11,7 @@ jobs:
       matrix:
         node-version: [ 16.13.1 ]
     env:
-      REACT_APP_API_URL: https://172.19.1.25:8083
+      REACT_APP_API_URL: http://172.19.1.25:8083
     steps:
       - uses: actions/checkout/@v2
 
