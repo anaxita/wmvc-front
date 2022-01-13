@@ -11,7 +11,7 @@ jobs:
       matrix:
         node-version: [ 16.13.1 ]
     env:
-      REACT_APP_API_URL: https://dc:kmsys:ru:53327
+      REACT_APP_API_URL: https://dc.kmsys.ru:53345
     steps:
       - uses: actions/checkout/@v2
 
