@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - run: export REACT_APP_API_URL=https://dc.kmsys.ru:53327
       - run: set -eu
       - run: mkdir "$HOME/.ssh"
       - run: echo "${{ secrets.anaxita }}" > "$HOME/.ssh/id_rsa"
