@@ -1,15 +1,15 @@
-name: deploy
+name: prod-deploy
 on:
   push:
-    branches: 
-      - front
+    branches:
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.19.0]
+        node-version: [ 16.13.1 ]
     steps:
       - uses: actions/checkout/@v2
 
@@ -21,11 +21,11 @@ jobs:
       - run: mkdir "$HOME/.ssh"
       - run: echo "${{ secrets.anaxita }}" > "$HOME/.ssh/id_rsa"
       - run: chmod 600 "$HOME/.ssh/id_rsa"
-      
+
       - run: npm ci
       - run: npm run-script build
         continue-on-error: true
 
-      - run: cd build && scp -P 53344 -r -o "StrictHostKeyChecking no" . anaxita@dc.kmsys.ru:/C:/Apache24/web/wvmc-dev
+      - run: cd build && scp -P 53344 -r -o "StrictHostKeyChecking no" . anaxita@dc.kmsys.ru:/C:/Apache24/web/wvmc_prod
       
       # - run: cd build && rsync -e "ssh -i $HOME/.ssh/anaxita -o StrictHostKeyChecking=no" --archive --compress --delete --port=53344 . anaxita@dc.kmsys.ru:C:\Apache24\web\wvmc-dev\
