@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import React, {useEffect, useState} from 'react';
-import {getSearch, getUserInfo} from '../../../Constants/Constants';
+import {getSearch} from '../../../Constants/Constants';
 import {FixedError} from '../../Error/FixedError';
 import {Sidebar} from '../../Sidebar/Sidebar';
 import {SpinnerServers} from '../../Spinner/SpinnerServers';
@@ -35,6 +35,7 @@ export const ServersList = () => {
             <ServerItem
                 key={el.id + el.name}
                 id={el.id}
+                vmid={el.vmid}
                 name={el.name}
                 hv={el.hv}
                 state={el.state}
@@ -44,9 +45,18 @@ export const ServersList = () => {
             />
         ));
     } else {
-        serversItems = serverSearch.map((el) => <ServerItem key={`${el.id}${el.name}`} id={el.id} name={el.name}
-                                                            hv={el.hv} state={el.state} network={el.network}
-                                                            status={el.status} cpu_load={el.cpu_load}/>);
+        serversItems = serverSearch.map((el) => {
+            return <ServerItem key={`${el.id}${el.name}`}
+                               id={el.id}
+                               vmid={el.vmid}
+                               name={el.name}
+                               hv={el.hv}
+                               state={el.state}
+                               network={el.network}
+                               status={el.status}
+                               cpu_load={el.cpu_load}
+            />
+        })
     }
 
     // html
@@ -68,7 +78,7 @@ export const ServersList = () => {
                     <div className="server-list-header">
                         <div className="srv-list-item">Name</div>
                         <div className="srv-list-item">State</div>
-                        <div className="srv-list-item">{getUserInfo()?.role ? 'HV' : ''}</div>
+                        <div className="srv-list-item">HV</div>
                         <div className="srv-list-item">Status</div>
                         <div className="srv-list-item">Network</div>
                         <div className="srv-list-item">CPU</div>
