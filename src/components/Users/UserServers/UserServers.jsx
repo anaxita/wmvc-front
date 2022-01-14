@@ -1,7 +1,6 @@
-import React from 'react';
-import { useState } from "react"
+import React, {useState} from 'react';
 
-export const UserServers = ({id, name, isActive, changeAddedStatus}) => {
+export const UserServers = ({id, vmid, name, isActive, changeAddedStatus}) => {
     const onChangeCheckbox = () => {
         changeAddedStatus(id)
         setChecked((prev) => (!prev))
@@ -11,8 +10,9 @@ export const UserServers = ({id, name, isActive, changeAddedStatus}) => {
 
     return (
         <div>
-                <input type="checkbox" name="" id="" className="form-check-input" onChange={onChangeCheckbox} checked={isChecked}/>
-                {name}
+            <input type="checkbox" name={name} id={id} className="form-check-input" onChange={onChangeCheckbox}
+                   checked={isChecked}/>
+            {name}
         </div>
     )
 }
