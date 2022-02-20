@@ -83,14 +83,14 @@ export const ModalUserServers = ({setModalShow, userID}) => {
     if (!isSearch) {
         serversList = servers.map((el) => {
             return (
-                <UserServers key={el.id} id={el.id} vmid={el.vmid} name={el.name} isActive={el.is_added}
+                <UserServers key={el.id} id={el.id} vmid={el.vmid} hv={el.hv} name={el.name} isActive={el.is_added}
                              changeAddedStatus={changeAddedStatus}/>
             )
         })
     } else {
         serversList = serversSearch.map((el) => {
             return (
-                <UserServers key={el.id} id={el.id} vmid={el.vmid} name={el.name} isActive={el.is_added}
+                <UserServers key={el.id} id={el.id} vmid={el.vmid} hv={el.hv} name={el.name} isActive={el.is_added}
                              changeAddedStatus={changeAddedStatus}/>
             )
         })
