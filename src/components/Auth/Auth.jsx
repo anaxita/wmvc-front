@@ -24,7 +24,10 @@ export const Auth = () => {
 
         setState(newState)
     }
-    const signIn = () => {
+    const signIn = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+
         setState({...state, isLoading: true})
         handleFetch('POST', '/signin', state.data).then(({data, err}) => {
 
@@ -65,7 +68,7 @@ export const Auth = () => {
                     </div>
                     <div className="modal-footer">
                         {state.isLoading ? <button type="button" className="btn" disabled><SpinnerBtn/> Войти</button> :
-                            <button type="button" className="btn" onClick={signIn}>Войти</button>}
+                            <button type="submit" className="btn" onClick={signIn}>Войти</button>}
                         {error ? <Error err={error}/> : null}
                     </div>
                 </div>
