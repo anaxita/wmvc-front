@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 16.13.1 ]
+        node-version: [ 16.18.0 ]
     env:
       REACT_APP_API_URL: http://172.19.11.25:8084
     steps:
