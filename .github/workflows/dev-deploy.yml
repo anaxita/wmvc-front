@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 16.13.1 ]
+        node-version: [ 16.18.0 ]
     env:
       REACT_APP_API_URL: https://bdc.kmsys.ru:53338
     steps:
@@ -27,4 +27,4 @@ jobs:
       - run: npm run-script build
         continue-on-error: true
 
-      - run: cd build && scp -P 53344 -r -o "StrictHostKeyChecking no" . anaxita@dc.kmsys.ru:/C:/Apache24/web/wvmc-dev
+      - run: cd build && scp -P 53344 -r -o "StrictHostKeyChecking no" . anaxita@bdc.kmsys.ru:/C:/Apache24/web/wvmc-dev

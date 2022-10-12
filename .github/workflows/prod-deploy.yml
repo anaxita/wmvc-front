@@ -28,6 +28,6 @@ jobs:
       - run: npm run-script build
         continue-on-error: true
 
-      - run: cd build && scp -P 53344 -r -o "StrictHostKeyChecking no" . anaxita@dc.kmsys.ru:/C:/Apache24/web/wvmc_prod
+      - run: cd build && scp -P 53344 -r -o "StrictHostKeyChecking no" . anaxita@bdc.kmsys.ru:/C:/Apache24/web/wvmc_prod
       
       # - run: cd build && rsync -e "ssh -i $HOME/.ssh/anaxita -o StrictHostKeyChecking=no" --archive --compress --delete --port=53344 . anaxita@dc.kmsys.ru:C:\Apache24\web\wvmc-dev\
