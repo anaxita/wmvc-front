@@ -8,15 +8,25 @@ import {handleGetServers, useServersStore} from '../store';
 
 import {ServerItem} from './Item/Item';
 import './style.css';
+import {Notification} from "../../Notification/Notification";
 
 export const ServersList = () => {
     const [isSearch, setSearch] = useState(false);
+    const [isWLAlert, setWLAlert] = useState(true);
     const [serverSearch, setServerSearch] = useState([]);
     const {servers, isLoading, error} = useServersStore();
 
     useEffect(() => {
+        setTimeout(()=> {
+            setWLAlert(false)
+        }, 5000)
+
         handleGetServers();
     }, []);
+
+    const hideNotification=() => {
+        setWLAlert(false)
+    }
 
     const onSearch = (e) => {
         const {value} = e.target;
@@ -63,6 +73,7 @@ export const ServersList = () => {
     return (
         <>
             <Sidebar/>
+            {isWLAlert ? <Notification text={"Ваш IP добавлен в белый список"} hide={hideNotification}/> : null}
             <div className="main">
                 <div className="servers-header">
                     <div className="servers-header__search">
